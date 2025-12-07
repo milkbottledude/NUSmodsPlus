@@ -23,4 +23,13 @@ This means users dont have to look for what modules they need to take to clear t
 
 Users don't have to do unnecessary searching, users save time. Users happy :)
 
+**In summary**, what BAISmods can do that NUSmods can't is:
 
+- Tell user if they have not completed the pre-requisite of the BAIS module they wish to take
+- Tell user which majors/minors they have partially completed based on prior completed modules
+- Tell user which majors/minors and modules they are **not** eligible for
+- Tell user if their chosen programme electives are acceptable (eg: < 3 courses above level 4k)
+  - ![Fig-a-programme_elective_req](progress_pics/ITS_OVER_4_THOUSAND.jpg)
+- (potential) arrange mods for u over 4 years, with criteria like:
+  - how many core mods does user want to do per sem
+  - how many pillar mods does user want to do per sem
