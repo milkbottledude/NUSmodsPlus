@@ -29,7 +29,7 @@ Users don't have to do unnecessary searching, users save time. Users happy :)
 - Tell user which majors/minors they have partially completed based on prior completed modules
 - Tell user which majors/minors and modules they are **not** eligible for
 - Tell user if their chosen programme electives are acceptable (eg: < 3 courses above level 4k)
-  - ![Fig-a-programme_elective_req](progress_pics/ITS_OVER_4_THOUSAND.jpg)
+  - ![Fig-ITSOVER4THOUSAND](progress_pics/Fig-a-programme_elective_req)
 - (potential) arrange mods for u over 4 years, with criteria like:
   - how many core mods does user want to do per sem
   - how many pillar mods does user want to do per sem
