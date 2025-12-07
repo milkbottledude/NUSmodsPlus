@@ -11,7 +11,7 @@ However, its quite a hassle arranging the modules for the 4 years, as some modul
 
 While NUSmods' planner does alert you when you try to place a module into planner without having done its pre-requisite mod, its rather buggy when BAIS modules are involved. Take a look at Figure a below:
 
-![image](Fig-a-missing_BAIS_mods_in_Planner.jpg)
+![image](progress_pics/Fig-a-missing_BAIS_mods_in_Planner.jpg)
 
 Thats because BAIS (Business Artificial Intelligence Systems) is a rather new degree, with its first batch of students entering just this year (academic year 2025/2026).
 
@@ -34,7 +34,7 @@ Users don't have to do unnecessary searching, users save time. Users happy :)
 2) Tell user which majors/minors they have partially completed based on prior completed modules
 3) Tell user which majors/minors and modules they are **not** eligible for
 4) Tell user if their chosen programme electives are acceptable (eg: < 3 courses above level 4k)
-  - ![Fig-ITSOVER4THOUSAND](progress_pics/Fig-a-programme_elective_req.jpg)
+  - ![Fig-ITSOVER4THOUSAND](progress_pics/Fig-b-programme_elective_req.jpg)
 
 5) (potential) arrange mods for u over 4 years, with criteria like:
   - how many core mods does user want to do per sem
