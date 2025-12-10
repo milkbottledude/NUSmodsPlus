@@ -211,3 +211,84 @@ After filling the lists of the 4 non-computing pillars, I make a separate key 'd
 ```
 
 Notice how I save it as an array. This is because we will be adding more dictionaries to the JSON file, which will take care of programme elective (PE) and unrestricted elective (UE) modules, etc.
+
+##### shld i do nested dicts for lvl 1k and 2k pillar mods??? hmmm
+
+### Chapter 1.3: Core and Programme Elective Modules
+
+Next, we need to add all the BAIS core modules to the target modules JSON. Nothing too technical here, just copy pasting the module names from the NUS BAIS website curriculum.
+
+After some thought, I've decided not to save the target modules as an array, but rather as a dictionary to make it more organised.
+
+```
+target_mods_list = read_json('target_mods.json')
+target_mods_list = target_mods_list[0]
+target_mods = {
+    'pillar_mods': target_mods_list,
+    'core_mods': ['BT2102', 'CS2030', 'CS2040', 'IS2101', 'IS2108', 'IS2109', 'IS3103', 'Ind_XP_req/CP4101', 'IS4108', 'MA1521', 'MA1522', 'ST2334']
+}
+to_json('target_mods.json', target_mods)
+```
+
+After calling the list of target mods, I extracted the dictionary from the array, then replaced the array with a dictionary 'target_mods'. 
+
+I added the key 'core_mods' and its array values, then wrote the new target_mods JSON back to its file. Now we need to do the same for the PE mods, which is slightly more troublesome.
+
+First, I copied the PE mods from the NUS website:
+
+```
+PE_string = '''
+Digital Business
+IS3150 Digital Media Marketing
+...
+
+Financial Technology
+IS4226 Systematic Trading Strategies and Systems
+...
+
+IT Solutioning
+CS2105 Introduction to Computer Networks
+...
+
+AI Solutioning
+BT3017 Feature Engineering for Machine Learning
+...
+
+IT Business Innovation and Entrepreneurship
+CP3100 Information Systems and Analytics Research Methodology
+...
+
+IT Security and Legal Aspects
+CS2107 Introduction to Information Security
+...
+'''.strip()
+```
+
+The ''' is used for multi-line strings in python, and the '.strip()' at the end removes any unwanted '/n' at the start or end of the string.
+
+```
+PE_groups = PE_string.split('\n\n')
+PE_mods = {}
+for grp in PE_groups:
+    parts = grp.split('\n')
+    title = parts.pop(0)
+    PE_mods[title] = [string.split(' ')[0] for string in parts]
+
+target_mods = read_json('target_mods.json')
+target_mods['PE_mods'] = PE_mods
+
+print(target_mods)
+to_json(target_mods)
+```
+
+PE_groups is an array of module groups, grouped by 'Digital Business', 'Financial Technology', etc. Then, I loop through each group and split them further using split('\n').
+
+This makes the first value in the split group list the title, and the rest of the values are the modules. To just get the module codes without the module names, I split the modules using the spacings with split(' ') and singled out the first value, which would be the module code.
+
+I attach the list of module codes as the value to the group title key in the dictionary 'PE_mods'. When I'm done doing this for all the groups, I add the dictionary to 'target_mods' and save it back to the JSON file.
+
+### Chapter 1.4: Unrestricted Modules
+
+
+
+
