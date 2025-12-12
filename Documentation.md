@@ -315,10 +315,11 @@ After assigning 'new' to each group key as its new value in the key-value pair f
 
 Ok, lots to be done for this subchapter. First thing to do is list out all NUS minors and majors of interest.
 
-**Chinese Language**:
+**1) Chinese Language**:
+
 *Pass 5 modules: CL1101E, CL2101, CL2102, CL2103, CL3104*
 
-**Economics**: (tough)
+**2) Economics**: (tough)
 
 *Pass EC1101E, EC2101, and 12 units from EC or EC-recognised courses*
 
@@ -331,11 +332,11 @@ EC-recognised mods:
 *MA1521 Calculus for Computing*
 *ST3131 Regression Analysis*
 
-**English Language and Linguistics**
+**3) English Language and Linguistics**
 
 *Pass EL1101E, 1 of the following(EL2101, EL2102, EL2111, EL2151), and 1 lvl-3k EL mod*
 
-**Human Services** (tough)
+**4) Human Services** (tough)
 
 *Pass SW1101E, SW2104, and 12 units (4 mods) of lvl-3k SW mods **excluding** the following:*
 
@@ -349,11 +350,11 @@ EC-recognised mods:
 *SW3103C Social Work Field Practice (I)*
 *SW3104B Social Work Field Practice (II)*
 
-**Malay Studies**
+**5) Malay Studies**
 
 *Pass MS1102E and 16 units (4 mods) of MS modules, where 1 mod must be >= lvl 3k.*
 
-**Psychology**
+**6) Psychology**
 
 *Pass PL1101E, and 16 units (4 mods) from the following:*
 
@@ -364,7 +365,7 @@ EC-recognised mods:
 *PL3105 Social Psychology*
 *PL3106 Mental Health and Distress*
 
-**Geosciences** (#)
+**7) Geosciences** (#)
 
 *Pass GE2103, XD3103, 4 units from Grp A, and 8 units from Grp B*
 
@@ -395,7 +396,7 @@ Group B:
 *CM3261 Environmental Chemistry*
 *ESE2001 Environmental Challenges in the Anthropocene*
 
-**Interactive Media Development**
+**8) Interactive Media Development**
 
 *Minimum 2 modules from Grp A and 2 modules from Grp B*
 
@@ -417,7 +418,7 @@ Group B:
 *NM4260*
 *NM5219R*
 
-**Architectural Studies**
+**9) Architectural Studies**
 
 *Pass AR1101A, AR1328A, AR2227, and 4 units (1 mod) from the following:*
 
@@ -431,23 +432,86 @@ Group B:
 *CDE3504*
 *CDE3505*
 
-Biomedical Engineering
-Hydrogen and Low Carbon Technology
-Landscape Architectural Studies
-Project Management
-Visual Communication Design
-Data Engineering (#)
-Infrastructure Management and Finance
-Integrative Health
-Analytical Chemistry
-Astronomy
-Bioinformatics
-Biophysics
-Chemistry
-Data Analytics
-Geosciences
-Environmental Sustainability
-Physics
-Statistics
-Quantitative Finance
-Medical Physics
+**10) Biomedical Engineering**
+
+*Pass BN1111/BN1112 and BN2111/BN2112, as well as 3 mods from the following:*
+
+*BN2104, BN2105, BN2201, BN2204, BN2301, BN2404, BN3405, BN3406*
+
+**11) Hydrogen and Low Carbon Technology**
+
+*Pass CN1101A/MLE1001B, CN2103, CN4252, and 2 modules from the following*
+
+*CN4235, CN5190, MLE2102, MLE4210, MLE4221*
+
+**12) Landscape Architectural Studies**
+
+*Pass LAD1003, LAD2004, LAD2009, and 2 modules from the following:*
+
+*LAD2003, LAD2005, LAD2010, LAD4006*
+
+**13) Project Management**
+
+*Pass PF1101A and 4 modules from the following:*
+
+*PF2108, PF2109, PF2203, IPM3103, PF3104, PF3208, PF4102, PF4203*
+
+**14) Visual Communication Design**
+
+*Pass ID2119, ID3130, and 3 modules from the following:*
+
+*ID3132, ID3131, ID1121, ID3126, ID3131, CDE2000, DTK1234*
+
+**15) Infrastructure Management and Finance**
+
+*Pass 5 modules from the following:*
+
+*PF1101A, IPM3103, PF3305, PF4309, RE2705, FIN2704, RE3701, RE4803, CE3121, CE4221*
+
+**16) Integrative Health**
+
+*Pass MIH1101, MIH1102, MIH2201, MIH2202, MIH3201*
+
+**17) Analytical Chemistry**
+
+*Pass CM1102, CM2133, CM2143, CM3141, CM3192*
+
+**18) Bioinformatics**
+
+*Pass ZB2101, ZB3101, and 3 modules from the following*
+
+*CS1010/variant, CS2040/variant, CS4220, MA3259, ZB2201, ZB3288, ZB4171, LSM4231, LSM4241*
+
+**19) Biophysics**
+
+*Pass PC1101, PC2267, PC3267, and 2 modules from the following*
+
+*PC2031, PC2135, LSM2106, LSM2234, LSM2241, LSM3220, LSM3243, PC4267, LSM4231*
+
+**20) Chemistry**
+
+*Pass CM1102, CM2112, CM2122, CM2133, CM2143*
+
+**21) Physics**
+
+*Pass PC1101, PC2174A, PC2193, and 2 modules from the following:*
+
+*PC2031, PC2032, PC2130, PC2135*
+
+**22) Statistics**
+
+*Pass ST1131, MA1521, ST2334, ST2132, ST3131/ST32xx (except ST328x mods)*
+
+**23) Quantitative Finance**
+
+*Pass QF1100, ST2334, QF2104, QF3101, and 1 mod from the following:*
+
+*QF3103, ST3131, EC3303, FIN3702/ABCD, FIN3716*
+
+**24) Medical Physics**
+
+*Pass GEH1032, PC3294, PC3295, and 2 mods from the following*
+
+*LSM2106, LSM2212, LSM2231, LSM2233, LSM3243, LSM3223, LSM4243*
+
+That makes a total of 24 selected minors to be included in BAISmods.

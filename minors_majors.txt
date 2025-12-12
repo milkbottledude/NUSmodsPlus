@@ -1,0 +1,198 @@
+1) Chinese Language:
+
+*Pass 5 modules: CL1101E, CL2101, CL2102, CL2103, CL3104*
+
+2) Economics: (tough)
+
+*Pass EC1101E, EC2101, and 12 units from EC or EC-recognised courses*
+
+EC-recognised mods:
+
+*FIN2004/FIN2004X/FIN2704/FIN2704X Finance*
+*RE1704 Principles of Real Estate Economics*
+*RE2705 Urban Economics*
+*MA1102R / MA2002 Calculus*
+*MA1521 Calculus for Computing*
+*ST3131 Regression Analysis*
+
+3) English Language and Linguistics
+
+*Pass EL1101E, 1 of the following(EL2101, EL2102, EL2111, EL2151), and 1 lvl-3k EL mod*
+
+4) Human Services (tough)
+
+*Pass SW1101E, SW2104, and 12 units (4 mods) of lvl-3k SW mods excluding the following:*
+
+*SW2101 Working with Individuals and Families*
+*SW2105 Values & Skills for Helping Relationships*
+*SW2106 Social Group Work Practice*
+*SW3103 Social Work Field Practice*
+*SW3105 Community Work Practice*
+*SW3209 Counselling Theories & Practice*
+*SW3214 Counselling Process & Skills*
+*SW3103C Social Work Field Practice (I)*
+*SW3104B Social Work Field Practice (II)*
+
+5) Malay Studies
+
+*Pass MS1102E and 16 units (4 mods) of MS modules, where 1 mod must be >= lvl 3k.*
+
+6) Psychology
+
+*Pass PL1101E, and 16 units (4 mods) from the following:*
+
+*PL2131 Research and Statistical Methods I*
+*PL3102 Biological Psychology*
+*PL3103 Cognitive Psychology*
+*PL3104 Developmental Psychology*
+*PL3105 Social Psychology*
+*PL3106 Mental Health and Distress*
+
+7) Geosciences (#)
+
+*Pass GE2103, XD3103, 4 units from Grp A, and 8 units from Grp B*
+
+Group A:
+
+*CM1102 Chemistry - The Central Science*
+*CM1417/CM1417X Fundamentals of Chemistry*
+*LSM1103/LSM2252 Biodiversity*
+*LSM1301/LSM1301FC/LSM1301X General Biology*
+*PC1201 Fundamental of Physics*
+
+Group B:
+
+*GE2215 Introduction to GIS*
+*GE3210 Natural Resources: Policy and Practice*
+*GE3231 Natural Hazards*
+*GE3250 Nature and Society*
+*GE3253 Weather and Climate*
+*GE3255 Aquatic, Riparian and Coastal Systems*
+*GE3256 Earth Surface Processes, Landforms and Ecosystems*
+*LSM2251 Ecology and Environment*
+*LSM3254 Ecology and Aquatic Environments*
+*LSM3255 Ecological of Terrestrial Environments*
+*EC3383 Environmental Economics*
+*HY2235 Environmental History*
+*CE2134/ME2134 Fluid Mechanics*
+*CE3132 Hydrology and Free Surface Flows*
+*CM3261 Environmental Chemistry*
+*ESE2001 Environmental Challenges in the Anthropocene*
+
+8) Interactive Media Development
+
+*Minimum 2 modules from Grp A and 2 modules from Grp B*
+
+Group A:
+
+*CS1010/variant*
+*CS3240*
+*CS3249*
+*CS4240*
+*CS4249*
+*CS4350*
+
+Group B:
+
+*NM3217*
+*NM3230*
+*NM3243*
+*NM4259*
+*NM4260*
+*NM5219R*
+
+9) Architectural Studies
+
+*Pass AR1101A, AR1328A, AR2227, and 4 units (1 mod) from the following:*
+
+*AR1329*
+*AR2225*
+*AR2228*
+*AR3223*
+*CDE2501*
+*CDE2502*
+*CDE2503*
+*CDE3504*
+*CDE3505*
+
+10) Biomedical Engineering
+
+*Pass BN1111/BN1112 and BN2111/BN2112, as well as 3 mods from the following:*
+
+*BN2104, BN2105, BN2201, BN2204, BN2301, BN2404, BN3405, BN3406*
+
+11) Hydrogen and Low Carbon Technology
+
+*Pass CN1101A/MLE1001B, CN2103, CN4252, and 2 modules from the following*
+
+*CN4235, CN5190, MLE2102, MLE4210, MLE4221*
+
+12) Landscape Architectural Studies
+
+*Pass LAD1003, LAD2004, LAD2009, and 2 modules from the following:*
+
+*LAD2003, LAD2005, LAD2010, LAD4006*
+
+13) Project Management
+
+*Pass PF1101A and 4 modules from the following:*
+
+*PF2108, PF2109, PF2203, IPM3103, PF3104, PF3208, PF4102, PF4203*
+
+14) Visual Communication Design
+
+*Pass ID2119, ID3130, and 3 modules from the following:*
+
+*ID3132, ID3131, ID1121, ID3126, ID3131, CDE2000, DTK1234*
+
+15) Infrastructure Management and Finance
+
+*Pass 5 modules from the following:*
+
+*PF1101A, IPM3103, PF3305, PF4309, RE2705, FIN2704, RE3701, RE4803, CE3121, CE4221*
+
+16) Integrative Health
+
+*Pass MIH1101, MIH1102, MIH2201, MIH2202, MIH3201*
+
+17) Analytical Chemistry
+
+*Pass CM1102, CM2133, CM2143, CM3141, CM3192*
+
+18) Bioinformatics
+
+*Pass ZB2101, ZB3101, and 3 modules from the following*
+
+*CS1010/variant, CS2040/variant, CS4220, MA3259, ZB2201, ZB3288, ZB4171, LSM4231, LSM4241*
+
+19) Biophysics
+
+*Pass PC1101, PC2267, PC3267, and 2 modules from the following*
+
+*PC2031, PC2135, LSM2106, LSM2234, LSM2241, LSM3220, LSM3243, PC4267, LSM4231*
+
+20) Chemistry
+
+*Pass CM1102, CM2112, CM2122, CM2133, CM2143*
+
+21) Physics
+
+*Pass PC1101, PC2174A, PC2193, and 2 modules from the following:*
+
+*PC2031, PC2032, PC2130, PC2135*
+
+22) Statistics
+
+*Pass ST1131, MA1521, ST2334, ST2132, ST3131/ST32xx (except ST328x mods)*
+
+23) Quantitative Finance
+
+*Pass QF1100, ST2334, QF2104, QF3101, and 1 mod from the following:*
+
+*QF3103, ST3131, EC3303, FIN3702/ABCD, FIN3716*
+
+24) Medical Physics
+
+*Pass GEH1032, PC3294, PC3295, and 2 mods from the following*
+
+*LSM2106, LSM2212, LSM2231, LSM2233, LSM3243, LSM3223, LSM4243*
