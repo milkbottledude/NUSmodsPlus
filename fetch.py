@@ -140,4 +140,46 @@ def step3pt2():
     to_json(target_mods)
 
 
-# step 4: time for unrestricted electives, ts gonna be a pain
+# step 4: Adding Interdisciplinary (ID) & Cross-Disciplinary (CD) mods
+
+def step4pt1():
+    ID_mods = []
+    with open('ID_mods.txt', 'r', encoding='utf-8') as f:
+        div = 0
+        for line in f:
+            if div % 3 == 0:
+                modCode = line.split(' ')[0]
+                ID_mods.append(modCode)
+            div += 1
+
+    target_mods = read_json('target_mods.json')
+    IDCD_mods = {'ID_mods': ID_mods}
+    target_mods['IDCD_mods'] = IDCD_mods
+
+    print(target_mods['IDCD_mods'])
+    to_json(target_mods)
+
+def step4pt2():
+    CD_mods = []
+    with open('CD_mods_pt1.txt', 'r', encoding='utf-8') as f:
+        div = 0
+        for line in f:
+            if div % 3 == 0:
+                modCode = line.split(' ')[0]
+                CD_mods.append(modCode)
+            div += 1
+            
+    all_mods = read_json('all_mods.json')
+    for dict in all_mods:
+        modCode = dict['moduleCode']
+        potential = ['PC', 'CM', 'LSM', 'ZB']
+        for pot in potential:
+            if pot in modCode:
+                CD_mods.append(modCode)
+
+    target_mods = read_json('target_mods.json')
+    target_mods['IDCD_mods']['CD_mods'] = CD_mods
+
+    to_json(target_mods)
+
+# step 5:

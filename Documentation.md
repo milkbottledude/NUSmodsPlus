@@ -10,8 +10,8 @@ Chapter 1: Syncing with NUSmods
 - 1.4: [](#14-)
 
 
-Chapter 2: Common Curriculum
-- 2.1: [](#21-)
+Chapter 2: Module Arrangement
+- 2.1: [placeholder](#21-placeholder)
 - 2.2: [](#22-)
 - 2.3: [](#23-)
 
@@ -311,7 +311,84 @@ Basically, I extract the list of modules for each PE group, and organised them i
 
 After assigning 'new' to each group key as its new value in the key-value pair for every group, I write the PE_mods back to target_mods, and target_mods back to the JSON file.
 
-### Chapter 1.4: Unrestricted Modules
+### Chapter 1.4: Interdisciplinary & Cross-Disciplinary Modules
+
+Inside this [txt file](ID_mods.txt) is some text copy-pasted from the NUS SoC website containing all the ID courses. As for the CD module [txt file](CD_mods_pt1.txt), it is slightly different in that its not complete.
+
+If you refer to Appendix C in the [SoC website](https://www.comp.nus.edu.sg/cug/soc-22-23/) and scroll past all the listed modules, you will see a message at the bottom that says: 
+
+'Any course from Chemistry, Physics, or Biological Sciences departments starting with codes PC, CM, LSM, ZB respectively.'
+
+So we will have to add those to target_mods.json, on top of the other CD modules listed. But before that, lets add the ID mods.
+
+```
+ID_mods = []
+with open('ID_mods.txt', 'r', encoding='utf-8') as f:
+    div = 0
+    for line in f:
+        if div % 3 == 0:
+            modCode = line.split(' ')[0]
+            ID_mods.append(modCode)
+        div += 1
+
+target_mods = read_json('target_mods.json')
+IDCD_mods = {'ID_mods': ID_mods}
+target_mods['IDCD_mods'] = IDCD_mods
+
+print(target_mods['IDCD_mods'])
+to_json(target_mods)
+```
+
+After singling out every 3rd line (the line containing the module code), I split the line and appended the first string (which is the mod code) to the `ID_mods` array.
+
+Then, I added an 'IDCD_mods' key to the target_mods dict, and added another dictionary as its value, which will hold the 'ID_mods' and 'CD_mods' keys.
+
+For the CD modules, we will have to do some extra work. We start with the same thing we did for the ID modules, sifting through the txt file and appending all the mod codes to an array.
+
+```
+CD_mods = []
+with open('CD_mods_pt1.txt', 'r', encoding='utf-8') as f:
+    div = 0
+    for line in f:
+        if div % 3 == 0:
+            modCode = line.split(' ')[0]
+            CD_mods.append(modCode)
+        div += 1
+    print(len(CD_mods))
+
+Output: 18
+```
+
+But remember, we still need to add any modules that have the prefix PC, CM, LSM, or ZB. We can do that by looking through [all_mods.json](all_mods.json).
+
+```
+all_mods = read_json('all_mods.json')
+for dict in all_mods:
+    modCode = dict['moduleCode']
+    potential = ['PC', 'CM', 'LSM', 'ZB']
+    for pot in potential:
+        if pot in modCode:
+            CD_mods.append(modCode)
+
+print(len(CD_mods))
+
+Output: 368
+```
+
+Now all thats left is to add the array to the target_mods dictionary.
+
+```
+target_mods = read_json('target_mods.json')
+target_mods['IDCD_mods']['CD_mods'] = CD_mods
+
+to_json(target_mods)
+```
+
+That concludes our work for syncing the ID and CD modules to BAISmods. This way, you dont have to look for the modules, which you have to when using NUSmods. 
+
+Here, we provide the list of modules applicable for ID and CD education use.
+
+### Chapter 1.5: Unrestricted Modules
 
 Ok, lots to be done for this subchapter. First thing to do is list out all NUS minors and majors of interest.
 
