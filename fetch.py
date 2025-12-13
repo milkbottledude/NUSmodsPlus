@@ -183,3 +183,17 @@ def step4pt2():
     to_json(target_mods)
 
 # step 5:
+
+def step5():
+    pass
+
+ms = []
+all_mods = read_json('all_mods.json')
+for dict in all_mods:
+    modCode = dict['moduleCode']
+    if modCode[:4] == 'ST32':
+        if 'ST328' in modCode:
+            ms.append(modCode)
+
+print(' '.join(ms))
+
