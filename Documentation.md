@@ -655,5 +655,42 @@ The array will contain all the modules that have **this** mod as a pre-requisite
 
 Thats the 'required for's done, now for part 2 which is the assignment of prerequisites.
 
+```
+prereq_dict = {}
+all_mods = read_json('all_mods.json')
+for obj in all_mods:
+    req_for = obj['req_for']
+    for mod_str in req_for:
+        if mod_str in prereq_dict:
+            prereq_dict[mod_str].append(obj['moduleCode'])
+        else:
+            prereq_dict[mod_str] = [obj['moduleCode']]
+```
 
+My plan is to first make a dictionary `prereq_dict`, where all the keys are module codes and all the values are arrays of the modules' prerequisite mods.
+
+I loop through every module object in all_mods.json and look at their 'req_for' array. Lets call the modules in the array 'x', and the module object we are currently looking at in the for loop, 'y'.
+
+Every 'x' module in that array has module 'y' as a pre-requisite. So in prereq_dict, I add 'x' as a key. For the value, I instantiate an array containing 'y'. From then on, whenever 'x' is in another 'req_for' array, I append the 'y' module to the prereq_dict list.
+
+At the end, we have a nicely organised dictionary containing the prerequisite modules of all modules that have prerequisites. Now all thats left is to add this information to `all_mods.json`.
+
+```
+for obj in all_mods:
+    modCode = obj['moduleCode']
+    if modCode in prereq_dict:
+        prereq = prereq_dict[modCode]
+        obj['pre_reqs'] = prereq
+    else:
+        obj['pre_reqs'] = []
+to_json(all_mods, 'all_mods.json')
+```
+
+Looping through the module objects in all_mods again, I check if the module code is in prereq_dict. If it isn't, that means this module has no prerequisite modules, so I just add an empty array to its 'pre_reqs' key.
+
+If the module code is present, then I extract it's list of prerequisite mods using the module code as the dictionary key. Then I assign the prerequisite array as the value to the module object's 'pre_reqs' key.
+
+That concludes chapter 2.4 of obtaining the prerequisite and 'required for' information for each module. A long process, but it beats overloading the API.
+
+*what do i do nowwwwwwww, chapt 3? or chapt 2.5?? what is even the chapt gonna be abt* AHHHHHHHHHHH
 

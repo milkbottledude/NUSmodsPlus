@@ -214,20 +214,24 @@ def step6pt1():
 
 
 def step6pt2():
-    pass
+    prereq_dict = {}
+    all_mods = read_json('all_mods.json')
+    for obj in all_mods:
+        req_for = obj['req_for']
+        for mod_str in req_for:
+            if mod_str in prereq_dict:
+                prereq_dict[mod_str].append(obj['moduleCode'])
+            else:
+                prereq_dict[mod_str] = [obj['moduleCode']]
 
-prereq_dict = {}
-all_mods = read_json('all_mods.json')
-for obj in all_mods:
-    req_for = obj['req_for']
-    for mod_str in req_for:
-        if mod_str in prereq_dict:
-            prereq_dict[mod_str].append(obj['moduleCode'])
+    for obj in all_mods:
+        modCode = obj['moduleCode']
+        if modCode in prereq_dict:
+            prereq = prereq_dict[modCode]
+            obj['pre_reqs'] = prereq
         else:
-            prereq_dict[mod_str] = [obj['moduleCode']]
-
-print(prereq_dict)
-# to_json(all_mods, 'all_mods.json')
+            obj['pre_reqs'] = []
+    to_json(all_mods, 'all_mods.json')
 
 
 
