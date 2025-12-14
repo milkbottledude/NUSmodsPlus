@@ -615,5 +615,89 @@
       "ZB4199",
       "ZB4299"
     ]
+  },
+  "minor_mods": {
+    "Chinese Language": [
+      "! CL1101E CL2101 CL2102 CL2103 CL3104"
+    ],
+    "Economics": [
+      "! EC1101E EC2101",
+      "% FIN2704X RE1704 RE2705 MA2002 MA1521 ST3131 3"
+    ],
+    "Psychology": [
+      "! PL1101E",
+      "% PL2131 PL3102 PL3103 PL3104 PL3105 PL3106 4"
+    ],
+    "Geosciences": [
+      "! GE2103 XD3103",
+      "% CM1102 CM1417 LSM2252 LSM1301 PC1201 1",
+      "% GE2215 GE3210 GE3250 GE3253 GE3255 GE3256 LSM2251 LSM3254 LSM3255 CE2134 CE3132 CM3261 ESE2001 2"
+    ],
+    "Interactive Media Development": [
+      "< CS1010A CS3240 CS3249 CS4240 CS4249 CS4350 2",
+      "< NM3217 NM3230 NM3243 NM4259 NM4260 NM5219R 2"
+    ],
+    "Architectural Studies": [
+      "! AR1101A AR1328A AR2227",
+      "% AR1329 AR2225 AR2228 AR3223 CDE2501 CDE2502 CDE2503 CDE3504 CDE3505 1"
+    ],
+    "Biomedical Engineering": [
+      "! BN1112 ",
+      "% BN2111 BN2112 1",
+      "% BN2104 BN2105 BN2201 BN2204 BN2301 BN2404 BN3405 BN3406 3"
+    ],
+    "Hydrogen and Low Carbon Technology": [
+      "% CN1101A MLE1001B 1",
+      "! CN2103 CN4252",
+      "% CN4235 CN5190 MLE2102 MLE4210 MLE4221 2"
+    ],
+    "Landscape Architectural Studies": [
+      "! LAD1003 LAD2004 LAD2009",
+      "% LAD2003 LAD2005 LAD2010 LAD4006 2"
+    ],
+    "Project Management": [
+      "! PF1101A",
+      "% PF2108 PF2109 PF2203 IPM3103 PF3104 PF3208 PF4102 PF4203 4"
+    ],
+    "Visual Communication Design": [
+      "! ID2119 ID3130",
+      "% ID3132 ID3131 ID1121 ID3126 ID3131 CDE2000 DTK1234 3"
+    ],
+    "Infrastructure Management and Finance": [
+      "% PF1101A IPM3103 PF3305 PF4309 RE2705 FIN2704 RE3701 RE4803 CE3121 CE4221 5"
+    ],
+    "Integrative Health": [
+      "! MIH1101 MIH1102 MIH2201 MIH2202 MIH3201"
+    ],
+    "Analytical Chemistry": [
+      "! CM1102 CM2133 CM2143 CM3141 CM3192"
+    ],
+    "Bioinformatics": [
+      "! ZB2101 ZB3101",
+      "% CS1010A CS2040 CS4220 MA3259 ZB2201 ZB3288 ZB4171 LSM4231 LSM4241 3"
+    ],
+    "Biophysics": [
+      "! PC1101 PC2267 PC3267",
+      "% PC2031 PC2135 LSM2106 LSM2234 LSM2241 LSM3220 LSM3243 PC4267 LSM4231 2"
+    ],
+    "Chemistry": [
+      "! CM1102 CM2112 CM2122 CM2133 CM2143"
+    ],
+    "Physics": [
+      "! PC1101 PC2174A PC2193",
+      "% PC2031 PC2032 PC2130 PC2135 2"
+    ],
+    "Statistics": [
+      "! ST1131 MA1521 ST2334 ST2132 ",
+      "% ST3131 ST3232 ST3236 ST3239 ST3244 ST3246 ST3247 ST3248 1"
+    ],
+    "Quantitative Finance": [
+      "! QF1100 ST2334 QF2104 QF3101",
+      "% QF3103 ST3131 EC3303 FIN3702A FIN3716"
+    ],
+    "Medical Physics": [
+      "! GEH1032 PC3294 PC3295",
+      "% LSM2106 LSM2212 LSM2231 LSM2233 LSM3243 LSM3223 LSM4243 2"
+    ]
   }
 }

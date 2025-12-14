@@ -16,7 +16,7 @@ def from_api(api_link, save_json=False, json_filepath = 'NA'):
     data = response.json()
 
     if save_json:
-        to_json(json_filepath, data)
+        to_json(data, json_filepath)
 
 # step 1: getting all the courses that fulfill the 4+2 pillars 
 
@@ -182,18 +182,53 @@ def step4pt2():
 
     to_json(target_mods)
 
-# step 5:
+# step 5: moving info in minors.txt to target_mods.json
 
 def step5():
+    minor_mods = {}
+    with open('minors.txt', 'r') as f:
+        paragraphs = f.read().split('\n\n')
+        for para in paragraphs:
+            lines = para.split('\n')
+            minor = lines.pop(0)[2:]
+            print(minor)
+            minor_mods[minor] = lines
+
+    target_json = read_json('target_mods.json')
+    target_json['minor_mods'] = minor_mods
+    to_json(target_json)
+
+# step 6: Configuring the 'pre_reqs'(pt2) and 'req_fors'(pt1) for each mod
+
+def step6pt1():
+    all_mods = read_json('all_mods.json')
+    for dict in all_mods:
+        dict['req_for'] = []
+    for mod1 in all_mods:
+        code = mod1['moduleCode']
+        for mod2 in all_mods:
+            if 'prerequisite' in mod2:
+                pre_req_str = mod2['prerequisite']
+                if code in pre_req_str:
+                    mod1['req_for'].append(mod2['moduleCode'])
+
+
+def step6pt2():
     pass
 
-ms = []
+prereq_dict = {}
 all_mods = read_json('all_mods.json')
-for dict in all_mods:
-    modCode = dict['moduleCode']
-    if modCode[:4] == 'ST32':
-        if 'ST328' in modCode:
-            ms.append(modCode)
+for obj in all_mods:
+    req_for = obj['req_for']
+    for mod_str in req_for:
+        if mod_str in prereq_dict:
+            prereq_dict[mod_str].append(obj['moduleCode'])
+        else:
+            prereq_dict[mod_str] = [obj['moduleCode']]
 
-print(' '.join(ms))
+print(prereq_dict)
+# to_json(all_mods, 'all_mods.json')
+
+
+
 

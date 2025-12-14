@@ -604,3 +604,56 @@ EG: `% FIN2704X RE1704 RE2705 MA2002 MA1521 ST3131 3` means I need to pick 3 mod
 
 EG: `< CS1010A CS3240 CS3249 CS4240 CS4249 CS4350 2` means you have to pick a minimum of 2 mods from the list
 
+Now its time to add all these to `target_mods.json`. I'll be arranging them in this order:
+
+![Fig 2.1](progress_pics/Fig-2.1-minors_in_target_mods.jpg)
+
+Fig 2.1: Module arrangement in target_mods.json
+
+To do this, we need a lil code to 1) extract information from the txt file and 2) parse the lines of text before adding it to the target_mods dictionary.
+
+```
+minor_mods = {}
+with open('minors.txt', 'r') as f:
+    paragraphs = f.read().split('\n\n')
+    for para in paragraphs:
+        lines = para.split('\n')
+        minor = lines.pop(0)[2:]
+        print(minor)
+        minor_mods[minor] = lines
+```
+
+After splitting the text into its paragraphs, I loop through them into each para, then split the para further.
+
+`lines` is a list of all the lines of text in the para, with `minor` being the first line. I remove the first 2 characters ') ' to obtain the minor name before adding it as a key to the 'minor_mods' dictionary.
+
+```
+target_json = read_json('target_mods.json')
+target_json['minor_mods'] = minor_mods
+to_json(target_json)
+```
+
+After adding the rest of the lines as its value, I add 'minor_mods' into 'target_mods' after all the paeas have been dealt with.
+
+### 2.4: Module 'pre-requisites' and 'required_fors'
+
+Before anyone says 'you can just use the prerequisite tree which you get when you specify a single module in the API call', I didn't want to call the API for every module.
+
+This would *100%* overload the API created by my soon-to-be seniors and piss them off, all before I've even matriculated.
+
+The only thing we can work with is the 'prerequisite string', which is provided when you call moduleInfo from the API. It provides slightly more information that simply calling moduleList.
+
+First, I'm going to add a new key-value pair to each module object in [all_mods.json](all_mods.json): `'req_for': []`
+
+```
+all_mods = read_json('all_mods.json')
+for dict in all_mods:
+    dict['req_for'] = []
+```
+
+The array will contain all the modules that have **this** mod as a pre-requisite. Kind of like the opposite of a pre-requisite. Get it? No? Ok, [see me after class](https://t.me/milkbottledude).
+
+Thats the 'required for's done, now for part 2 which is the assignment of prerequisites.
+
+
+
