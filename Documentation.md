@@ -823,7 +823,7 @@ The more chosen modules are in that array, the more higher level modules are unl
 
 Now its time to show how these factors and rules shape 8 semesters worth of modules. At this point in time, we are at stage 2 and the student has completed stage 1 (choosing their mods) of the BAISmods webapp process. Stage 1 will be covered and coded in a later chapter.
 
-**Y1S1**: Default MST -> 'LAN' = 1, 'BAIS' = 4 
+**Y1S1**: Default MSTs -> 'LAN' = 1, 'BAIS' = 4 
 - LAS1202 (see Rule 1)
 - CS1010A 
 - IS1108 
@@ -877,12 +877,12 @@ One spot left. Another tie, between BT1101, IS2101, and MA1522 if we exclude the
 
 For now, I'm just going to pick the mod closest to the top, which happens to be **BT1101**. That is how the Y1S1 modules are allocated if we follow the 3 factors.
 
-**Y1S2**: Default MST -> 'LAN' = 1, 'BAIS' = 3, 'MISC' = 1
+**Y1S2**: Default MSTs -> 'LAN' = 1, 'BAIS' = 3, 'MISC' = 1
 - LAS2201 (Rule 1)
 - BT2102
 - CS2030
 - CS2040
-- 
+- ST1131
 
 Lets look at whats left of the BAIS mods from the earlier output:
 
@@ -921,4 +921,60 @@ ST3131 []
 SH5104 []
 ```
 
-Following the 'req_for' factor, 
+Following the 'req_for' factor, ST1131 wins and gets the spot. Lets move to Y2S1
+
+**Y2S1**: Default MSTs -> 'LAN' = 1, 'BAIS' = 3, 'MISC' = 1
+- LAS3201 (Rule 1)
+- BT3103
+- IS2101
+- MA1522
+- GEX1000
+
+Back to the list of remaining BAIS mods:
+
+```
+IS2101 ['IS3103']
+IS2108 []
+IS2109 ['IS3109']
+IS3103 ['IS4233', 'IS4236']
+MA1522 ['IS2109']
+ST2334 ['IS2109']
+IS2102 ['IS4234']
+IS3109 []
+IS4234 []
+IS4236 []
+IS4233 []
+BT3103 ['IS4234', 'IS4236']
+``` 
+
+IS3103 and BT3103 both have the longest arrays, but only **BT3103** is unlocked. So that goes in. The next 2 unlocked mods of array length 1 are **IS2101** and **MA1522**. Next is the single 'MISC' mod, lets see what our options are.
+
+```
+GEX1000 []
+GEC1017 []
+GES1005 []
+GEN2000 []
+ID2116 []
+ID2122 []
+ST2137 []
+ST3131 []
+SH5104 []
+```
+
+It does not really matter since they all have the same array length, so I'll just go for the first unlocked one which is **GEX1000**.
+
+**Y2S2**: Default MSTs -> 'LAN' = 1, 'BAIS' = 2, 'MISC' = 2
+- LAS3202 (Rule 1)
+- 
+
+```
+IS2108 []
+IS2109 ['IS3109']
+ST2334 ['IS2109']
+IS2102 ['IS4234']
+IS3109 []
+IS4234 []
+IS4236 []
+IS4233 []
+BT3103 ['IS4234', 'IS4236']
+``` 
