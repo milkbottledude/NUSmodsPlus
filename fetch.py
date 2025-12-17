@@ -29,6 +29,8 @@ pillar_mods = {
 
 # saving all courses so I don't have to call everytime and overload the api
 # from_api(api_link='https://api.nusmods.com/v2/2025-2026/moduleList.json', save_json=True, json_filepath='all_mods.json')
+from_api(api_link='https://api.nusmods.com/v2/2025-2026/modules/IS3103.json', save_json=True, json_filepath='testAPI.json')
+
 
 
 def step1():

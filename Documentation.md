@@ -7,16 +7,17 @@ Chapter 1: Syncing with NUSmods
 - 1.1: [Getting to know the API](#11-getting-to-know-the-api) 
 - 1.2: [Modules for 6 Pillars](#12-modules-for-6-pillars) 
 - 1.3: [Core and Programme Elective Modules](#13-core-and-programme-elective-modules) 
-- 1.4: [Interdisciplinary & Cross-Disciplinary Modules](#14-interdisciplinary-&-cross-disciplinary-modules)
+- 1.4: [Interdisciplinary & Cross-Disciplinary Modules](#chapter-14-interdisciplinary--cross-disciplinary-modules)
 
 
 Chapter 2: Module Arrangement and Configuration
 - 2.1: [Modules of Minors](#21-modules-of-minors)
 - 2.2: [Modules of Majors](#22-modules-of-majors-tbc) (TBC!)
 - 2.3: [Module Formatting](#23-module-formatting)
+- 2.4: [Module 'pre-requisites' & 'required_fors'](#24-module-pre-requisites-and-required_fors)
 
-Chapter 3: placeholder
-- 3.1: [](#31-)
+Chapter 3: Semester Module Arrangement
+- 3.1: [Module Allocation & Rules](#31-module-allocation-&-rules) METHOD 1 ONLY??
 
 Chapter 4: placeholder
 - 4.1: [](#41-)
@@ -633,7 +634,7 @@ target_json['minor_mods'] = minor_mods
 to_json(target_json)
 ```
 
-After adding the rest of the lines as its value, I add 'minor_mods' into 'target_mods' after all the paeas have been dealt with.
+After adding the rest of the lines as its value, I add 'minor_mods' into 'target_mods'.
 
 ### 2.4: Module 'pre-requisites' and 'required_fors'
 
@@ -683,6 +684,7 @@ for obj in all_mods:
         obj['pre_reqs'] = prereq
     else:
         obj['pre_reqs'] = []
+
 to_json(all_mods, 'all_mods.json')
 ```
 
@@ -690,47 +692,25 @@ Looping through the module objects in all_mods again, I check if the module code
 
 If the module code is present, then I extract it's list of prerequisite mods using the module code as the dictionary key. Then I assign the prerequisite array as the value to the module object's 'pre_reqs' key.
 
+Before moving on, I'd like to make a change all_mods.json. ots currently a list of dictionaries, which means everytime i want to access a module object from its code, its O(n) time complexity. Changing the array to a dictionary with the module codes as the key would change the big O time to O(1). So lets do that real quick.
+
+```
+all_mods = read_json('all_mods.json')
+
+new_allmods = {}
+for obj in all_mods:
+    key = obj['moduleCode']
+    new_allmods[key] = obj
+    to_json(new_allmods, 'all_mods.json')
+```
+
 That concludes chapter 2.4 of obtaining the prerequisite and 'required for' information for each module. A long process, but it beats overloading the API.
 
-## Chapter 3: Module Arrangement
+## Chapter 3: Semester Module Arrangement
 
-### Chapter 3.1: Module Priority & Rules
+### Chapter 3.1: Module Allocation & Rules
 
-Now that we have all the modules a BAIS student will take and then some, its time to focus on the algorithm of dividing the chosen modules among the 8 semesters.
-
-We will assign the semesters their modules based on module priority, which will be as such:
-
-#### Very High Priority
-- BAIS core mods with no prerequisites, + CS1010A, IS1108, and BT1101
-- Low level UE language modules
-
-#### High Priority
-- Just unlocked, mid level BAIS modules that is required to unlock higher level BAIS mods
-- UE mods needed to access higher level PE/minor mods
-
-#### Medium Priority
-- Just unlocked, mid level UE mods that are required to unlock higher level PE/minor mods
-- The 4 remaining modules needed to satisfy the 6 pillars
-
-#### Low Priority
-- High level BAIS mods 
-- High level/Miscellanous UE mods
-
-Now lets establish some rules that BAISmods will abide by when allocating modules to a semester:
-
-#### Rules
-
-1) Every semester must contain a UE language module or UE pre-req module. Unless there are no longer any more UE modules under that criteria.
-
-2) For the remaining 4 modules required to satisfy the 6 pillars, there cannot be more than 1 of such mods in a single semester
-
-3) IS4108 AI Solutioning Capstone Project can only be taken in y4s1 or y4s2, and Industry Experience Requirement can only be taken in y3s2 or y4s1. So there are 2 options: IS4108 and IER in y3s2 and y4s1 respectively, or y4s1 and y4s2 (more common, this will be the default)
-
-4) IS4108 AI Solutioning Capstone Project can only be put with **max** 2 other modules that are <= 4 units.
-
-5) Industry Experience Requirement can only be taken with **max** 2 other modules that are <= 4 units. If using ATAP (Advanced Technology Attachment Programme) to fulfill IER, **no other modules** allowed in that semester.
-
-To show the module priority system and rules in action, lets use it on a sample 8 semester module spread that I just created with chatGPT.
+Now that we have all the modules a BAIS student will take and then some, its time to focus on the algorithm of dividing the chosen modules among the 8 semesters. To start, here is a sample 8 semester module spread that I just created with chatGPT.
 
 It represents a typical module selection of a BAIS student. This particular student wants to dive deeper into IT and AI solutioning with their PE mods.
 
@@ -740,77 +720,205 @@ As for UEs, he/she wants to learn spanish and take a minor in statistics, as wel
 BAIS COMMON CURRICULUM (40 units)
 University Pillars (24)
 
-CS1010A Programming Methodology (Digital Literacy)
-BT1101 Introduction to Business Analytics (Data Literacy)
-GEX1xxx Critique & Expression
-GEC1xxx Cultures & Connections
-GES1xxx Singapore Studies
-GEN2xxx Communities & Engagement
-IS1108 Digital and AI Ethics
+CS1010A Programming Methodology (Digital Literacy) [Group: BAIS]
+BT1101 Introduction to Business Analytics (Data Literacy)  [Group: BAIS]
+GEX1000 Critique & Expression [Group: MISC]
+GEC1017 Cultures & Connections [Group: MISC]
+GES1005 Singapore Studies [Group: MISC]
+GEN2000 Communities & Engagement [Group: MISC]
+IS1108 Digital and AI Ethics [Group: BAIS]
 
 ID / CD Courses (12)
-ID2116 Computing for Design
-ID2122 Ecodesign And Sustainability
-DAO2703 Operations and Technology Management
+ID2116 Computing for Design [Group: MISC]
+ID2122 Ecodesign And Sustainability [Group: MISC]
+IS2218 Digital Platforms for Businesses [Group: BAIS]
 
-BAIS CORE MODULES (60 units)
-BT2102 Data Management and Visualisation
-CS2030 Programming Methodology II
-CS2040 Data Structures and Algorithms
-IS2101 Business and Technical Communication
-IS2108 Full-stack Software Engineering for AI Solutions I
-IS2109 AI and Machine Learning Techniques I
-IS3103 Digital Transformation and Leadership Communication
-MA1521 Calculus for Computing
-MA1522 Linear Algebra for Computing
-ST2334 Probability and Statistics
-Industry Experience Requirement (Internship / ATAP)
-IS4108 AI Solutioning Capstone Project
+BAIS CORE MODULES (60 units) [Group: BAIS]
+BT2102 Data Management and Visualisation [Group: BAIS]
+CS2030 Programming Methodology II [Group: BAIS]
+CS2040 Data Structures and Algorithms [Group: BAIS]
+IS2101 Business and Technical Communication [Group: BAIS]
+IS2108 Full-stack Software Engineering for AI Solutions I [Group: BAIS]
+IS2109 AI and Machine Learning Techniques I [Group: BAIS]
+IS3103 Digital Transformation and Leadership Communication [Group: BAIS]
+MA1521 Calculus for Computing [Group: BAIS]
+MA1522 Linear Algebra for Computing [Group: BAIS]
+ST2334 Probability and Statistics [Group: BAIS]
+Industry Experience Requirement (Internship / ATAP) [Group: BAIS]
+IS4108 AI Solutioning Capstone Project [Group: BAIS]
 
 BAIS PROGRAMME ELECTIVES (20 units)
-IS2102 Data Engineering
-IS3109 AI and Machine Learning Techniques II
-IS4234 Governance, Regulation, and Compliance Technology
-IS4236 Cloud Services and Infrastructure Management
-IS4401 Generative AI and Business Applications
+IS2102 Data Engineering [Group: BAIS]
+IS3109 AI and Machine Learning Techniques II [Group: BAIS]
+IS4234 Governance, Regulation, and Compliance Technology [Group: BAIS]
+IS4236 Cloud Services and Infrastructure Management [Group: BAIS]
+IS4233 Legal Aspects of Information Technology [Group: BAIS]
 
 BAIS UNRESTRICTED ELECTIVES (40 units)
 (Spanish, 5 mods)
-LAS1202 Spanish 1
-LAS2201 Spanish 2
-LAS3201 Spanish 3
-LAS3202 Spanish 4
-LAS4201 Spanish 5
+LAS1202 Spanish 1 [Group: LAN]
+LAS2201 Spanish 2 [Group: LAN]
+LAS3201 Spanish 3 [Group: LAN]
+LAS3202 Spanish 4 [Group: LAN]
+LAS4201 Spanish 5 [Group: LAN]
 
 (Minor in Statistics, 3 mods)
-ST1131 Introduction to Statistics and Statistical Computing
+ST1131 Introduction to Statistics and Statistical Computing [Group: MISC]
 ST2334 Probability and Statistics (alr in core courses so not needed)
 MA1521 Calculus for Computing (alr in core courses, not needed)
-ST2137 Statistical Computing and Programming
-ST3131 Regression Analysis
+ST2137 Statistical Computing and Programming [Group: MISC]
+ST3131 Regression Analysis [Group: MISC]
 
 (Extra 2 UEs)
-BT3103 Application Systems Development for Business Analytics (to fulfill pre_req for IS4234 and IS4236)
-SH5104 Occupational Health
+BT3103 Application Systems Development for Business Analytics (pre_req for IS4234 and IS4236)  [Group: BAIS]
+SH5104 Occupational Health  [Group: MISC]
 ```
-At this point in time, we are at stage 2 and the student has completed stage 1 (choosing their mods) of the BAISmods webapp process. We will code up stage 1 in the future, for now we are doing stage 2, which arranges all the mods into 8 semesters.
 
-Looking at the [first module priority](#high-priority) and keeping in mind the [rules](#rules), we can safely say the 1st semester's module list will look like this:
+We will assign the modules to semesters based on a few factors:
 
-**1st Sem**
-- LAS1202 (see Rule 1 and [High Priority](#high-priority))
-- CS1010A ([High Priority](#high-priority))
-- IS1108 ([High Priority](#high-priority))
-- BT1101 ([High Priority](#high-priority))
-- MA1521 ([High Priority](#high-priority))
+1) Module Space Type
+2) Rules
+3) 'req_for's
 
-Standard stuff, but with a language module instead of the usual GEN/GEC/GEX module. 
+Sounds goofy asf right? Lets dive into each of them, taking reference to the module spread provided by ChatGPT above.
 
-This is because you need to have completed Spanish 1 to progress to Spanish 2, but the modules of the 4 pillars don't lead to any other mods of interest (unless they do, which in that case it will be under [very high priority](#very-high-priority)'s 2nd bullet point). 
+#### Module Space Type
 
-This is the rationale of the priority and rules. Moving on to Sem 2:
+As we know, each semester can house at least 5 modules (20 units) give or take. 'Module Space' refers to those 5 spaces. As for the 'type', I mean the modules can be grouped by their type.
 
-## 2nd Sem**
+For eg, the 2 pillar mods like CS1010A and BT1101 as well as IS1108, core mods like IS3103 and MA1522, and PE mods like IS4234 can be grouped as **'BAIS** mods.
+
+Language mods like LAS1202 will be under **'LAN'**. Miscellanous mods such as ID/CD mods, the 4 remaining pillar mods, and UEs like ST2137, will be categorized under **'MISC'**.
+
+So 3 different module group types for now: 'BAIS', 'LAN', and 'MISC'. My plan with these is to have limited spaces for each group type in each semester. 
+
+For example, MST for second semester can be: 4 mod spaces allocated to 'BAIS' group mods, 1 to 'LAN' mods, and the last one to 'MISC'. The space allocation will differ for each semester, and some semesters may have mod overload as well, meaning more than 5 mod spaces.
+
+**Exceptions:**
+
+If a UE module or ID_CD module is required to unlock a higher level BAIS mod, that UE/ID_CD mod will be categorized under 'BAIS' group instead of 'MISC'.
+
+Now lets establish some rules that BAISmods will abide by when allocating modules to a semester:
+
+#### Rules
+
+1) There will always be 1 MS (mod space) allocated to 'LAN', unless theres no more LAN modules. This is because each LAN mod is a prerequisite to the next, so it is important to start early if you want to get to a high level LAN mod.
+
+
+2) IS4108 AI Solutioning Capstone Project can only be taken in y4s1 or y4s2, and Industry Experience Requirement can only be taken in y3s2 or y4s1. So there are 2 options: IS4108 and IER in y3s2 and y4s1 respectively, or y4s1 and y4s2 (more common, this will be the default)
+
+3) IS4108 AI Solutioning Capstone Project can only be put with **max** 2 other modules that are <= 4 units.
+
+4) Industry Experience Requirement can only be taken with **max** 2 other modules that are <= 4 units. If using ATAP (Advanced Technology Attachment Programme) to fulfill IER, **no other modules** allowed in that semester.
+
+#### 'req_for's
+
+So in the first factor, we established module spaces for different module types. Great. But how do we choose which modules go into the semester first? By how many mods in the module spread are inside its 'req_for' array. 
+
+The more chosen modules are in that array, the more higher level modules are unlocked upon this particular mod's completion, the higher its priority to go into the semester over other mods. This is why I painstakingly created a 'req_for' array for every module object, not just the 'pre_req' array.
+
+**Concept for now:** If there is a draw, (this may sound confusing, [hmu](https://t.me/milkbottledude) if you want to discuss this) we can look at the 'req_for's of the 'req_fors'. Essentially, the mods that will be unlocked, what higher level mods will *they*, the unlocked mods, unlock.
+
+### Chapter 3.2: Sample Study Plan
+
+Now its time to show how these factors and rules shape 8 semesters worth of modules. At this point in time, we are at stage 2 and the student has completed stage 1 (choosing their mods) of the BAISmods webapp process. Stage 1 will be covered and coded in a later chapter.
+
+**Y1S1**: Default MST -> 'LAN' = 1, 'BAIS' = 4 
+- LAS1202 (see Rule 1)
+- CS1010A 
+- IS1108 
+- MA1521 
+- BT1101 
+
+Before I explain why I picked these mods, lets take a look at this code I wrote in our [new python file](algorithm.py).
+
+```
+BAIS_grp = ['CS1010A', 'BT1101', 'IS1108', 'BT2102', 'CS2030', 'CS2040', 'IS2101', 'IS2108', 'IS2109', 'IS3103', 'MA1521', 'MA1522', 'ST2334', 'IS2102', 'IS3109', 'IS4234', 'IS4236', 'IS4233', 'BT3103']
+reqfor_count = {}
+for mod in BAIS_grp:
+    reqfor_count[mod] = []
+    for check in all_mods[mod]['req_for']:
+        if check in BAIS_grp:
+            reqfor_count[mod].append(check)
+
+for key, array in reqfor_count.items():
+    print(key, array)
+
+Output:
+
+CS1010A ['BT2102', 'CS2030', 'CS2040', 'IS2102', 'IS2109']
+BT1101 ['BT2102']
+IS1108 ['IS3103', 'IS4233']
+BT2102 ['BT3103']
+CS2030 ['IS2108']
+CS2040 []
+IS2101 ['IS3103']
+IS2108 []
+IS2109 ['IS3109']
+IS3103 ['IS4233', 'IS4236']
+MA1521 ['IS2109', 'ST2334']
+MA1522 ['IS2109']
+ST2334 ['IS2109']
+IS2102 ['IS4234']
+IS3109 []
+IS4234 []
+IS4236 []
+IS4233 []
+BT3103 ['IS4234', 'IS4236']
+```
+
+The output shows the 'req_for' arrays of all the mods of group **BAIS**. Following the ['req_for' rule](#req_fors), we want the 4 mods with the longest 'req_for' list.
+
+**CS1010A** wins by a long shot, so we add that to the semester first immediately after Spanish 1. 
+
+The next spot is a 4 way tie between IS1108, IS3103, MA1521, and BT3103. But 2 of those are level 3 mods that have not been unlocked, so we can only take **IS1108** and **MA1521**.
+
+One spot left. Another tie, between BT1101, IS2101, and MA1522 if we exclude the locked mods. We could use our concept idea, which branches further and checks more 'req_fors'. 
+
+For now, I'm just going to pick the mod closest to the top, which happens to be **BT1101**. That is how the Y1S1 modules are allocated if we follow the 3 factors.
+
+**Y1S2**: Default MST -> 'LAN' = 1, 'BAIS' = 3, 'MISC' = 1
+- LAS2201 (Rule 1)
+- BT2102
+- CS2030
+- CS2040
 - 
 
-*if inclined to, can use linking.py to check pre-req length of all chosen mods above*
+Lets look at whats left of the BAIS mods from the earlier output:
+
+```
+BT2102 ['BT3103']
+CS2030 ['IS2108']
+CS2040 []
+IS2101 ['IS3103']
+IS2108 []
+IS2109 ['IS3109']
+IS3103 ['IS4233', 'IS4236']
+MA1522 ['IS2109']
+ST2334 ['IS2109']
+IS2102 ['IS4234']
+IS3109 []
+IS4234 []
+IS4236 []
+IS4233 []
+BT3103 ['IS4234', 'IS4236']
+``` 
+
+There are 2 mods with pre_req arrays of length 2, but unfortunately both their prerequisites have not been fulfilled yet. So among the mods with array length 1 and are already unlocked, we need 3. The first 3 are **BT2102**, **CS2030**, and **CS2040**.
+
+For the last MS, we need a module from the 'MISC' group. Here are all the mods from the group, together with their 'req_for' array:
+
+```
+GEX1000 []
+GEC1017 []
+GES1005 []
+GEN2000 []
+ID2116 []
+ID2122 []
+ST1131 ['ST2137']
+ST2137 []
+ST3131 []
+SH5104 []
+```
+
+Following the 'req_for' factor, 
