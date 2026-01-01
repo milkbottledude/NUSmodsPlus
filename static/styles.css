@@ -44,6 +44,22 @@
     width: 80%;
 }
 .dropdown-mod {
+    display: flex;
     width: 80%;
     margin: 5px;
+    gap: 20px;
+    font-size: 25px;
+}
+
+.details_nusmods {
+    text-decoration: none;
+    color: black;
+    border: 1.5px solid black;
+    border-radius: 7px;
+    padding: 0px 7px;
+    font-size: 18px;
+}
+
+.select_mod {
+    font-size: inherit;
 }

@@ -9,7 +9,6 @@ Chapter 1: Syncing with NUSmods
 - 1.3: [Core and Programme Elective Modules](#13-core-and-programme-elective-modules) 
 - 1.4: [Interdisciplinary & Cross-Disciplinary Modules](#chapter-14-interdisciplinary--cross-disciplinary-modules)
 
-
 Chapter 2: Module Arrangement and Configuration
 - 2.1: [Modules of Minors](#21-modules-of-minors)
 - 2.2: [Modules of Majors](#22-modules-of-majors-tbc) (TBC!)
@@ -17,10 +16,11 @@ Chapter 2: Module Arrangement and Configuration
 - 2.4: [Module 'pre-requisites' & 'required_fors'](#24-module-pre-requisites-and-required_fors)
 
 Chapter 3: Semester Module Arrangement
-- 3.1: [Module Allocation & Rules](#31-module-allocation-&-rules) METHOD 1 ONLY??
+- 3.1: [Module Allocation & Rules](#31-module-allocation--rules)
+- 3.2: [Algorithm's Sample Study Plan](#32-algorithms-sample-study-plan)
 
-Chapter 4: placeholder
-- 4.1: [](#41-)
+Chapter 4: BAISmods Layout
+- 4.1: [HTML & CSS](#41-HTML--CSS)
 
 
 
@@ -708,7 +708,7 @@ That concludes chapter 2.4 of obtaining the prerequisite and 'required for' info
 
 ## Chapter 3: Semester Module Arrangement
 
-### Chapter 3.1: Module Allocation & Rules
+### 3.1: Module Allocation & Rules
 
 Now that we have all the modules a BAIS student will take and then some, its time to focus on the algorithm of dividing the chosen modules among the 8 semesters. To start, here is a sample 8 semester module spread that I just created with chatGPT.
 
@@ -774,6 +774,8 @@ BT3103 Application Systems Development for Business Analytics (pre_req for IS423
 SH5104 Occupational Health  [Group: MISC]
 ```
 
+The user can also choose which sem to overload should it be required. Accounting for the mods and number of sems, this student will have to overload 2 semesters. Lets assume the user chooses **Y1S2** and **Y2S1** to overload.
+
 We will assign the modules to semesters based on a few factors:
 
 1) Module Space Type
@@ -805,11 +807,13 @@ Now lets establish some rules that BAISmods will abide by when allocating module
 1) There will always be 1 MS (mod space) allocated to 'LAN', unless theres no more LAN modules. This is because each LAN mod is a prerequisite to the next, so it is important to start early if you want to get to a high level LAN mod.
 
 
-2) IS4108 AI Solutioning Capstone Project can only be taken in y4s1 or y4s2, and Industry Experience Requirement can only be taken in y3s2 or y4s1. So there are 2 options: IS4108 and IER in y3s2 and y4s1 respectively, or y4s1 and y4s2 (more common, this will be the default)
+2) IS4108 AI Solutioning Capstone Project can only be taken in y4s1 or y4s2, and Industry Experience Requirement can only be taken in y3s2 or y4s1. So there are 2 options: IER and IS4108 in y3s2 and y4s1 respectively, or y4s1 and y4s2 (more common, this will be the default)
 
 3) IS4108 AI Solutioning Capstone Project can only be put with **max** 2 other modules that are <= 4 units.
 
-4) Industry Experience Requirement can only be taken with **max** 2 other modules that are <= 4 units. If using ATAP (Advanced Technology Attachment Programme) to fulfill IER, **no other modules** allowed in that semester.
+4) Industry Experience Requirement cannot be taken with any other modules. This is in case the student is using ATAP (Advanced Technology Attachment Programme) to fulfill IER, which **does not** allow any other modules to be taken in that semester.
+
+5) When choosing semesters to overload, Y1S1 is off limits.
 
 #### 'req_for's
 
@@ -817,9 +821,7 @@ So in the first factor, we established module spaces for different module types.
 
 The more chosen modules are in that array, the more higher level modules are unlocked upon this particular mod's completion, the higher its priority to go into the semester over other mods. This is why I painstakingly created a 'req_for' array for every module object, not just the 'pre_req' array.
 
-**Concept for now:** If there is a draw, (this may sound confusing, [hmu](https://t.me/milkbottledude) if you want to discuss this) we can look at the 'req_for's of the 'req_fors'. Essentially, the mods that will be unlocked, what higher level mods will *they*, the unlocked mods, unlock.
-
-### Chapter 3.2: Sample Study Plan
+### 3.2: Algorithm's Sample Study Plan
 
 Now its time to show how these factors and rules shape 8 semesters worth of modules. At this point in time, we are at stage 2 and the student has completed stage 1 (choosing their mods) of the BAISmods webapp process. Stage 1 will be covered and coded in a later chapter.
 
@@ -877,12 +879,13 @@ One spot left. Another tie, between BT1101, IS2101, and MA1522 if we exclude the
 
 For now, I'm just going to pick the mod closest to the top, which happens to be **BT1101**. That is how the Y1S1 modules are allocated if we follow the 3 factors.
 
-**Y1S2**: Default MSTs -> 'LAN' = 1, 'BAIS' = 3, 'MISC' = 1
+**Y1S2**: Default MSTs -> 'LAN' = 1, 'BAIS' = 3, 'MISC' = 2 (overload)
 - LAS2201 (Rule 1)
 - BT2102
 - CS2030
 - CS2040
 - ST1131
+- GEX1000
 
 Lets look at whats left of the BAIS mods from the earlier output:
 
@@ -921,14 +924,15 @@ ST3131 []
 SH5104 []
 ```
 
-Following the 'req_for' factor, ST1131 wins and gets the spot. Lets move to Y2S1
+Following the 'req_for' factor, ST1131 wins and gets a spot, along with GEX1000. Lets move to Y2S1
 
-**Y2S1**: Default MSTs -> 'LAN' = 1, 'BAIS' = 3, 'MISC' = 1
+**Y2S1**: Default MSTs -> 'LAN' = 1, 'BAIS' = 3, 'MISC' = 2 (overload)
 - LAS3201 (Rule 1)
 - BT3103
 - IS2101
 - MA1522
-- GEX1000
+- GEC1017
+- GES1005
 
 Back to the list of remaining BAIS mods:
 
@@ -950,7 +954,6 @@ BT3103 ['IS4234', 'IS4236']
 IS3103 and BT3103 both have the longest arrays, but only **BT3103** is unlocked. So that goes in. The next 2 unlocked mods of array length 1 are **IS2101** and **MA1522**. Next is the single 'MISC' mod, lets see what our options are.
 
 ```
-GEX1000 []
 GEC1017 []
 GES1005 []
 GEN2000 []
@@ -961,20 +964,126 @@ ST3131 []
 SH5104 []
 ```
 
-It does not really matter since they all have the same array length, so I'll just go for the first unlocked one which is **GEX1000**.
+It does not really matter since they all have the same array length, so I'll just go for the first 2 unlocked ones which are **GES1005** and **GEC1017**.
 
 **Y2S2**: Default MSTs -> 'LAN' = 1, 'BAIS' = 2, 'MISC' = 2
 - LAS3202 (Rule 1)
-- 
+- IS3103
+- ST2334
+- GEN2000
+- ID2116
 
 ```
 IS2108 []
 IS2109 ['IS3109']
+IS3103 ['IS4233', 'IS4236']
 ST2334 ['IS2109']
 IS2102 ['IS4234']
 IS3109 []
 IS4234 []
 IS4236 []
 IS4233 []
-BT3103 ['IS4234', 'IS4236']
 ``` 
+
+All pre-reqs for IS3103 are complete, so we can put it in now. IS2109 pre-requisites have not been met, so we add ST2334 instead.
+
+```
+GEN2000 []
+ID2116 []
+ID2122 []
+ST2137 []
+ST3131 []
+SH5104 []
+```
+
+Again, we take the first 2 mods here, which are GEN2000 and ID2116.
+
+**Y3S1**: Default MSTs -> 'LAN' = 1, 'BAIS' = 3, 'MISC' = 1
+- LAS4201 (Rule 1)
+- IS2109
+- IS2108
+- IS2102
+- ID2122
+
+```
+IS2108 []
+IS2109 ['IS3109']
+IS2102 ['IS4234']
+IS3109 []
+IS4234 []
+IS4236 []
+IS4233 []
+``` 
+
+After IS2109 and IS2102, they all have the same length arrays, so I just pick the next mod which happens to be IS2108.
+
+```
+ID2122 []
+ST2137 []
+ST3131 []
+SH5104 []
+```
+
+Again, since its a draw, I just pick the top mod ID2122.
+
+
+Same with the MISC mods, I take the top 2.
+
+**Y3S2**: Default MSTs -> 'BAIS' = 3, 'MISC' = 2
+- IS3109 
+- IS4234 
+- IS4236
+- ST2137
+- ST3131
+
+```
+IS3109 []
+IS4234 []
+IS4236 []
+IS4233 []
+``` 
+
+Coming to the business end of our mod picking journey. All tied for array length, so I'll just go with the top few again: IS3109, IS4234, and IS4236.
+
+```
+ST2137 []
+ST3131 []
+SH5104 []
+```
+
+Again, top 2, so ST2137 and ST3131. That leaves just SH5104 as the last mod from the MISC group, and IS4233 from the BAIS grp.
+
+**Y4S1**: Industry Experience Requirement (no other modules allowed)
+- IER (Rule 2 and 4)
+
+**Y4S2**: 1S4108 + leftover mods
+- IS4108 (Rule 2 and 3)
+- IS4233
+- SH5104
+
+That is how the algorithm would organise the mods for a BAIS student across 8 semesters. Implementing the algorithm using code is going to be a real challenge, but its got to be done.
+
+### 3.3: Coding up Algorithm
+
+## Chapter 4: BAISmods Layout
+
+### 4.1: Base & Pillars
+
+Here, I call the starting point of the webapp the 'base', hence the filename 'base.html'. This is where you select the group of which you want to choose its mods. Users are recommended to select their mods in group order. So choosing Pillar mods first, before moving on to PE mods, and so on.
+
+![Fig 4.1](progress_pics/Fig-4.1-base_html_first_glimpse.jpg)
+
+Fig 4.1: First draft of [base.html](templates/base.html)
+
+Excuse the CSS aesthetic, I know its not pretty but I'm focusing on functionality at the moment. It will look much better when the product is finished.
+
+The blue containers are buttons which are meant to be pressed to access each group's mods. Lets click into the 'Pillar Mods' group to choose the mods for the remaining 4 pillars (since the mods for Digital Literacy, Data Literacy, and Computing Ethics are already set in stone). This will lead us to [pillar_mods.html](templates/pillar_mods.html)
+
+![Fig 4.2](progress_pics/Fig-4.2-pillar_mods_html_first_glimpse.jpg)
+
+Fig 4.2: First draft of [pillar_mods.html](templates/pillar_mods.html)
+
+Here, users can click which GE mods they would like to take, with a maximum of 1 mod from each group. Should they wish to take more, they will have to select the mod from the UE mods group at the end of base.html.
+
+To find out more about a mod, they can click the '^' button on the right of each module button. The final product should have a dropdown description of the module upon pressing the '^' button, but for now it just leads you to the NUSmods module description.
+
