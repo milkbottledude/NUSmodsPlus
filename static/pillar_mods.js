@@ -76,3 +76,23 @@ all_mod_buttons.forEach(mod_button => {
         }
     })    
 })
+
+// saving selected pillar mods to localStorage
+const back_button = document.querySelector('.back_button')
+const not_done = document.querySelector('.not_done_notice')
+
+back_button.addEventListener('click', () => {
+    let unfulfilled = ''
+    for (const [key, value] of Object.entries(mods_chosen)) {
+        if (value === undefined) {
+            unfulfilled = unfulfilled + key + ' '
+        }
+    }
+    if (unfulfilled !== '') {
+        not_done.style.display = 'flex'
+        not_done.textContent = 'You have not chosen mods from these group(s): \n' + unfulfilled
+    } else {
+        localStorage.setItem('pillar_mods', JSON.stringify(mods_chosen))
+        window.location.href = "base.html"
+    }
+})

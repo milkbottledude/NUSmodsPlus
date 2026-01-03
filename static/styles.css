@@ -6,7 +6,7 @@ body {
     display: flex;
     background-color: rgb(101, 101, 163);
     margin-top: auto;
-    height: 75px;
+    height: 82px;
     align-items: center;
 }
 
@@ -29,12 +29,12 @@ body {
     background-color: aqua;
     font-size: 40px;
     width: 600px;
-    height: 60px;
+    height: auto;
     text-align: center;
     margin: 20px;
     justify-content: center;
     align-items: center;
-
+    padding: 5px;
     text-decoration: none;
     color: black;
 }
@@ -59,6 +59,19 @@ body {
     background-color: azure;
     font-weight: bold;
 }
+
+.not_done_notice {
+    display: none;
+    background-color: antiquewhite;
+    border-radius: 12px;
+    font-size: 22px;
+    margin-left: 22px;
+    margin: 20px;
+    width: fit-content;
+    padding: 8px 20px;
+    white-space: pre-line;
+}
+
 .dropdown-container {
     display: flex;
     flex-direction: column;
@@ -106,4 +119,29 @@ body {
     width: 18px;
     height: 18px;
     margin-right: 10px;
+}
+
+/* pe_mods */
+.mod_2k {
+    font-size: 15px;
+    background-color: chocolate;
+    margin: 10px;
+}
+
+.mod_2k {
+    font-size: 15px;
+    background-color: rgb(30, 210, 75);
+    margin: 10px;
+}
+
+.mod_3k {
+    font-size: 15px;
+    background-color: rgb(111, 30, 210);
+    margin: 10px;
+}
+
+.mod_4k {
+    font-size: 15px;
+    background-color: rgb(210, 30, 114);
+    margin: 10px;
 }
