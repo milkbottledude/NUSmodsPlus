@@ -158,10 +158,6 @@ body {
     color: aliceblue;
 }
 
- #pr_IS4262 { /* remove ltr, js will do */
-    background-color: rgb(204, 14, 14);
-}
-
 .pr_window {
     display: none;
     position: fixed;
@@ -169,6 +165,7 @@ body {
     width: 100%;  
     background: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
     justify-content: center;
+    white-space: pre;
 }
 
 .prs_left {

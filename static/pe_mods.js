@@ -64,21 +64,6 @@ ITSec_button.addEventListener('click', function() {
     }
 })
 
-// showing pre-reqs left when clicking the button
-const pr_window = document.querySelector('.pr_window')
-const open_prs = document.querySelectorAll('.pre_reqs')
-
-open_prs.forEach(open_pr => {
-    open_pr.addEventListener('click', () => {
-        pr_window.style.display = 'flex'
-    })      
-})
-
-const got_it = document.querySelector('.got_it')
-
-got_it.addEventListener('click', () => {
-    pr_window.style.display = 'none'
-})
 
 // for green circle status + counting no. of mods and no. of 4ks
 
@@ -154,6 +139,16 @@ pullMods().then(() => {
         }
         const pr_NA = document.querySelector(`#pr_${mod_code}`)
         pr_NA.textContent = `prereqs left: ${x}`
+        if (x === 1) {
+            pr_NA.style.backgroundColor = 'yellow'
+            pr_NA.style.color = 'black'
+        } else if (x === 2) {
+            pr_NA.style.backgroundColor = 'orange'
+            pr_NA.style.color = 'white'
+        } else if (x > 2) {
+            pr_NA.style.backgroundColor = 'red'
+            pr_NA.style.color = 'white'
+        }
         all_mods_pr[mod_code] = pre_req_array
     })
 })
@@ -162,5 +157,41 @@ pullMods().then(() => {
 
 
 
+// showing pre-reqs left when clicking the button
+const pr_window = document.querySelector('.pr_window')
+const pr_text = document.querySelector('.prs_left')
+const open_prs = document.querySelectorAll('.pre_reqs')
+const got_it = document.querySelector('.got_it')
 
+open_prs.forEach(open_pr => {
+    open_pr.addEventListener('click', () => {
+        const mod_code = open_pr.id.slice(3)
+        const pre_reqs = all_mods_pr[mod_code]
+        let pr_string = ''
+        for (const str of pre_reqs) {
+            if (str[0] === '!') {
+                pr_string += `All of: ${str.slice(2)} \n`
+            } else if (str[0] === '%') {
+                pr_string += `One of: ${str.slice(2, -2)} \n`
+            } else {
+                let shld_hav = ''
+                if (str.includes('MA1301')) {
+                    shld_hav = "H2 Math"
+                } else if (str.includes('CM1417')) {
+                    shld_hav = "H2 Chemistry"
+                } else if (str.includes('LSM1301')) {
+                    shld_hav = "H2 Biology"
+                }
+                pr_string += `Have you taken ${shld_hav}? If not, \n One of ${str.slice(2)}`
+            }
+        }
+        pr_text.textContent = pr_string
+        pr_text.appendChild(got_it)
+        pr_window.style.display = 'flex'
+    })      
+})
+
+got_it.addEventListener('click', () => {
+    pr_window.style.display = 'none'
+})
 
