@@ -130,3 +130,37 @@ back_button.addEventListener('click', () => {
         window.location.href = "base.html"        
     }
 })
+
+// dynamically adding pre-reqs to html from all_mods.json
+let all_mods_dict;
+const all_mods_pr = {}
+
+const pullMods = async () => {
+    const raw = await fetch('../jsons/all_mods.json')
+    all_mods_dict = await raw.json()
+}
+
+pullMods().then(() => {
+    all_mod_buttons.forEach(mod_button => {
+        const mod_code = mod_button.textContent
+        pre_req_array = all_mods_dict[mod_code]['pre_reqs']
+        let x = 0
+        for (const str of pre_req_array) {
+            if (str[0] === '!') {
+                x += str.split(' ').length - 1
+            } else {
+                x++
+            }
+        }
+        const pr_NA = document.querySelector(`#pr_${mod_code}`)
+        pr_NA.textContent = `prereqs left: ${x}`
+        all_mods_pr[mod_code] = pre_req_array
+    })
+})
+.then(() => console.log(all_mods_pr))
+.then(() => console.log(Object.keys(all_mods_pr).length))
+
+
+
+
+
