@@ -89,7 +89,7 @@ const core_mods = [
     "IS2108",
     "IS2109",
     "IS3103",
-    "Ind_XP_req/CP4101",
+    // "Ind_XP_req/CP4101",
     "IS4108",
     "MA1521",
     "MA1522",

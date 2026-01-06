@@ -161,32 +161,13 @@ pullMods().then(() => {
 .then(() => console.log(Object.keys(all_mods_pr).length))
 
 // checking and changing pre_req_array at the start (for core mods) AND whenever a mod is selected
-const check_prereq = (modCode) => {
-    const req_fors = all_mods_rf[modCode]
-    req_fors.forEach(rf => {
-        // reducing x
-        pr_strings = all_mods_pr[rf]
-        let reduce = false
-        pr_strings.forEach(pr_str => {
-            if (pr_str.includes(modCode)) {
-                if (pr_str[0] === '%') {
-                    reduce = true
-                } else if (pr_str[0] === '!') {
-                    // how to decide when all ! are fulfilled, damn ts hard
-                }
-            }
-        })
-        if (reduce) {
-            const divv = document.querySelector(`.${rf}`)
-            if (divv.classList[0] === 'not_claimed') {
-                const x_text = document.querySelector(`#pr_${rf}`)
-                let x_textContent = x_text.textContent
-                let new_x = Number(x_textContent.slice(-1)) - 1
-                
-            }
-        }
+const to_green = (modCode) => {
+    const green_ts = document.querySelectorAll(`.${modCode}_window`)
+    green_ts.forEach(ts => {
+        ts.classList.add('green_fn')
     })
 }
+const selected_mods = JSON.parse(localStorage.getItem('core_mods'))
 
 // showing pre-reqs left when clicking the button
 const pr_window = document.querySelector('.pr_window')
@@ -205,7 +186,11 @@ open_prs.forEach(open_pr => {
                 pr_string += '<div>All of: '
                 while (str.length > 1) {
                     let pr = str.pop()
-                    pr_string += `<span id="${pr}_window">${pr}</span> `
+                    if (selected_mods.includes(pr)) {
+                        pr_string += `<span class="${pr}_window green_fn">${pr}</span> `
+                    } else {
+                        pr_string += `<span class="${pr}_window">${pr}</span> `
+                    }
                 }
                 pr_string += '</div>'
             } else if (str[0] === '%') {
@@ -213,7 +198,11 @@ open_prs.forEach(open_pr => {
                 str.pop()
                 while (str.length > 1) {
                     let pr = str.pop()
-                    pr_string += `<span id="${pr}_window">${pr} </span> `
+                    if (selected_mods.includes(pr)) {
+                        pr_string += `<span class="${pr}_window green_fn">${pr} </span> `
+                    } else {
+                        pr_string += `<span class="${pr}_window">${pr} </span> `
+                    }
                 }
                 pr_string += '</div>'
             } else if (str[0] === '?') {
