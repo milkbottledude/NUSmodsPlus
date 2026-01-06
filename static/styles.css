@@ -165,10 +165,10 @@ body {
     width: 100%;  
     background: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
     justify-content: center;
-    white-space: pre;
 }
 
 .prs_left {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -181,8 +181,13 @@ body {
     width: 70%;
 }
 
+.prs_left div {
+    display: inline;
+}
+
 .got_it {
-    margin-top: 20px;
+    position: absolute;
+    bottom: 60px;
     border-radius: 10px;
     background-color: aquamarine;
     font-size: 22px;

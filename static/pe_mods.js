@@ -119,6 +119,7 @@ back_button.addEventListener('click', () => {
 // dynamically adding pre-reqs to html from all_mods.json
 let all_mods_dict;
 const all_mods_pr = {}
+const all_mods_rf = {}
 
 const pullMods = async () => {
     const raw = await fetch('../jsons/all_mods.json')
@@ -128,6 +129,7 @@ const pullMods = async () => {
 pullMods().then(() => {
     all_mod_buttons.forEach(mod_button => {
         const mod_code = mod_button.textContent
+        // pre_req
         pre_req_array = all_mods_dict[mod_code]['pre_reqs']
         let x = 0
         for (const str of pre_req_array) {
@@ -150,12 +152,18 @@ pullMods().then(() => {
             pr_NA.style.color = 'white'
         }
         all_mods_pr[mod_code] = pre_req_array
+        // req_for
+        req_for_arr = all_mods_dict[mod_code]['req_for']
+        all_mods_rf[mod_code] = req_for_arr
     })
 })
 .then(() => console.log(all_mods_pr))
 .then(() => console.log(Object.keys(all_mods_pr).length))
 
+// checking and changing pre_req_array at the start (for core mods) AND whenever a mod is selected
+const check_prereq = (modCode) => {
 
+}
 
 // showing pre-reqs left when clicking the button
 const pr_window = document.querySelector('.pr_window')
@@ -168,12 +176,24 @@ open_prs.forEach(open_pr => {
         const mod_code = open_pr.id.slice(3)
         const pre_reqs = all_mods_pr[mod_code]
         let pr_string = ''
-        for (const str of pre_reqs) {
+        for (let str of pre_reqs) {
+            str = str.split(' ')
             if (str[0] === '!') {
-                pr_string += `All of: ${str.slice(2)} \n`
+                pr_string += '<div>All of: '
+                while (str.length > 1) {
+                    let pr = str.pop()
+                    pr_string += `<span id="${pr}_window">${pr}</span> `
+                }
+                pr_string += '</div>'
             } else if (str[0] === '%') {
-                pr_string += `One of: ${str.slice(2, -2)} \n`
-            } else {
+                pr_string += '<div class="not_claimed">One of: '
+                str.pop()
+                while (str.length > 1) {
+                    let pr = str.pop()
+                    pr_string += `<span id="${pr}_window">${pr} </span> `
+                }
+                pr_string += '</div>'
+            } else if (str[0] === '?') {
                 let shld_hav = ''
                 if (str.includes('MA1301')) {
                     shld_hav = "H2 Math"
@@ -185,7 +205,7 @@ open_prs.forEach(open_pr => {
                 pr_string += `Have you taken ${shld_hav}? If not, \n One of ${str.slice(2)}`
             }
         }
-        pr_text.textContent = pr_string
+        pr_text.innerHTML = pr_string
         pr_text.appendChild(got_it)
         pr_window.style.display = 'flex'
     })      

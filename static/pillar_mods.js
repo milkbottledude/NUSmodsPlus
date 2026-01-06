@@ -77,9 +77,24 @@ all_mod_buttons.forEach(mod_button => {
     })    
 })
 
-// saving selected pillar mods to localStorage
+// saving selected pillar & core mods to localStorage
 const back_button = document.querySelector('.back_button')
 const not_done = document.querySelector('.not_done_notice')
+
+const core_mods = [
+    "BT2102",
+    "CS2030",
+    "CS2040",
+    "IS2101",
+    "IS2108",
+    "IS2109",
+    "IS3103",
+    "Ind_XP_req/CP4101",
+    "IS4108",
+    "MA1521",
+    "MA1522",
+    "ST2334"
+  ]
 
 back_button.addEventListener('click', () => {
     let unfulfilled = ''
@@ -93,6 +108,7 @@ back_button.addEventListener('click', () => {
         not_done.textContent = 'You have not chosen mods from these group(s): \n' + unfulfilled
     } else {
         localStorage.setItem('pillar_mods', JSON.stringify(mods_chosen))
+        localStorage.setItem('core_mods', JSON.stringify(core_mods))
         window.location.href = "base.html"
     }
 })
