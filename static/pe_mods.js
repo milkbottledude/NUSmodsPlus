@@ -65,41 +65,6 @@ ITSec_button.addEventListener('click', function() {
 })
 
 
-// for green circle status + counting no. of mods and no. of 4ks
-
-const all_mod_buttons = document.querySelectorAll('.select_mod')
-const notice_div = document.querySelector('.not_done_notice')
-
-let total_chosen = []
-let chosen_4ks = 0
-
-all_mod_buttons.forEach(mod_button => {
-    mod_button.addEventListener('click', function() {
-        const mod_code = mod_button.textContent
-        const mod_status = document.querySelector(`#${mod_code}_status`)
-        if (mod_status.style.display === '') {
-            if (total_chosen.length === 5) {
-                notice_div.textContent = 'You have already selected 5 mods'
-                notice_div.display = 'flex'
-            } else {
-                mod_status.style.display = 'flex'
-                total_chosen.push(mod_code)
-                if (mod_button.classList[1] === 'lvl_4k') {
-                    chosen_4ks++
-                    console.log('4K ADDEDDDDDDDDDDD')
-                }
-            }
-        } else {
-            mod_status.style.display = ''
-            total_chosen = total_chosen.filter(mod => mod !== mod_code)
-            if (mod_button.classList[1] === 'lvl_4k') {
-                chosen_4ks--
-                console.log('4K REMOVEDDDDD')
-            }
-        }
-    })    
-})
-
 // back button
 const back_button = document.querySelector('.back_button')
 
@@ -107,28 +72,29 @@ back_button.addEventListener('click', () => {
     if (total_chosen.length !== 5) {
         notice_div.textContent = 'You have not selected 5 mods'
         notice_div.style.display = 'flex'
+        setTimeout(() => {
+            notice_div.style.display = 'none'
+        }, 3200)
     } else if (chosen_4ks < 3) {
         notice_div.textContent = 'You need at least 3 courses at Level-4000'
         notice_div.style.display = 'flex'
+        setTimeout(() => {
+            notice_div.style.display = 'none'
+        }, 3200)
     } else {
         localStorage.setItem('pe_mods', JSON.stringify(total_chosen))
         window.location.href = "base.html"        
     }
 })
 
-// checking and changing pre_req_array at the start (for core mods) AND whenever a mod is selected
-const to_green = (modCode) => {
-    const green_ts = document.querySelectorAll(`.${modCode}_window`)
-    green_ts.forEach(ts => {
-        ts.classList.add('green_fn')
-    })
-}
-
 // dynamically adding pre-reqs to html from all_mods.json
 let all_mods_dict;
 const all_mods_pr = {}
 const all_mods_rf = {}
-const selected_mods = JSON.parse(localStorage.getItem('core_mods'))
+const selected_mods = new Set(JSON.parse(localStorage.getItem('core_mods')))
+const all_mod_buttons = document.querySelectorAll('.select_mod')
+const all_pe_mods = new Set()
+
 
 const pullMods = async () => {
     const raw = await fetch('../jsons/all_mods.json')
@@ -138,6 +104,7 @@ const pullMods = async () => {
 pullMods().then(() => {
     all_mod_buttons.forEach(mod_button => {
         const mod_code = mod_button.textContent
+        all_pe_mods.add(mod_code)
         // pre_req
         pre_req_array = all_mods_dict[mod_code]['pre_reqs']
         all_mods_pr[mod_code] = {'%': []}
@@ -161,6 +128,7 @@ pullMods().then(() => {
                 } else if (str[0] === '?') {
                     const ting = str.slice(2)
                     all_mods_pr[mod_code]['?'] = {ting: false}
+                    x = '?'
                 }
             }
         }
@@ -170,7 +138,7 @@ pullMods().then(() => {
         for ([key, value] of Object.entries(mod_dict)) {
             if (key === '!') {
                 Object.keys(value).forEach(mod1 => {
-                    if (selected_mods.includes(mod1)) {
+                    if (selected_mods.has(mod1)) {
                         value[mod1] = true
                         remove++
                     }
@@ -179,7 +147,8 @@ pullMods().then(() => {
                 value.forEach(childDict => {
                     let case_remove = false
                     Object.keys(childDict).forEach(mod2 => {
-                        if (selected_mods.includes(mod2)) {
+                        if (selected_mods.has(mod2)) {
+                            childDict[mod2] = true
                             case_remove = true
                         }
                     })
@@ -189,18 +158,26 @@ pullMods().then(() => {
                 })
             }
         }
-        x -= remove
+        if (x !== '?') {
+            x -= remove
+        }
         const pr_NA = document.querySelector(`#pr_${mod_code}`)
         pr_NA.textContent = `prereqs left: ${x}`
         if (x === 1) {
             pr_NA.style.backgroundColor = 'yellow'
             pr_NA.style.color = 'black'
         } else if (x === 2) {
-            pr_NA.style.backgroundColor = 'orange'
-            pr_NA.style.color = 'white'
+            pr_NA.style.backgroundColor = 'rgba(245, 51, 34, 1)'
+            pr_NA.style.color = 'aliceblue'
         } else if (x > 2) {
             pr_NA.style.backgroundColor = 'red'
-            pr_NA.style.color = 'white'
+            pr_NA.style.color = 'aliceblue'
+        } else if (x === 0) {
+            pr_NA.style.backgroundColor = 'rgb(36, 137, 20)'
+            pr_NA.style.color = 'aliceblue'          
+        } else if (x === 0) {
+            pr_NA.style.backgroundColor = 'black'
+            pr_NA.style.color = 'aliceblue'          
         }
         // all_mods_pr[mod_code] = pre_req_array
         // req_for
@@ -208,15 +185,134 @@ pullMods().then(() => {
         all_mods_rf[mod_code] = req_for_arr
     })
 })
-.then(() => console.log(all_mods_pr))
-.then(() => console.log(Object.keys(all_mods_pr).length))
+
+
+// for green circle status + counting no. of mods and no. of 4ks
+const notice_div = document.querySelector('.not_done_notice')
+
+let selected_pe_mods = []
+let total_chosen = []
+let chosen_4ks = 0
+
+all_mod_buttons.forEach(mod_button => {
+    mod_button.addEventListener('click', function() {
+        const mod_code = mod_button.textContent
+        const mod_status = document.querySelector(`#${mod_code}_status`)
+        const unfilt_req_fors = all_mods_rf[mod_code]
+        const req_fors = unfilt_req_fors.filter(val => all_pe_mods.has(val))
+        if (mod_status.style.display === '') {
+            if (total_chosen.length === 5) {
+                notice_div.textContent = 'You have already selected 5 mods'
+                notice_div.style.display = 'flex'
+                setTimeout(() => {
+                    notice_div.style.display = 'none'
+                }, 3200)
+            } else {
+                console.log(`${mod_code} selected`)
+                mod_status.style.display = 'flex'
+                total_chosen.push(mod_code)
+                if (mod_button.classList[1] === 'lvl_4k') {
+                    chosen_4ks++
+                    console.log('4K ADDEDDDDDDDDDDD')
+                }
+                // now time to update localStorage and 'x'
+                selected_pe_mods.push(mod_code)
+                console.log(req_fors)
+                req_fors.forEach(parentMod => {
+                    let x;
+                    let pr_tag = document.querySelector(`#pr_${parentMod}`)
+                    for (let [key, val] of Object.entries(all_mods_pr[parentMod])) {
+                        if (key === '!') {
+                            if (Object.keys(val).includes(mod_code)) {
+                                x = Number(pr_tag.textContent.slice(-1)) - 1
+                                pr_tag.textContent = `prereqs left: ${x}`
+                                val[mod_code] = true
+                            }
+                        } else if (key === '%') {                           
+                            val.forEach(childDict => {
+                                if (Object.keys(childDict).includes(mod_code)) {
+                                    if (!Object.values(childDict).some(Boolean)) {
+                                        console.log(parentMod)
+                                        x = Number(pr_tag.textContent.slice(-1)) - 1   
+                                        pr_tag.textContent = `prereqs left: ${x}`
+                                    }
+                                    childDict[mod_code] = true
+                                }                                
+                            })
+                        }
+                    }
+                    if (x === 1) {
+                        pr_tag.style.backgroundColor = 'yellow'
+                        pr_tag.style.color = 'black'
+                    } else if (x === 2) {
+                        pr_tag.style.backgroundColor = 'rgba(245, 51, 34, 1)'
+                        pr_tag.style.color = 'aliceblue'
+                    } else if (x > 2) {
+                        pr_tag.style.backgroundColor = 'red'
+                        pr_tag.style.color = 'aliceblue'
+                    } else if (x === 0) {
+                        pr_tag.style.backgroundColor = 'rgb(36, 137, 20)'
+                        pr_tag.style.color = 'aliceblue'          
+                    } else if (x === 0) {
+                        pr_tag.style.backgroundColor = 'black'
+                        pr_tag.style.color = 'aliceblue'          
+                    }
+                })
+            }
+        } else {
+            selected_pe_mods = selected_pe_mods.filter(mod => mod !== `${mod_code}`)
+            mod_status.style.display = ''
+            total_chosen = total_chosen.filter(mod => mod !== mod_code)
+            req_fors.forEach(parentMod => {
+                let pr_tag = document.querySelector(`#pr_${parentMod}`)
+                let x;
+                for (let [key, val] of Object.entries(all_mods_pr[parentMod])) {
+                    if (key === '!') {
+                        if (Object.keys(val).includes(mod_code)) {
+                            x = Number(pr_tag.textContent.slice(-1)) + 1
+                            pr_tag.textContent = `prereqs left: ${x}`
+                            val[mod_code] = false
+                        }
+                    } else if (key === '%') {                           
+                        val.forEach(childDict => {
+                            if (Object.keys(childDict).includes(mod_code)) {
+                                childDict[mod_code] = false
+                                if (!Object.values(childDict).some(Boolean)) {
+                                    x = Number(pr_tag.textContent.slice(-1)) + 1   
+                                    pr_tag.textContent = `prereqs left: ${x}`
+                                }
+                            }                                
+                        })
+                    }
+                }
+                if (x === 1) {
+                    pr_tag.style.backgroundColor = 'yellow'
+                    pr_tag.style.color = 'black'
+                } else if (x === 2) {
+                    pr_tag.style.backgroundColor = 'rgba(245, 51, 34, 1)'
+                    pr_tag.style.color = 'aliceblue'
+                } else if (x > 2) {
+                    pr_tag.style.backgroundColor = 'red'
+                    pr_tag.style.color = 'aliceblue'
+                } else if (x === 0) {
+                    pr_tag.style.backgroundColor = 'rgb(36, 137, 20)'
+                    pr_tag.style.color = 'aliceblue'          
+                }
+            })
+            if (mod_button.classList[1] === 'lvl_4k') {
+                chosen_4ks--
+                console.log('4K REMOVEDDDDD')
+            }
+        }
+    })    
+})
+
 
 // showing pre-reqs left when clicking the button
 const pr_window = document.querySelector('.pr_window')
 const pr_text = document.querySelector('.prs_left')
 const open_prs = document.querySelectorAll('.pre_reqs')
 const got_it = document.querySelector('.got_it')
-const selected_pe_mods = JSON.parse(localStorage.getItem('pe_mods'))
 
 
 open_prs.forEach(open_pr => {
@@ -228,9 +324,9 @@ open_prs.forEach(open_pr => {
             if (key === '!') {
                 pr_string += '<div>All of: '
                 Object.keys(value).forEach(pr => {
-                    if (selected_pe_mods.includes(pr) || selected_mods.includes(pr) ) {
+                    if (selected_pe_mods.includes(pr) || selected_mods.has(pr) ) {
                         // update true/false status here
-                        pr_string += `<span class="${pr}_window green_fn">${pr}</span> `
+                        pr_string += `<span class="${pr}_window green_fn>${pr}</span> `
                     } else {
                         pr_string += `<span class="${pr}_window">${pr}</span> `
                     }
@@ -240,7 +336,7 @@ open_prs.forEach(open_pr => {
                 for (const dict of value) {
                     pr_string += `<div class="not_claimed ${mod_code}">One of: `
                     Object.keys(dict).forEach(pr => {
-                        if (selected_pe_mods.includes(pr) || selected_mods.includes(pr)) {
+                        if (selected_pe_mods.includes(pr) || selected_mods.has(pr)) {
                             // update true/false status here
                             pr_string += `<span class="${pr}_window green_fn">${pr} </span> `
                         } else {

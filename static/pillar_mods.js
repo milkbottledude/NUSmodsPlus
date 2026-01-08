@@ -97,7 +97,7 @@ const core_mods = [
     "MA1521",
     "MA1522",
     "ST2334"
-  ]
+]
 
 back_button.addEventListener('click', () => {
     let unfulfilled = ''
@@ -112,7 +112,6 @@ back_button.addEventListener('click', () => {
     } else {
         localStorage.setItem('pillar_mods', JSON.stringify(mods_chosen))
         localStorage.setItem('core_mods', JSON.stringify(core_mods))
-        localStorage.setItem('pe_mods', JSON.stringify([]))
         window.location.href = "base.html"
     }
 })

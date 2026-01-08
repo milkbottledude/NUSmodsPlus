@@ -66,14 +66,17 @@ body {
 
 .not_done_notice {
     display: none;
+    position: absolute;
+    top: 160px;
     background-color: antiquewhite;
     border-radius: 12px;
     font-size: 22px;
     margin-left: 22px;
     margin: 20px;
     width: fit-content;
-    padding: 8px 20px;
+    padding: 20px 20px;
     white-space: pre-line;
+    border: 2px solid black;
 }
 
 .dropdown-container {
@@ -100,14 +103,17 @@ body {
 
 .details_nusmods {
     text-decoration: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: black;
     border: 1.5px solid black;
     border-radius: 7px;
     padding: 0px 7px;
+    padding-bottom: 3px;
     font-size: 17px;
     font-weight: bold;
     margin-left: auto;
     margin-right: 10px;
+    background-color: rgb(164, 186, 186);
 }
 
 .select_mod {
@@ -183,6 +189,7 @@ body {
     border: 2px solid black;
     height: 70%;
     width: 70%;
+    padding: 40px;
 }
 
 .prs_left div {
