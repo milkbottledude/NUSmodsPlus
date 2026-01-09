@@ -19,6 +19,48 @@ body {
     padding-top: 90px;
 }
 
+#u_selected {
+    position: absolute;
+    top: 20px;
+}
+
+#selected_mods_window {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 60px;
+}
+
+.window_mod {
+    display: flex;
+    flex-direction: column;
+    font-size: 32px;
+    align-items: center;
+}
+
+.window_pillar {
+    display: none;
+}
+
+.window_PE {
+    display: none;
+}
+
+.window_UE {
+    display: none;
+}
+
+.window_IDCD {
+    display: none;
+}
+
+.mod_title {
+    margin-bottom: 10px;
+    font-size: 40px;
+    font-weight: bold;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 .button {
     box-shadow: 0 1px 0 black; /* from gpt */
     cursor: pointer; /* from gpt */
@@ -41,6 +83,13 @@ body {
     text-decoration: none;
     color: black;
     box-shadow:  0 3px 0 black;
+}
+
+.current_stack {
+    font-size: 20px;
+    width: auto;
+    background-color: cornsilk;
+    padding: 5px 8px;
 }
 
 .button:active { /* from gpt */
@@ -192,10 +241,6 @@ body {
     padding: 40px;
 }
 
-.prs_left div {
-    display: inline;
-}
-
 .got_it {
     position: absolute;
     bottom: 60px;
@@ -233,4 +278,26 @@ body {
     font-size: 29px;
     font-family: Arial, Helvetica, sans-serif;
     color: burlywood;
+}
+
+.purple {
+    display: inline-block;
+    color: purple;
+}
+
+.black {
+    display: inline-block;
+    background-color: black;
+}
+
+.legend {
+    position: absolute;
+    top: 19%;
+    right: 19%;
+    font-size: 22px;
+    z-index: 2;
+    background-color: bisque;
+    border: 2px solid black;
+    border-radius: 7px;
+    padding: 20px;
 }

@@ -8,13 +8,32 @@
 </head>
 <body>
     <div class="top_banner">
-
+        <button class="current_stack tile button">Selected Mods</button>
     </div>
+    <div class="pr_window" id="selected_mods_container">      
+        <div class="prs_left" id="selected_mods_window">
+            <div id="u_selected"> Your Module Selection: </div>
+            <div class="window_mod window_pillar">
+                <span class="mod_title">Pillars</span>
+            </div>
+            <div class="window_mod window_PE">
+                <span class="mod_title">PE Mods</span>
+            </div>
+            <div class="window_mod window_UE">
+                <span class="mod_title">UE Mods</span>
+            </div>
+            <div class="window_mod window_IDCD">
+                <span class="mod_title">IDCD Mods</span>
+            </div>
+            <button class="got_it button">OK</button>
+        </div>
+    </div> 
     <div class="base_tiles">
-        <a href="pillar_mods.html" class="tile button">Pillar Mods</a>
-        <a href="pe_mods.html" class="tile button">Programme Elective Mods</a>
-        <a href="ue_mods.html" class="tile button">Unrestricted Elective Mods</a>
-        <a href="idcd_mods.html" class="tile button">Inter & Cross Disciplinary Mods</a>
+        <a href="pillar_mods.html" class="tile button" id="pillar_tile">Pillar Mods</a>
+        <a href="pe_mods.html" class="tile button" id="PE_tile">Programme Elective Mods</a>
+        <a href="ue_mods.html" class="tile button" id="UE_tile">Unrestricted Elective Mods</a>
+        <a href="idcd_mods.html" class="tile button" id="IDCD_tile">Inter & Cross Disciplinary Mods</a>
     </div>
+    <script src="../static/base.js"></script>
 </body>
 </html>

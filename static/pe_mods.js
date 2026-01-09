@@ -64,34 +64,13 @@ ITSec_button.addEventListener('click', function() {
     }
 })
 
-
-// back button
-const back_button = document.querySelector('.back_button')
-
-back_button.addEventListener('click', () => {
-    if (total_chosen.length !== 5) {
-        notice_div.textContent = 'You have not selected 5 mods'
-        notice_div.style.display = 'flex'
-        setTimeout(() => {
-            notice_div.style.display = 'none'
-        }, 3200)
-    } else if (chosen_4ks < 3) {
-        notice_div.textContent = 'You need at least 3 courses at Level-4000'
-        notice_div.style.display = 'flex'
-        setTimeout(() => {
-            notice_div.style.display = 'none'
-        }, 3200)
-    } else {
-        localStorage.setItem('pe_mods', JSON.stringify(total_chosen))
-        window.location.href = "base.html"        
-    }
-})
-
 // dynamically adding pre-reqs to html from all_mods.json
 let all_mods_dict;
 const all_mods_pr = {}
 const all_mods_rf = {}
+localStorage.setItem('pe_mods', JSON.stringify({}))
 const selected_mods = new Set(JSON.parse(localStorage.getItem('core_mods')))
+console.log(selected_mods)
 const all_mod_buttons = document.querySelectorAll('.select_mod')
 const all_pe_mods = new Set()
 
@@ -184,16 +163,13 @@ pullMods().then(() => {
         req_for_arr = all_mods_dict[mod_code]['req_for']
         all_mods_rf[mod_code] = req_for_arr
     })
-})
+}).then(console.log(all_mods_pr))
 
 
 // for green circle status + counting no. of mods and no. of 4ks
 const notice_div = document.querySelector('.not_done_notice')
-
-let selected_pe_mods = []
 let total_chosen = []
 let chosen_4ks = 0
-
 all_mod_buttons.forEach(mod_button => {
     mod_button.addEventListener('click', function() {
         const mod_code = mod_button.textContent
@@ -206,7 +182,7 @@ all_mod_buttons.forEach(mod_button => {
                 notice_div.style.display = 'flex'
                 setTimeout(() => {
                     notice_div.style.display = 'none'
-                }, 3200)
+                }, 1900)
             } else {
                 console.log(`${mod_code} selected`)
                 mod_status.style.display = 'flex'
@@ -216,7 +192,6 @@ all_mod_buttons.forEach(mod_button => {
                     console.log('4K ADDEDDDDDDDDDDD')
                 }
                 // now time to update localStorage and 'x'
-                selected_pe_mods.push(mod_code)
                 console.log(req_fors)
                 req_fors.forEach(parentMod => {
                     let x;
@@ -260,7 +235,6 @@ all_mod_buttons.forEach(mod_button => {
                 })
             }
         } else {
-            selected_pe_mods = selected_pe_mods.filter(mod => mod !== `${mod_code}`)
             mod_status.style.display = ''
             total_chosen = total_chosen.filter(mod => mod !== mod_code)
             req_fors.forEach(parentMod => {
@@ -313,7 +287,7 @@ const pr_window = document.querySelector('.pr_window')
 const pr_text = document.querySelector('.prs_left')
 const open_prs = document.querySelectorAll('.pre_reqs')
 const got_it = document.querySelector('.got_it')
-
+console.log(Object.keys(all_mods_pr))
 
 open_prs.forEach(open_pr => {
     open_pr.addEventListener('click', () => {
@@ -321,14 +295,18 @@ open_prs.forEach(open_pr => {
         const pre_reqs = all_mods_pr[mod_code]
         let pr_string = ''
         for (let [key, value] of Object.entries(pre_reqs)) {
+            console.log(key, value)
             if (key === '!') {
                 pr_string += '<div>All of: '
                 Object.keys(value).forEach(pr => {
-                    if (selected_pe_mods.includes(pr) || selected_mods.has(pr) ) {
-                        // update true/false status here
-                        pr_string += `<span class="${pr}_window green_fn>${pr}</span> `
+                    if (value[pr] === true) {
+                        pr_string += `<span class="${pr}_window green_fn">${pr}</span> `
                     } else {
-                        pr_string += `<span class="${pr}_window">${pr}</span> `
+                        if (all_pe_mods.has(pr)) {
+                            pr_string += `<span class="${pr}_window purple">${pr}</span> `
+                        } else {
+                            pr_string += `<span class="${pr}_window">${pr}</span> `
+                        }
                     }
                 })
                 pr_string += '</div>'
@@ -336,11 +314,15 @@ open_prs.forEach(open_pr => {
                 for (const dict of value) {
                     pr_string += `<div class="not_claimed ${mod_code}">One of: `
                     Object.keys(dict).forEach(pr => {
-                        if (selected_pe_mods.includes(pr) || selected_mods.has(pr)) {
+                        if (dict[pr] === true) {
                             // update true/false status here
                             pr_string += `<span class="${pr}_window green_fn">${pr} </span> `
                         } else {
-                            pr_string += `<span class="${pr}_window">${pr} </span> `
+                            if (all_pe_mods.has(pr)) {
+                                pr_string += `<span class="${pr}_window purple">${pr} </span> `
+                            } else {
+                                pr_string += `<span class="${pr}_window">${pr} </span> `
+                            }
                         }
                     })
                     pr_string += '</div>'              
@@ -367,3 +349,30 @@ got_it.addEventListener('click', () => {
     pr_window.style.display = 'none'
 })
 
+
+// back button
+const back_button = document.querySelector('.back_button')
+
+back_button.addEventListener('click', () => {
+    if (total_chosen.length !== 5) {
+        notice_div.textContent = 'You have not selected 5 mods'
+        notice_div.style.display = 'flex'
+        setTimeout(() => {
+            notice_div.style.display = 'none'
+        }, 1900)
+    } else if (chosen_4ks < 3) {
+        notice_div.textContent = 'You need at least 3 courses at Level-4000'
+        notice_div.style.display = 'flex'
+        setTimeout(() => {
+            notice_div.style.display = 'none'
+        }, 1900)
+    } else {
+        localStorage.setItem('pe_mods', JSON.stringify(total_chosen))
+        const selected_pe_mods = {}
+        total_chosen.forEach(mod => {
+            selected_pe_mods[mod] = all_mods_pr[mod]
+        })
+        localStorage.setItem('PE_mods', JSON.stringify(selected_pe_mods))
+        window.location.href = "base.html"        
+    }
+})
