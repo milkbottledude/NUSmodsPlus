@@ -480,10 +480,10 @@ back_button.addEventListener('click', () => {
             // changing got_it
             pr_text.appendChild(got_it)
             got_it.addEventListener('click', () => {
-                window.location.href = "base.html" 
+                window.location.href = "/" 
             })
         } else {
-                window.location.href = "base.html"        
+                window.location.href = "/"        
         }
 
     }

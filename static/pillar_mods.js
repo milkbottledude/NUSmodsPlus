@@ -103,6 +103,6 @@ back_button.addEventListener('click', () => {
             'CD': false
         }))
         localStorage.setItem('Others', JSON.stringify([]))
-        window.location.href = "base.html"
+        window.location.href = "/"
     }
 })
