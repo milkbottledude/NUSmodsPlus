@@ -22,7 +22,7 @@ def ue():
 def idcd():
     return render_template('idcd_mods.html')
 
-@app.route('timetable/')
+@app.route('/timetable')
 def timetable():
     return render_template('timetable.html')
 

@@ -330,7 +330,8 @@ body {
 }
 
 .cols2 {
-    display: flex;        
+    display: flex;    
+    flex-wrap: wrap;    
     justify-content: center;
-    gap: 0px 60px;          
+    gap: 200px 60px;          
 }
