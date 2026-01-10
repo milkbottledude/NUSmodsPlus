@@ -447,7 +447,7 @@ back_button.addEventListener('click', () => {
             // editing window
             let notif_string = '<div class="dont_worry" id="the_following">The following mods do not have their pre-reqs met:</div>'
             for (let [key, val] of Object.entries(incomplete_prs)) {
-                notif_string += `<div>${key}:`
+                notif_string += `<div class"i_got_this">${key}:`
                 val.forEach(pr => {
                     notif_string += `<span class="red"> ${pr}</span>`
                     let oth = 0
@@ -462,6 +462,7 @@ back_button.addEventListener('click', () => {
                         groups['Others'].push(pr)
                     }
                 })
+                notif_string += '</div>'
             }
             let grp = []
             for (let [type2, arr2] of Object.entries(groups)) {

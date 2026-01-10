@@ -1,6 +1,6 @@
 const language_tiles = document.querySelectorAll('.language_tile')
 const notice = document.querySelector('.not_done_notice')
-let langs_chosen = new Set()
+let langs_chosen = new Set() // CHANGE TO DICT, ND TO INCLUDE LEVELz!!
 
 language_tiles.forEach(tile => {
     tile.addEventListener('click', () => {
