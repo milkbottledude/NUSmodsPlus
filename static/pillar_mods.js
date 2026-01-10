@@ -93,6 +93,9 @@ back_button.addEventListener('click', () => {
     if (unfulfilled !== '') {
         not_done.style.display = 'flex'
         not_done.textContent = 'You have not chosen mods from these group(s): \n' + unfulfilled
+        setTimeout(() => {
+            not_done.style.display = 'none'
+        }, 1900)
     } else {
         localStorage.setItem('pillar_mods', JSON.stringify(mods_chosen))
         localStorage.setItem('IDCD_mods', JSON.stringify({

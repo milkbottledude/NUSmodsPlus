@@ -682,7 +682,14 @@
       "LAR4201",
       "LAR4202"
     ],
-    "Bahasa Indonesia": [],
+    "Bahasa Indonesia": [
+      "LAB1201",
+      "LAB2201",
+      "LAB3201",
+      "LAB3202",
+      "LAB4201",
+      "LAB4202"
+    ],
     "Chinese": [
       "LAC1201",
       "LAC2201",

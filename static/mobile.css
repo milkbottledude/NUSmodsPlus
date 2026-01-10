@@ -7,7 +7,7 @@ body {
     position: fixed;
     background-color: rgb(101, 101, 163);
     margin-top: auto;
-    height: 8%;
+    height: 6%;
     width: 100%;
     align-items: center;
 }
@@ -16,12 +16,13 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 12%;
+    padding-top: 22%;
 }
 
 #u_selected {
     position: absolute;
     top: 3%;
+    font-size: 25px;
 }
 
 #selected_mods_window {
@@ -38,9 +39,9 @@ body {
 .window_mod {
     display: flex;
     flex-direction: column;
-    font-size: 75%;
+    font-size: 35%;
     align-items: center;
-    margin-bottom: 5%;
+    margin-bottom: 37%;
     height: max-content;
 }
 
@@ -75,7 +76,7 @@ body {
     border: 2px solid black;
     background-color: aqua;
     font-size: 240%;
-    width: 600px;
+    width: 360px;
     height: auto;
     text-align: center;
     margin: 3%;

@@ -475,6 +475,7 @@ back_button.addEventListener('click', () => {
             pr_text.innerHTML = notif_string
             for (let [title, arr3] of Object.entries(groups)) {
                 localStorage.setItem(title, JSON.stringify(arr3))
+                console.log(title, arr3)
             }
             // changing got_it
             pr_text.appendChild(got_it)
