@@ -88,6 +88,7 @@ ITSec_button.addEventListener('click', function() {
 let all_mods_dict;
 const all_mods_pr = {}
 const all_mods_rf = {}
+let IDCD_mods;
 localStorage.setItem('pe_mods', JSON.stringify({}))
 const selected_mods = new Set(JSON.parse(localStorage.getItem('core_mods')))
 console.log(selected_mods)
@@ -98,6 +99,9 @@ const all_pe_mods = new Set()
 const pullMods = async () => {
     const raw = await fetch('../jsons/all_mods.json')
     all_mods_dict = await raw.json()
+    const raw2 = await fetch('../jsons/target_mods.json')
+    const target_mods = await raw2.json()
+    IDCD_mods = target_mods['IDCD_mods']
 }
 
 pullMods().then(() => {
@@ -410,7 +414,17 @@ back_button.addEventListener('click', () => {
                     let to_add = []
                     subVal.forEach(childDict => {
                         if (!Object.values(childDict).some(Boolean)) {
-                            to_add.push(Object.keys(childDict)[0])
+                            let found = false
+                            for (const pot of Object.keys(childDict)) {
+                                if (IDCD_mods['ID_mods'].includes(pot) || IDCD_mods['CD_mods'].includes(pot)) {
+                                    found = true
+                                    to_add.push(pot)
+                                    break
+                                }
+                            }
+                            if (!found) {
+                                to_add.push(Object.keys(childDict)[0])
+                            }
                         }
                     })
                     if (incomplete_prs[key]) {
@@ -422,6 +436,11 @@ back_button.addEventListener('click', () => {
             }
         }
         if (Object.keys(incomplete_prs).length > 0) {
+            const groups = {
+                'ID_mods': [],
+                'CD_mods': [],
+                'Others': []
+            }
             pr_window.style.display = 'flex'
             const legend = document.querySelector('.legend')
             legend.style.display = 'none'
@@ -431,11 +450,32 @@ back_button.addEventListener('click', () => {
                 notif_string += `<div>${key}:`
                 val.forEach(pr => {
                     notif_string += `<span class="red"> ${pr}</span>`
+                    let oth = 0
+                    for (let [type, arr] of Object.entries(IDCD_mods)) {
+                        if (arr.includes(pr)) {
+                            groups[type].push(pr)
+                        } else {
+                            oth++
+                        }
+                    }
+                    if (oth == 2) {
+                        groups['Others'].push(pr)
+                    }
                 })
             }
-            notif_string += '<div class="dont_worry">We will add them to your selected modules as UE mods</div>'
+            let grp = []
+            for (let [type2, arr2] of Object.entries(groups)) {
+                if (arr2.length > 0) {
+                    grp.push(type2)
+                }
+            }
+            grp = grp.join(' and ')
+            notif_string += `<div class="dont_worry">We will add them to your selected modules as <span class="purple">${grp}</span> mods</div>`
             const got_it = document.querySelector('.got_it')
             pr_text.innerHTML = notif_string
+            for (let [title, arr3] of Object.entries(groups)) {
+                localStorage.setItem(title, JSON.stringify(arr3))
+            }
             // changing got_it
             pr_text.appendChild(got_it)
             got_it.addEventListener('click', () => {
