@@ -423,9 +423,24 @@ back_button.addEventListener('click', () => {
         }
         if (Object.keys(incomplete_prs).length > 0) {
             pr_window.style.display = 'flex'
-            setTimeout(() => {
-                window.location.href = "base.html"        
-            }, 1900)            
+            const legend = document.querySelector('.legend')
+            legend.style.display = 'none'
+            // editing window
+            let notif_string = '<div class="dont_worry" id="the_following">The following mods do not have their pre-reqs met:</div>'
+            for (let [key, val] of Object.entries(incomplete_prs)) {
+                notif_string += `<div>${key}:`
+                val.forEach(pr => {
+                    notif_string += `<span class="red"> ${pr}</span>`
+                })
+            }
+            notif_string += '<div class="dont_worry">We will add them to your selected modules as UE mods</div>'
+            const got_it = document.querySelector('.got_it')
+            pr_text.innerHTML = notif_string
+            // changing got_it
+            pr_text.appendChild(got_it)
+            got_it.addEventListener('click', () => {
+                window.location.href = "base.html" 
+            })
         } else {
                 window.location.href = "base.html"        
         }
