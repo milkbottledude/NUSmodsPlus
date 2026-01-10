@@ -97,9 +97,9 @@ const all_pe_mods = new Set()
 
 
 const pullMods = async () => {
-    const raw = await fetch('jsons/all_mods.json')
+    const raw = await fetch('/jsons/all_mods.json')
     all_mods_dict = await raw.json()
-    const raw2 = await fetch('jsons/target_mods.json')
+    const raw2 = await fetch('/jsons/target_mods.json')
     const target_mods = await raw2.json()
     IDCD_mods = target_mods['IDCD_mods']
 }

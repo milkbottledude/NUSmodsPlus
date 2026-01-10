@@ -1,6 +1,10 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, send_from_directory
 
 app = Flask(__name__)
+
+@app.route('/jsons/<path:filename>')
+def serve_json(filename):
+    return send_from_directory('jsons', filename)
 
 @app.route('/')
 def base():
