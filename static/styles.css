@@ -88,6 +88,20 @@ body {
     box-shadow: 0 1px 0 black;
 }
 
+#u_sure_text {
+    text-align: center;
+}
+
+#go_in {
+    left: 30%;
+    bottom: 20%;
+}
+
+#nuh_uh {
+    right: 30%;
+    bottom: 20%;
+}
+
 /* pillar_mods */
 .back_button {
     display: flex;
@@ -291,6 +305,7 @@ body {
 .purple {
     display: inline-block;
     color: purple;
+    white-space: pre;
 }
 
 .black {
@@ -331,7 +346,7 @@ body {
 }
 
 .green_bg {
-    background-color: rgb(49, 192, 49);
+    background-color: rgb(23, 196, 23);
 }
 
 .lan_lvl {

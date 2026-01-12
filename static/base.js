@@ -103,3 +103,87 @@ const got_it = document.querySelector('.got_it')
 got_it.addEventListener('click', () => {
     selected_mods_window.style.display = 'none'
 })
+
+// go if ur ok with reset
+const pe_tile = document.querySelector('#PE_tile')
+const ue_tile = document.querySelector('#UE_tile')
+const idcd_tile = document.querySelector('#IDCD_tile')
+const reset_notice = document.querySelector('#u_sure_window')
+const reset_text = document.querySelector('#u_sure_text')
+const go_in = document.querySelector('#go_in')
+const nuh_uh = document.querySelector('#nuh_uh')
+
+pe_tile.addEventListener('click', () => {
+    if (pe_tile.style.background = 'rgb(23, 196, 23)') {
+        let reset_mods = '<span class="purple">PE'
+        if (ue_tile.style.background === 'rgb(23, 196, 23)') {
+            reset_mods += 'and UE'
+        }
+        if (ue_tile.style.background === 'rgb(23, 196, 23)') {
+            reset_mods += 'and IDCD'
+        }
+        reset_mods += ' mods</span>'
+        reset_text.innerHTML = `Entering this tile will reset all your ${reset_mods} Continue?`
+        reset_notice.appendChild(go_in)
+        go_in.addEventListener('click', () => {
+            window.location.href = '/pe_mods'
+        })
+        reset_notice.appendChild(nuh_uh)
+        nuh_uh.addEventListener('click', () => {
+            reset_notice.style.display = 'none'
+        })
+        reset_notice.style.display = 'flex'
+    } else {
+        window.location.href = '/pe_mods'
+    }
+})
+
+ue_tile.addEventListener('click', () => {
+    if (ue_tile.style.background = 'rgb(23, 196, 23)') {
+        let reset_mods = '<span class="purple">UE'
+        if (pe_tile.style.background === 'rgb(23, 196, 23)') {
+            reset_mods += 'and PE'
+        }
+        if (idcd_tile.style.background === 'rgb(23, 196, 23)') {
+            reset_mods += 'and IDCD'
+        }
+        reset_mods += ' mods</span>'
+        reset_text.innerHTML = `Entering this tile will reset all your ${reset_mods} Continue?`
+        reset_notice.appendChild(go_in)
+        go_in.addEventListener('click', () => {
+            window.location.href = '/ue_mods'
+        })
+        reset_notice.appendChild(nuh_uh)
+        nuh_uh.addEventListener('click', () => {
+            reset_notice.style.display = 'none'
+        })
+        reset_notice.style.display = 'flex'
+    } else {
+        window.location.href = '/ue_mods'
+    }
+})
+
+idcd_tile.addEventListener('click', () => {
+    if (idcd_tile.style.background = 'rgb(23, 196, 23)') {
+        let reset_mods = '<span class="purple">IDCD'
+        if (PE_tile.style.background === 'rgb(23, 196, 23)') {
+            reset_mods += 'and PE'
+        }
+        if (ue_tile.style.background === 'rgb(23, 196, 23)') {
+            reset_mods += 'and UE'
+        }
+        reset_mods += ' mods</span>'
+        reset_text.innerHTML = `Entering this tile will reset all your ${reset_mods} Continue?`
+        reset_notice.appendChild(go_in)
+        go_in.addEventListener('click', () => {
+            window.location.href = '/idcd_mods'
+        })
+        reset_notice.appendChild(nuh_uh)
+        nuh_uh.addEventListener('click', () => {
+            reset_notice.style.display = 'none'
+        })
+        reset_notice.style.display = 'flex'
+    } else {
+        window.location.href = '/idcd_mods'
+    }
+})
