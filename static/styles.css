@@ -216,6 +216,7 @@ body {
     background: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
     justify-content: center;
     align-items: center;
+    z-index: 3;
 }
 
 .prs_left {
@@ -351,3 +352,17 @@ body {
     color: rgb(15, 21, 83);
     margin: 2px;
 }
+
+.minor_txt {
+    display: flex;
+    width: 69%;
+    text-align: left;
+    /* background-color: antiquewhite; */
+    padding: 0px 12px;
+    font-size: 32px;
+}
+
+.mod_req {
+    border: 1px solid black;
+}
+

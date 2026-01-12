@@ -334,3 +334,33 @@ body {
     background-color: rgb(9, 237, 9);
     /* background-color: blueviolet; */
 }
+
+/* FROM HERE ON, NOT YET CONFIGURED */
+
+.lan_lvl {
+    display: flex;
+    margin: 5px;
+    border-radius: 7px;
+    padding: 2px;
+    background-color: gray;
+    color: white;
+    z-index: 2;
+}
+
+.pls_choose {
+    display: none;
+    flex-direction: row;
+    font-size: 20px;
+    align-items: center;
+    color: rgb(15, 21, 83);
+    margin: 2px;
+}
+
+.minor_txt {
+    display: flex;
+    width: 69%;
+    text-align: left;
+    /* background-color: antiquewhite; */
+    padding: 0px 12px;
+    font-size: 32px;
+}
