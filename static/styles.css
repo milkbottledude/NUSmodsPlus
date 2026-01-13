@@ -302,6 +302,14 @@ body {
     color: burlywood;
 }
 
+.orange {
+    color: orange;
+}
+
+.yellow {
+    color: rgb(118, 118, 3);
+}
+
 .purple {
     display: inline-block;
     color: purple;
@@ -381,3 +389,10 @@ body {
     border: 1px solid black;
 }
 
+.row_div {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+    font-weight: bold;
+}
