@@ -251,6 +251,7 @@ body {
 .got_it {
     position: absolute;
     bottom: 60px;
+    /* right: 20%; */
     border-radius: 10px;
     background-color: aquamarine;
     font-size: 22px;
@@ -353,10 +354,6 @@ body {
     gap: 200px 60px;          
 }
 
-.green_bg {
-    background-color: rgb(23, 196, 23);
-}
-
 .lan_lvl {
     display: flex;
     margin: 5px;
@@ -389,10 +386,47 @@ body {
     border: 1px solid black;
 }
 
-.row_div {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
+.col_div {
+    display: none;
+    flex-direction: column;
+    background-color: bisque;
     align-items: center;
-    font-weight: bold;
+    width: 60%;
+    padding: 5px 0px;
+    font-size: 95%;
+}
+
+.of_drop {
+    border: 2px solid black;
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 9px;
+    margin-top: 20px;
+}
+
+.of_drop:hover {
+    transition: 0.4s;
+    cursor: pointer;
+    background-color: rgb(48, 67, 67);
+    color: aliceblue;
+}
+
+.mod_button {
+    font-weight: normal;
+    font-size: 90%;
+    width: 82%;
+    text-align: center;
+    margin: 5px 0px;
+    border-radius: 14px;
+    border: 2px solid black;
+    padding: 5px 0px;
+}
+
+
+
+
+.green_bg {
+    background-color: rgb(23, 196, 23);
 }
