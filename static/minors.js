@@ -1,4 +1,8 @@
-minor_mrs = {};
+const minor_mrs = {};
+let selected_minors = [];
+const nuh_uh = document.querySelector('.not_done_notice');
+let overlap = [];
+
 (async () => {
     // gotta load these brats first
     const target_mods = await fetch('/jsons/target_mods.json').then(r => r.json())
@@ -15,7 +19,7 @@ mod_req_buttons.forEach(mod_req_button => {
     let alr_done = '' // temp, to see completed mod_reqs
     let x = 0
     let container_no = 1
-    minor_mrs[minor_key] = {'%<': []}
+    minor_mrs[minor_key] = {}
     for (const req_str of target_mods['minor_mods'][minor_key]) {
         const str_array = req_str.split(' ')
         const symbol = str_array.shift()
@@ -39,12 +43,12 @@ mod_req_buttons.forEach(mod_req_button => {
                 } else {
                     if (target_mods['IDCD_mods']['ID_mods'].includes(str_piece)) {
                         // console.log(`IDDDDDD ${str_piece}${minor_key}`)
-                        add_to_mrs += `<div class="orange mod_button greyed">${str_piece}</div>`
+                        add_to_mrs += `<div class="orange mod_button default_all_of">${str_piece}</div>`
                     } else if (target_mods['IDCD_mods']['CD_mods'].includes(str_piece)) {
                         // console.log(`CDDDDD ${str_piece}${minor_key}`)
-                        add_to_mrs += `<div class="yellow mod_button greyed">${str_piece}</div>`
+                        add_to_mrs += `<div class="yellow mod_button default_all_of">${str_piece}</div>`
                     } else {
-                        add_to_mrs += `<div class="mod_button greyed">${str_piece}</div>`
+                        add_to_mrs += `<div class="mod_button default_all_of">${str_piece}</div>`
                     }
                     minor_mrs[minor_key]['!'].push(str_piece)
                 }
@@ -67,6 +71,7 @@ mod_req_buttons.forEach(mod_req_button => {
                 ) {
                     alr_done += str_piece
                     add_to_mrs += `<div class="green_fn greyed mod_button button">${str_piece}</div>`
+                    overlap.push(str_piece)
                     to_add_ltr.push(str_piece)
                     if (amt_left > 0) {
                         amt_left--
@@ -85,7 +90,7 @@ mod_req_buttons.forEach(mod_req_button => {
             }
             minor_mrs[minor_key][`${container_no}`] = to_add_ltr
             if (amt_left < amt_left_total) {
-                let percentage = Math.floor(amt_left/amt_left_total*100)
+                let percentage = 100 - Math.floor(amt_left/amt_left_total*100)
                 add_to_mrs = `<div class="of_drop button_${container_no}" style="background: linear-gradient(to right, rgb(23, 196, 23) ${percentage}%, white ${percentage}%)">${amt_left_total} of...</div><div class="col_div container_${container_no} ${minor_key}">` + add_to_mrs
             } else if (amt_left === 0) {
                 add_to_mrs = `<div class="of_drop button_${container_no} green_bg">${amt_left_total} of...</div><div class="col_div container_${container_no} ${minor_key}">` + add_to_mrs                
@@ -103,24 +108,46 @@ mod_req_buttons.forEach(mod_req_button => {
         mod_req_button.textContent = `Mod req: ${x}`
         if (tile_button.classList.contains('green_bg')) {
             tile_button.classList.remove('green_bg')
+            selected_minors = selected_minors.filter(minor => minor !== minor_key)
+            mod_req_button.classList.remove('green_bg')
+            for (let [key, val] of Object.entries(minor_mrs[minor_key]))
+                if (key != '!') {
+                    let num_req = val.shift()
+                    minor_mrs[minor_key][key] = val.filter(mod => overlap.includes(mod))
+                    minor_mrs[minor_key][key].unshift(num_req)
+                }
         } else {
-            mrs_left.innerHTML = mrs_left_string
-            mrs_left.appendChild(got_it)
-            if (alr_done === '') {
-                console.log('nigga')
+            if (selected_minors.length === 2) {
+                nuh_uh.style.display = 'flex'
+                nuh_uh.textContent = 'Cannot select more than 2 minors'
+                console.log(selected_minors)
+                setTimeout(() => {
+                    nuh_uh.style.display = ''
+                }, 1900)
             } else {
-                console.log(alr_done) // temp, to see completed mod_reqs
-                console.log(x)
+                mrs_left.innerHTML = mrs_left_string
+                selected_minors.push(minor_key)
+                mrs_left.appendChild(got_it)
+                if (minor_mrs[minor_key]['!']) {
+                    mod_req_button.textContent = `Mod req: ${x - minor_mrs[minor_key]['!'].length}`
+                    if (x - minor_mrs[minor_key]['!'].length === 0) {
+                        mod_req_button.classList.add('green_bg')
+                    }                    
+                }
+                pr_window.style.display = 'flex'   
+                tile_button.classList.add('green_bg')  
             }
-            pr_window.style.display = 'flex'   
-            // CHECK IF ALL REQS BEEN FULFILLED YET
-            tile_button.classList.add('green_bg')         
         }
     })
 })
 
 got_it.addEventListener('click', () => {
     pr_window.style.display = ''
+    nuh_uh.textContent = `${selected_minors.length} minor(s) selected`
+    nuh_uh.style.display = 'flex'
+    setTimeout(() => {
+        nuh_uh.style.display = ''
+    }, 1200);
 })
 
 pr_window.addEventListener('click', (e) => {
@@ -133,31 +160,81 @@ pr_window.addEventListener('click', (e) => {
         } else {
             i_drop.style.display = ''
         }
-    } else if (e.target.classList.contains('mod_button')) {
+    } else if (e.target.classList.contains('mod_button') && !e.target.classList.contains('greyed')) {
         let mod_button = e.target
         let parent = mod_button.parentElement
         let num = Number(parent.classList[1].at(-1))
         let minor_key = parent.classList[2]
+        console.log(minor_mrs[minor_key])
         let x_div = document.querySelector(`#${minor_key}_mod_req`)
+        let num_req = Number(minor_mrs[minor_key][num][0])
+        let change_color = document.querySelector(`.button_${num}`)
         if (mod_button.classList.contains('green_bg')) {
             let old = minor_mrs[minor_key][num]
             minor_mrs[minor_key][num] = old.filter(mod => mod !== mod_button.textContent)
+            let num_now = minor_mrs[minor_key][num].length - 1
             mod_button.classList.remove('green_bg')
             let new_x = Number(x_div.textContent.at(-1)) + 1
             x_div.textContent = `Mod Req: ${new_x}`
-            
-        } else {
-            console.log(minor_mrs)
-            console.log(parent.classList)
-            minor_mrs[minor_key][num].push(mod_button.textContent)
-            mod_button.classList.add('green_bg')
-            let new_x = Number(x_div.textContent.at(-1)) - 1
-            x_div.textContent = `Mod Req: ${new_x}`
-        }
+            change_color.style.background = `linear-gradient(to right, rgb(23, 196, 23) ${100 * num_now/num_req}%, white ${100 * num_now/num_req}%)`                          
 
+        } else {
+            let num_now = minor_mrs[minor_key][num].length - 1
+            if (num_req > num_now) {
+                num_now++
+                minor_mrs[minor_key][num].push(mod_button.textContent)
+                mod_button.classList.add('green_bg')
+                let new_x = Number(x_div.textContent.at(-1)) - 1
+                x_div.textContent = `Mod Req: ${new_x}`      
+                if (new_x === 0) {
+                    x_div.classList.add('green_bg')
+                    change_color.style
+                }
+                change_color.style.background = `linear-gradient(to right, rgb(23, 196, 23) ${100 * num_now/num_req}%, white ${100 * num_now/num_req}%)`                          
+            }
+        }
     }
 })
 
+const fuouttahere = document.querySelector('.back_button')
+fuouttahere.addEventListener('click', () => {
+    let selected_minors_proper = []
+    let hv_not_arr = new Set()
+    let hv_not_str = 'You have not selected mods for the following minor(s): \n\n'
+    selected_minors.forEach(minor_key => {
+        let proper_name = document.querySelector(`#${minor_key}_tile`).firstElementChild.textContent
+        selected_minors_proper.push(proper_name)
+        for (let [key, arr] of Object.entries(minor_mrs[minor_key])) {
+            if (key != '!') {
+                if (arr.length - 1 != Number(arr[0])) {
+                    hv_not_arr.add(proper_name)
+                }
+            }
+        }
+    })
+    if (hv_not_arr.size != 0) {
+        hv_not_arr.forEach(minor_name => {
+            hv_not_str += `${minor_name} \n`
+        })
+        nuh_uh.textContent = hv_not_str
+        nuh_uh.style.display = 'flex'
+        setTimeout(() => {
+            nuh_uh.style.display = ''
+        }, 4900);
+    } else {
+        const to_base = {}
+        selected_minors_proper.forEach(ril_name => {
+            for (let [key, dict] of Object.entries(minor_mrs)) {
+                if (ril_name.split(' ')[0] === key) {
+                    to_base[ril_name] = dict
+                    break
+                }
+            }
+        })
+        localStorage.setItem('minors', to_base)
+        window.location.href = '/ue_mods'
+    }
+})
 
 })();
 

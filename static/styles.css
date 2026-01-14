@@ -303,14 +303,6 @@ body {
     color: burlywood;
 }
 
-.orange {
-    color: orange;
-}
-
-.yellow {
-    color: rgb(118, 118, 3);
-}
-
 .purple {
     display: inline-block;
     color: purple;
@@ -420,6 +412,32 @@ body {
     border: 2px solid black;
     padding: 5px 0px;
 }
+
+.mod_req {
+    background-color: orangered;
+}
+
+.default_all_of {
+    background-color: black;
+    color: aliceblue;
+}
+
+.orange {
+    color: orange;
+}
+
+.yellow {
+    color: rgb(118, 118, 3);
+}
+
+
+
+
+
+
+
+
+
 
 
 
