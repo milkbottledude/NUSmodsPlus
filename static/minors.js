@@ -2,8 +2,8 @@ const minor_mrs = {};
 let selected_minors = [];
 const nuh_uh = document.querySelector('.not_done_notice');
 let overlap = [];
-let ID_chosen = JSON.parse(localStorage.getItem('ID_mods'));
-let CD_chosen = JSON.parse(localStorage.getItem('CD_mods'));
+let ID_chosen = [];
+let CD_chosen = [];
 
 (async () => {
     // gotta load these brats first
@@ -128,31 +128,35 @@ mod_req_buttons.forEach(mod_req_button => {
                     nuh_uh.style.display = ''
                 }, 1900)
             } else {
+                pr_window.dataset.currentMinor = minor_key;
                 mrs_left.innerHTML = mrs_left_string
                 mrs_left.appendChild(got_it)
                 mrs_left.appendChild(dowan)
                 pr_window.style.display = 'flex'   
-                got_it.addEventListener('click', () => {
-                    pr_window.style.display = ''
-                    nuh_uh.textContent = `${selected_minors.length} minor(s) selected`
-                    nuh_uh.style.display = 'flex'
-                    setTimeout(() => {
-                        nuh_uh.style.display = ''
-                    }, 1200);
-                    selected_minors.push(minor_key)
-                    if (minor_mrs[minor_key]['!']) {
-                        mod_req_button.textContent = `Mod req: ${x - minor_mrs[minor_key]['!'].length}`
-                        if (x - minor_mrs[minor_key]['!'].length === 0) {
-                            mod_req_button.classList.add('green_bg')
-                        }                    
-                    }
-                    tile_button.classList.add('green_bg')   
-                })
             }
         }
     })
 })
 
+got_it.addEventListener('click', () => {
+    pr_window.style.display = ''
+    nuh_uh.textContent = `${selected_minors.length + 1} minor(s) selected`
+    nuh_uh.style.display = 'flex'
+    setTimeout(() => {
+        nuh_uh.style.display = ''
+    }, 1200);
+    let minor_cur = pr_window.dataset.currentMinor
+    selected_minors.push(minor_cur)
+    if (minor_mrs[minor_cur]['!']) {
+        const x = Number(document.querySelector(`#${minor_cur}_mod_req`).textContent.split(': ')[1])
+        let mod_req_button = document.querySelector(`#${minor_cur}_mod_req`)
+        mod_req_button.textContent = `Mod req: ${x - minor_mrs[minor_cur]['!'].length}`
+        if (x - minor_mrs[minor_cur]['!'].length === 0) {
+            mod_req_button.classList.add('green_bg')
+        }                    
+    }
+    document.querySelector(`#${minor_cur}_tile`).classList.add('green_bg')   
+})
 
 
 dowan.addEventListener('click', () => {
@@ -232,8 +236,8 @@ fuouttahere.addEventListener('click', () => {
         hv_not_arr.forEach(minor_name => {
             hv_not_str += `${minor_name} \n`
         })
-        ID_chosen = JSON.parse(localStorage.getItem('ID_mods'))
-        CD_chosen = JSON.parse(localStorage.getItem('CD_mods'))
+        ID_chosen = []
+        CD_chosen = []
         nuh_uh.textContent = hv_not_str
         nuh_uh.style.display = 'flex'
         setTimeout(() => {
@@ -250,8 +254,8 @@ fuouttahere.addEventListener('click', () => {
             }
         })
         localStorage.setItem('minors', to_base)
-        localStorage.setItem('ID_w_minor', ID_chosen)
-        localStorage.setItem('CD_w_minor', CD_chosen)
+        localStorage.setItem('ID_mods', ID_chosen)
+        localStorage.setItem('CD_mods', CD_chosen)
         window.location.href = '/ue_mods'
     }
 })

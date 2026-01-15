@@ -258,8 +258,9 @@ def step7():
 def check():
     all_mods_list = read_json('jsons/all_mods.json')
     target_mods = read_json('jsons/target_mods.json')
-    for lan in target_mods['language_mods']:
-        for mod in target_mods['language_mods'][lan]:
-            if all_mods_list[mod]["moduleCredit"] != "4":
-                print(mod)
+    for pe_mod in target_mods['core_mods']:
+        if pe_mod in target_mods['IDCD_mods']['ID_mods'] or pe_mod in target_mods['IDCD_mods']['ID_mods']:
+            print(pe_mod)
+
+check()                
 

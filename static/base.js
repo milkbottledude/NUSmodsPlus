@@ -69,20 +69,24 @@ if (JSON.parse(localStorage.getItem('PE_mods') !== null)) {
 const ID_mods = JSON.parse(localStorage.getItem('ID_mods'))
 const CD_mods = JSON.parse(localStorage.getItem('CD_mods'))
 const Others = JSON.parse(localStorage.getItem('Others'))
-let ICDC_total = 0
+let IDCD_total = 0
 
 if (ID_mods !== null) {
     if (ID_mods.length) {
         to_window('ID')
-        ICDC_total += ID_mods.length
-        console.log(ICDC_total)
+        if (IDCD_total < 3) {
+            IDCD_total += ID_mods.length
+        }
+        console.log(IDCD_total)
         console.log(ID_mods)
     }
 }
 if (CD_mods !== null) {
     if (CD_mods.length) {
         to_window('CD')
-        ICDC_total++
+        if (IDCD_total < 3) {
+            IDCD_total++
+        }
     }
 }
 if (Others !== null) {
@@ -91,11 +95,11 @@ if (Others !== null) {
     }
 }
 
-if (ICDC_total === 1) {
+if (IDCD_total === 1) {
     IDCD_tile.style.background = 'linear-gradient(to right, rgb(23, 196, 23) 30%, aqua 30%)'
-} else if (ICDC_total === 2) {
+} else if (IDCD_total === 2) {
     IDCD_tile.style.background = 'linear-gradient(to right, rgb(23, 196, 23) 60%, aqua 60%)'    
-} else if (ICDC_total === 3) {
+} else if (IDCD_total === 3) {
     IDCD_tile.style.background = 'rgb(23, 196, 23)'
 }
 
@@ -107,7 +111,6 @@ got_it.addEventListener('click', () => {
 // go if ur ok with reset
 const pe_tile = document.querySelector('#PE_tile')
 const ue_tile = document.querySelector('#UE_tile')
-const idcd_tile = document.querySelector('#IDCD_tile')
 const reset_notice = document.querySelector('#u_sure_window')
 const reset_text = document.querySelector('#u_sure_text')
 const go_in = document.querySelector('#go_in')
@@ -144,7 +147,7 @@ ue_tile.addEventListener('click', () => {
         if (pe_tile.style.background === 'rgb(23, 196, 23)') {
             reset_mods += 'and PE'
         }
-        if (idcd_tile.style.background === 'rgb(23, 196, 23)') {
+        if (IDCD_tile.style.background === 'rgb(23, 196, 23)') {
             reset_mods += 'and IDCD'
         }
         reset_mods += ' mods</span>'
@@ -163,8 +166,8 @@ ue_tile.addEventListener('click', () => {
     }
 })
 
-idcd_tile.addEventListener('click', () => {
-    if (idcd_tile.style.background = 'rgb(23, 196, 23)') {
+IDCD_tile.addEventListener('click', () => {
+    if (IDCD_tile.style.background = 'rgb(23, 196, 23)') {
         let reset_mods = '<span class="purple">IDCD'
         if (PE_tile.style.background === 'rgb(23, 196, 23)') {
             reset_mods += 'and PE'
