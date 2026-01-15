@@ -1,3 +1,4 @@
+const ue_tile = document.querySelector('#UE_tile')
 const selected_mods_window = document.querySelector('#selected_mods_container')
 const progress_bar = document.querySelector('.current_stack')
 progress_bar.addEventListener('click', () => {
@@ -9,16 +10,8 @@ const to_window = (type) => {
     const tile = document.querySelector(`#${type}_tile`)
     if (tile) {
         tile.style.backgroundColor = 'rgb(23, 196, 23)'
-        progress_amt++
-        if (progress_amt === 1) {
-            progress_bar.style.background = 'linear-gradient(to right, rgb(23, 196, 23) 20%, white 20%)'
-        } else if (progress_amt === 2) {
-            progress_bar.style.background = 'linear-gradient(to right, rgb(23, 196, 23) 40%, white 40%)'
-        } else if (progress_amt === 3) {
-            progress_bar.style.background = 'linear-gradient(to right, rgb(23, 196, 23) 60%, white 60%)'
-        } else if (progress_amt === 4) {
-            progress_bar.style.background = 'linear-gradient(to right, rgb(23, 196, 23) 80%, white 80%)'
-        }
+        progress_amt += 25
+        progress_bar.style.background = `linear-gradient(to right, rgb(23, 196, 23) ${progress_amt}%, white ${progress_amt}%)`
     }
     const window = document.querySelector(`.window_${type}`)
     window.style.display = 'flex'
@@ -97,11 +90,27 @@ if (Others !== null) {
 
 if (IDCD_total === 1) {
     IDCD_tile.style.background = 'linear-gradient(to right, rgb(23, 196, 23) 30%, aqua 30%)'
+    progress_amt += 8
 } else if (IDCD_total === 2) {
-    IDCD_tile.style.background = 'linear-gradient(to right, rgb(23, 196, 23) 60%, aqua 60%)'    
+    IDCD_tile.style.background = 'linear-gradient(to right, rgb(23, 196, 23) 60%, aqua 60%)'  
+    progress_amt += 16
 } else if (IDCD_total === 3) {
     IDCD_tile.style.background = 'rgb(23, 196, 23)'
+    progress_amt += 25
 }
+
+const minor_dict = JSON.parse(localStorage.getItem('minors'))
+if (minor_dict) {
+    let UE_crs_left = JSON.parse(localStorage.getItem('UE_crs_left'))
+    let percentage = 100 - Math.floor(UE_crs_left/40*100)
+    UE_tile.style.background = `linear-gradient(to right, rgb(23, 196, 23) ${percentage}%, aqua ${percentage}%)`
+    progress_amt += Math.floor(25 * (1-(UE_crs_left/40)))
+    progress_bar.style.background = `linear-gradient(to right, rgb(23, 196, 23) ${progress_amt}%, white ${progress_amt}%)`
+}
+
+
+
+
 
 const got_it = document.querySelector('.got_it')
 got_it.addEventListener('click', () => {
@@ -110,7 +119,6 @@ got_it.addEventListener('click', () => {
 
 // go if ur ok with reset
 const pe_tile = document.querySelector('#PE_tile')
-const ue_tile = document.querySelector('#UE_tile')
 const reset_notice = document.querySelector('#u_sure_window')
 const reset_text = document.querySelector('#u_sure_text')
 const go_in = document.querySelector('#go_in')

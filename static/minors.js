@@ -33,9 +33,7 @@ mod_req_buttons.forEach(mod_req_button => {
             x += str_array.length
             // checking for alr done mod_reqs
             for (const str_piece of str_array) {
-                if (JSON.parse(localStorage.getItem('CD_mods')).includes(str_piece) || 
-                    JSON.parse(localStorage.getItem('ID_mods')).includes(str_piece) || 
-                    JSON.parse(localStorage.getItem('Others')).includes(str_piece) ||
+                if (JSON.parse(localStorage.getItem('Others')).includes(str_piece) ||
                     JSON.parse(localStorage.getItem('pe_mods')).includes(str_piece) ||
                     JSON.parse(localStorage.getItem('core_mods')).includes(str_piece) ||
                     Object.values(JSON.parse(localStorage.getItem('pillar_mods'))).includes(str_piece)
@@ -65,9 +63,7 @@ mod_req_buttons.forEach(mod_req_button => {
             let add_to_mrs = ''
             container_no++
             for (const str_piece of str_array) {
-                if (JSON.parse(localStorage.getItem('CD_mods')).includes(str_piece) || 
-                    JSON.parse(localStorage.getItem('ID_mods')).includes(str_piece) || 
-                    JSON.parse(localStorage.getItem('Others')).includes(str_piece) ||
+                if (JSON.parse(localStorage.getItem('Others')).includes(str_piece) ||
                     JSON.parse(localStorage.getItem('pe_mods')).includes(str_piece) ||
                     JSON.parse(localStorage.getItem('core_mods')).includes(str_piece) ||
                     Object.values(JSON.parse(localStorage.getItem('pillar_mods'))).includes(str_piece)
@@ -253,10 +249,10 @@ fuouttahere.addEventListener('click', () => {
                 }
             }
         })
-        localStorage.setItem('minors', to_base)
-        localStorage.setItem('ID_mods', ID_chosen)
-        localStorage.setItem('CD_mods', CD_chosen)
-        window.location.href = '/ue_mods'
+        localStorage.setItem('minors', JSON.stringify(to_base))
+        localStorage.setItem('ID_mods', JSON.stringify(ID_chosen))
+        localStorage.setItem('CD_mods', JSON.stringify(CD_chosen))
+        // window.location.href = '/ue_mods'
     }
 })
 
