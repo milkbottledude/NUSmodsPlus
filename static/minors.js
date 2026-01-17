@@ -33,6 +33,42 @@ mod_req_buttons.forEach(mod_req_button => {
             x += str_array.length
             // checking for alr done mod_reqs
             for (const str_piece of str_array) {
+                let str_piece_trimmed = str_piece.trim();
+                let prs_arr = all_mods_dict[str_piece]['pre_reqs']
+                let mod_x = 0;
+                prs_arr.forEach(pr_str => {
+                    let prs = pr_str.split(' ')
+                    let symb = prs.shift()
+                    if (symb === '!') {
+                        prs.forEach(pr => {
+                            if (!JSON.parse(localStorage.getItem('ID_mods')).includes(str_piece) ||
+                                !JSON.parse(localStorage.getItem('CD_mods')).includes(str_piece) ||
+                                !JSON.parse(localStorage.getItem('Others')).includes(str_piece) ||
+                                !JSON.parse(localStorage.getItem('pe_mods')).includes(str_piece) ||
+                                !JSON.parse(localStorage.getItem('core_mods')).includes(str_piece) ||
+                                !Object.values(JSON.parse(localStorage.getItem('pillar_mods'))).includes(str_piece)
+                            ) {
+                                mod_x++
+                            }
+                        })
+                    } else if (symb === '<' || symb === '%') {
+                        let amt = Number(prs.pop())
+                        prs.forEach(pr => {
+                            if (!JSON.parse(localStorage.getItem('ID_mods')).includes(str_piece) ||
+                                !JSON.parse(localStorage.getItem('CD_mods')).includes(str_piece) ||
+                                !JSON.parse(localStorage.getItem('Others')).includes(str_piece) ||
+                                !JSON.parse(localStorage.getItem('pe_mods')).includes(str_piece) ||
+                                !JSON.parse(localStorage.getItem('core_mods')).includes(str_piece) ||
+                                !Object.values(JSON.parse(localStorage.getItem('pillar_mods'))).includes(str_piece)
+                            ) {
+                                if (amt > 0) {
+                                    amt--
+                                    mod_x++
+                                }
+                            }                            
+                        })
+                    }
+                })
                 if (JSON.parse(localStorage.getItem('ID_mods')).includes(str_piece) ||
                     JSON.parse(localStorage.getItem('CD_mods')).includes(str_piece) ||
                     JSON.parse(localStorage.getItem('Others')).includes(str_piece) ||
@@ -46,12 +82,12 @@ mod_req_buttons.forEach(mod_req_button => {
                 } else {
                     if (target_mods['IDCD_mods']['ID_mods'].includes(str_piece)) {
                         // console.log(`IDDDDDD ${str_piece}${minor_key}`)
-                        add_to_mrs += `<div class="orange mod_button default_all_of">${str_piece}</div>`
+                        add_to_mrs += `<div class="orange mod_button default_all_of">${str_piece}<div class="pre_reqs">prs: ${mod_x}</div></div>`
                     } else if (target_mods['IDCD_mods']['CD_mods'].includes(str_piece)) {
                         // console.log(`CDDDDD ${str_piece}${minor_key}`)
-                        add_to_mrs += `<div class="yellow mod_button default_all_of">${str_piece}</div>`
+                        add_to_mrs += `<div class="yellow mod_button default_all_of">${str_piece}<div class="pre_reqs">prs: ${mod_x}</div></div>`
                     } else {
-                        add_to_mrs += `<div class="mod_button default_all_of">${str_piece}</div>`
+                        add_to_mrs += `<div class="mod_button default_all_of">${str_piece}<div class="pre_reqs">prs: ${mod_x}</div></div>`
                     }
                     minor_mrs[minor_key]['!'].push(str_piece)
                 }
@@ -65,6 +101,41 @@ mod_req_buttons.forEach(mod_req_button => {
             let add_to_mrs = ''
             container_no++
             for (const str_piece of str_array) {
+                let prs_arr = all_mods_dict[str_piece]['pre_reqs']
+                let mod_x = 0;
+                prs_arr.forEach(pr_str => {
+                    let prs = pr_str.split(' ')
+                    let symb = prs.shift()
+                    if (symb === '!') {
+                        prs.forEach(pr => {
+                            if (!JSON.parse(localStorage.getItem('ID_mods')).includes(str_piece) ||
+                                !JSON.parse(localStorage.getItem('CD_mods')).includes(str_piece) ||
+                                !JSON.parse(localStorage.getItem('Others')).includes(str_piece) ||
+                                !JSON.parse(localStorage.getItem('pe_mods')).includes(str_piece) ||
+                                !JSON.parse(localStorage.getItem('core_mods')).includes(str_piece) ||
+                                !Object.values(JSON.parse(localStorage.getItem('pillar_mods'))).includes(str_piece)
+                            ) {
+                                mod_x++
+                            }
+                        })
+                    } else if (symb === '<' || symb === '%') {
+                        let amt = Number(prs.pop())
+                        prs.forEach(pr => {
+                            if (!JSON.parse(localStorage.getItem('ID_mods')).includes(str_piece) ||
+                                !JSON.parse(localStorage.getItem('CD_mods')).includes(str_piece) ||
+                                !JSON.parse(localStorage.getItem('Others')).includes(str_piece) ||
+                                !JSON.parse(localStorage.getItem('pe_mods')).includes(str_piece) ||
+                                !JSON.parse(localStorage.getItem('core_mods')).includes(str_piece) ||
+                                !Object.values(JSON.parse(localStorage.getItem('pillar_mods'))).includes(str_piece)
+                            ) {
+                                if (amt > 0) {
+                                    amt--
+                                    mod_x++
+                                }
+                            }                            
+                        })
+                    }
+                })
                 if (JSON.parse(localStorage.getItem('ID_mods')).includes(str_piece) ||
                     JSON.parse(localStorage.getItem('CD_mods')).includes(str_piece) ||
                     JSON.parse(localStorage.getItem('Others')).includes(str_piece) ||
@@ -82,12 +153,12 @@ mod_req_buttons.forEach(mod_req_button => {
                 } else {
                     if (target_mods['IDCD_mods']['ID_mods'].includes(str_piece)) {
                         // console.log(`IDDDDDD ${str_piece}${minor_key}`)
-                        add_to_mrs += `<div class="orange mod_button button">${str_piece}</div>`
+                        add_to_mrs += `<div class="orange mod_button button">${str_piece}<div class="pre_reqs" style="width: 80%; margin-right: auto;">prs: ${mod_x}</div></div>`
                     } else if (target_mods['IDCD_mods']['CD_mods'].includes(str_piece)) {
                         // console.log(`CDDDDD ${str_piece}${minor_key}`)
-                        add_to_mrs += `<div class="yellow mod_button button">${str_piece}</div>`
+                        add_to_mrs += `<div class="yellow mod_button button">${str_piece}<div class="pre_reqs" style="width: 80%; margin-right: auto;">prs: ${mod_x}</div></div>`
                     } else {
-                        add_to_mrs += `<div class="mod_button button">${str_piece}</div>`
+                        add_to_mrs += `<div class="mod_button button">${str_piece}<div class="pre_reqs" style="width: 80%; margin-right: auto;">prs: ${mod_x}</div></div>`
                     }
                 }
             }

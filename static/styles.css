@@ -421,6 +421,7 @@ body {
 }
 
 .mod_button {
+    display: flex;
     font-weight: normal;
     font-size: 90%;
     width: 82%;
@@ -429,6 +430,8 @@ body {
     border-radius: 14px;
     border: 2px solid black;
     padding: 5px 0px;
+    align-items: center;
+    flex-direction: column;
 }
 
 .mod_req {
