@@ -89,7 +89,7 @@ let all_mods_dict;
 const all_mods_pr = {}
 const all_mods_rf = {}
 let IDCD_mods;
-localStorage.setItem('pe_mods', JSON.stringify({}))
+// localStorage.setItem('pe_mods', JSON.stringify({}))
 const selected_mods = new Set(JSON.parse(localStorage.getItem('core_mods')))
 console.log(selected_mods)
 const all_mod_buttons = document.querySelectorAll('.select_mod')
@@ -398,6 +398,7 @@ back_button.addEventListener('click', () => {
             selected_pe_mods[mod] = all_mods_pr[mod]
         })
         localStorage.setItem('PE_mods', JSON.stringify(selected_pe_mods))
+        localStorage.setItem('pe_mods', JSON.stringify(total_chosen))
         for (let [key, value] of Object.entries(selected_pe_mods)) {
             for (let [sign, subVal] of Object.entries(value)) {
                 if (sign === '!') {
