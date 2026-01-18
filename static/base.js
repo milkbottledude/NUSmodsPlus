@@ -52,7 +52,7 @@ const to_window = (type, pt2=false) => {
                 string += `<span>${mod}</span>`     
             })       
         } else {
-            Object.values(JSON.parse(localStorage.getItem(`${type}_mods2`))).forEach(mod => {
+            Object.values(JSON.parse(localStorage.getItem(`${type}_mods3`))).forEach(mod => {
                 string += `<span>${mod}</span>` 
             })
         }
@@ -78,6 +78,8 @@ if (JSON.parse(localStorage.getItem('PE_mods') !== null)) {
         tile.removeAttribute('href')
     })
 }
+const ID_mods3 = JSON.parse(localStorage.getItem('ID_mods3'))
+const CD_mods3 = JSON.parse(localStorage.getItem('CD_mods3'))
 const ID_mods2 = JSON.parse(localStorage.getItem('ID_mods2'))
 const CD_mods2 = JSON.parse(localStorage.getItem('CD_mods2'))
 const ID_mods = JSON.parse(localStorage.getItem('ID_mods'))
@@ -105,12 +107,16 @@ if (!ID_mods2) {
         }
     }    
 } else {
-    if (ID_mods2.length) {
+    if (ID_mods3.length) {
         to_window('ID', pt2=true)
     }
-    if (CD_mods2.length) {
+    if (CD_mods3.length) {
         to_window('CD', pt2=true)
     }
+    let to_others = []
+    to_others += ID_mods2.filter(mod => !ID_mods3.includes(mod))
+    to_others += CD_mods2.filter(mod => !CD_mods3.includes(mod))
+    Others.push(...to_others)
 }
 
 
