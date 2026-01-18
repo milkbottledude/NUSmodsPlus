@@ -65,7 +65,7 @@ base_tiles.addEventListener('click', (e) => {
 const back_to_ue = document.querySelector('.back_button') 
 
 back_to_ue.addEventListener('click', () => {
-    let current_others = JSON.parse(localStorage.getItem('Others'))
+    let current_others = JSON.parse(localStorage.getItem('Others2'))
     current_others.push(...chosen_others)
     localStorage.setItem('Others2', JSON.stringify(current_others))
     window.location.href = '/ue_mods'

@@ -1,8 +1,11 @@
 const languages_dict = JSON.parse(localStorage.getItem('languages'))
 const lang_tile = document.querySelector('#languages_tile')
-if (Object.keys(languages_dict).length > 0) {
-    lang_tile.classList.add('green_bg')
+if (languages_dict) {
+    if (Object.keys(languages_dict).length > 0) {
+        lang_tile.classList.add('green_bg')
+    }    
 }
+
 const remaining_crs_span = document.querySelector('#remaining_crs')
 for (let lvl of Object.values(languages_dict)) {
     let new_crs = Number(remaining_crs_span.textContent) - 4*lvl

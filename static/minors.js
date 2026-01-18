@@ -403,7 +403,7 @@ fuouttahere.addEventListener('click', () => {
         if (let_go) {
             window.location.href = '/ue_mods'
         } else {
-            localStorage.setItem('Others', JSON.stringify(to_others))
+            localStorage.setItem('Others2', JSON.stringify(to_others))
             pr_window.style.display = 'flex'
             mrs_left.innerHTML = notif_string
             got_it.textContent = 'OK'
