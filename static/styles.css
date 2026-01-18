@@ -451,8 +451,38 @@ body {
     color: rgb(112, 127, 0);
 }
 
+/* others.html */
 
+#search_mod {
+    font-size: 31px;
+    padding: 2px 5px;
+    border-radius: 5px;
+    margin-top: 69px;
+}
 
+.otherModTile {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    align-items: flex-start;
+    font-size: 27px;
+    padding: 12px;
+    padding-left: 27px;
+}
+
+.otherModCode {
+    color: rgb(255, 0, 0);
+    padding: 2px 7px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.otherModTitle {
+    font-size: 24px;
+    text-align: left;
+}
 
 
 

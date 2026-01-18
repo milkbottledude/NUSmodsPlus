@@ -262,5 +262,5 @@ def check():
         if pe_mod in target_mods['IDCD_mods']['ID_mods'] or pe_mod in target_mods['IDCD_mods']['ID_mods']:
             print(pe_mod)
 
-check()                
-
+all_mods_list = read_json('jsons/all_mods.json')
+print(len(all_mods_list))

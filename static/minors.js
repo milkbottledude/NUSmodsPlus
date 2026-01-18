@@ -369,6 +369,7 @@ fuouttahere.addEventListener('click', () => {
         let notif_string = '<div class="dont_worry" id="the_following">The following mods do not have their pre-reqs met:</div>'
         let let_go = true
         // adding undone pre-reqs to 'Others' and window
+        const to_others = JSON.parse(localStorage['Others'])
         Object.values(to_base).forEach(dict => {
             for (let [sym, arr] of Object.entries(dict)) {
                 if (sym === '!') {
@@ -377,6 +378,7 @@ fuouttahere.addEventListener('click', () => {
                             notif_string += `<div class"i_got_this">${mod}:`
                             undone_prs[mod].forEach(pr => {
                                 notif_string += `<span class="red"> ${pr}</span>`
+                                to_others.push(pr)
                                 let_go = false
                             })                            
                         }
@@ -389,6 +391,7 @@ fuouttahere.addEventListener('click', () => {
                             undone_prs[mod].forEach(pr => {
                                 let_go = false
                                 notif_string += `<span class="red"> ${pr}</span>`
+                                to_others.push(pr)
                             })
                         }
                     })
@@ -400,6 +403,7 @@ fuouttahere.addEventListener('click', () => {
         if (let_go) {
             window.location.href = '/ue_mods'
         } else {
+            localStorage.setItem('Others', to_others)
             pr_window.style.display = 'flex'
             mrs_left.innerHTML = notif_string
             got_it.textContent = 'OK'

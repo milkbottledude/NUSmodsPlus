@@ -49,8 +49,14 @@ if (crs2 < 0) {
 }
 remaining_crs_span.textContent = crs2
 
+let ril_others;
+if (JSON.parse(localStorage.getItem('Others2'))) {
+    ril_others = JSON.parse(localStorage.getItem('Others2'))
+} else {
+    ril_others = JSON.parse(localStorage.getItem('Others'))
+}
 
-JSON.parse(localStorage.getItem('Others')).forEach(other_mod => {
+ril_others.forEach(_ => {
     let crs3 = Number(remaining_crs_span.textContent) - 4
     if (crs3 < 0) {
         remaining_crs_span.classList.add('red')
