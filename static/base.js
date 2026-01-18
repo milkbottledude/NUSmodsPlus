@@ -1,3 +1,4 @@
+// localStorage.clear()
 const ue_tile = document.querySelector('#UE_tile')
 const selected_mods_window = document.querySelector('#selected_mods_container')
 const progress_bar = document.querySelector('.current_stack')
@@ -5,6 +6,11 @@ progress_bar.addEventListener('click', () => {
     selected_mods_window.style.display = 'flex'
 })
 let progress_amt = 0
+
+const got_it = document.querySelector('.got_it')
+got_it.addEventListener('click', () => {
+    selected_mods_window.style.display = 'none'
+})
 
 const to_window = (type, pt2=false) => {
     const tile = document.querySelector(`#${type}_tile`)
@@ -19,6 +25,7 @@ const to_window = (type, pt2=false) => {
     if (type === 'pillar') {
         string = `<span class="mod_title">Pillars</span>`
         Object.values(JSON.parse(localStorage.getItem(`${type}_mods`))).forEach(mod => {
+            console.log(mod)
             string += `<span>${mod}</span>`
         })
     } else if (type === 'Others') {
@@ -56,15 +63,16 @@ const to_window = (type, pt2=false) => {
                 string += `<span>${mod}</span>` 
             })
         }
-    window.innerHTML = string
     }
+    window.innerHTML = string
 }
 
-if (JSON.parse(localStorage.getItem('pillar_mods') !== null)) {
+if (JSON.parse(localStorage.getItem('pillar_mods')) !== null) {
     to_window('pillar')
+    console.log('to_window pillar')
 }
 
-if (JSON.parse(localStorage.getItem('PE_mods') !== null)) {
+if (JSON.parse(localStorage.getItem('PE_mods')) !== null) {
     to_window('PE')
     console.log(JSON.parse(localStorage.getItem('PE_mods')))
 } else {
@@ -87,37 +95,52 @@ const CD_mods = JSON.parse(localStorage.getItem('CD_mods'))
 const Others = JSON.parse(localStorage.getItem('Others'))
 let IDCD_total = 0
 
-if (!ID_mods2) {
-    if (ID_mods !== null) {
-        if (ID_mods.length) {
-            to_window('ID')
-            if (IDCD_total < 3) {
-                IDCD_total += ID_mods.length
+if (ID_mods) {
+    to_window('ID')
+    to_window('CD')
+}
+
+if (ID_mods2) {
+    if (ID_mods2.length === 0) {
+        if (ID_mods !== null) {
+            if (ID_mods.length) {
+                to_window('ID')
+                if (IDCD_total < 3) {
+                    IDCD_total += ID_mods.length
+                }
+                console.log(IDCD_total)
+                console.log(ID_mods)
             }
-            console.log(IDCD_total)
-            console.log(ID_mods)
         }
+        if (CD_mods !== null) {
+            if (CD_mods.length) {
+                to_window('CD')
+                if (IDCD_total < 3) {
+                    IDCD_total++
+                }
+            }
+        }    
     }
-    if (CD_mods !== null) {
-        if (CD_mods.length) {
-            to_window('CD')
-            if (IDCD_total < 3) {
-                IDCD_total++
-            }
-        }
-    }    
-} else {
+}
+if (ID_mods3) {
     if (ID_mods3.length) {
         to_window('ID', pt2=true)
     }
+}
+if (CD_mods3) {
     if (CD_mods3.length) {
         to_window('CD', pt2=true)
     }
-    let to_others = []
+}
+let to_others = []
+if (ID_mods2) {
     to_others += ID_mods2.filter(mod => !ID_mods3.includes(mod))
-    to_others += CD_mods2.filter(mod => !CD_mods3.includes(mod))
+    to_others += CD_mods2.filter(mod => !CD_mods3.includes(mod))        
+}
+if (Others) {
     Others.push(...to_others)
 }
+
 
 
 
@@ -157,10 +180,7 @@ if (languages_arr) {
     to_window('Languages')
 }
 
-const got_it = document.querySelector('.got_it')
-got_it.addEventListener('click', () => {
-    selected_mods_window.style.display = 'none'
-})
+
 
 // go if ur ok with reset
 const pe_tile = document.querySelector('#PE_tile')
