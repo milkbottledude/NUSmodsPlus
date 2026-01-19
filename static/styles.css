@@ -55,7 +55,7 @@ body {
 .button {
     box-shadow: 0 1px 0 black; /* from gpt */
     cursor: pointer; /* from gpt */
-    transition: transform 0.1s ease, box-shadow 0.1s ease; /* from gpt */    
+    transition: transform 0.1s ease, box-shadow 0.1s ease; /* from gpt */ 
 }
 
 .tile {
@@ -484,13 +484,95 @@ body {
     text-align: left;
 }
 
+/* overload sem */
 
+.overload_text {
+    font-size: 32px;
+    color: aliceblue;
+    margin: 10px;
+}
 
+.xcess_continue {
+    display: flex;
+    flex-direction: row;
+    width: 69%;
+    background-color: aliceblue;
+    justify-content: space-between;
+    padding: 10px 20px;
+    align-items: center;
+    font-size: 32px;
+}
 
+.xcess_container {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
+.xcess_x {
+    font-weight: bold;
+    color: rgb(157, 14, 14);
+    font-size: 120%;
+    padding-top: 7px;
+}
 
+.continue_allocate {
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 70%;
+}
 
+.sem_tiles_container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px 40px;
+    margin: 46px;
+    /* background-color: aliceblue; */
+    width: 69%;
+    justify-content: center;
+}
 
+.sem_tile {
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 22px;
+}
+
+.sem_title {
+    background-color: aqua;
+    padding: 1px 4px;
+    border-radius: 3px;
+}
+
+.number_container {
+    width: 140px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: bisque;
+    border-radius: 3px;
+}
+
+.minus_s {
+    border: 1.5px solid black;
+    border-radius: 10px;
+    padding: 0px 6px;
+    margin: 5px 10px;
+}
+
+.add_s {
+    border: 1.5px solid black;
+    border-radius: 10px;
+    padding: 0px 5px;
+    margin: 5px 10px;
+}
+
+.num_s {
+    font-size: 24px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
 
 
 .green_bg {
