@@ -96,12 +96,14 @@ const Others = JSON.parse(localStorage.getItem('Others'))
 let IDCD_total = 0
 
 if (ID_mods) {
+    IDCD_total = ID_mods.length + CD_mods.length
     to_window('ID')
     to_window('CD')
 }
 
 if (ID_mods2) {
     if (ID_mods2.length === 0) {
+        IDCD_total = 0
         if (ID_mods !== null) {
             if (ID_mods.length) {
                 to_window('ID')
@@ -123,12 +125,15 @@ if (ID_mods2) {
     }
 }
 if (ID_mods3) {
+    IDCD_total = 0
     if (ID_mods3.length) {
+        IDCD_total += ID_mods3.length
         to_window('ID', pt2=true)
     }
 }
 if (CD_mods3) {
     if (CD_mods3.length) {
+        IDCD_total += CD_mods3.length
         to_window('CD', pt2=true)
     }
 }
@@ -167,10 +172,15 @@ if (minor_dict != null) {
     minor_dict = JSON.parse(minor_dict)
 }
 if (minor_dict) {
-    let UE_crs_left = JSON.parse(localStorage.getItem('UE_crs_left'))
+    let UE_crs_left = Number(JSON.parse(localStorage.getItem('UE_crs_left')))
     let percentage = 100 - Math.floor(UE_crs_left/40*100)
     UE_tile.style.background = `linear-gradient(to right, rgb(23, 196, 23) ${percentage}%, aqua ${percentage}%)`
-    progress_amt += Math.floor(25 * (1-(UE_crs_left/40)))
+    if (UE_crs_left > 0) {
+        console.log(UE_crs_left)
+        progress_amt += Math.floor(25 * (1-(UE_crs_left/40)))
+    } else {
+        progress_amt += 25
+    }
     progress_bar.style.background = `linear-gradient(to right, rgb(23, 196, 23) ${progress_amt}%, white ${progress_amt}%)`
     to_window('minors')
 }
@@ -274,3 +284,11 @@ IDCD_tile.addEventListener('click', () => {
         window.location.href = '/idcd_mods'
     }
 })
+
+// to timetable generator
+const timetable_tile = document.querySelector('#timetable_tile')
+if (progress_bar.style.background = 'linear-gradient(to right, rgb(23, 196, 23) 100%, white 100%);') {
+    timetable_tile.classList.remove('greyed')
+    timetable_tile.classList.add('button')
+    timetable_tile.addEventListener('click', () => window.location.href = '/overload_sem')
+}

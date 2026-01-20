@@ -42,6 +42,6 @@ def minors():
 def others():
     return render_template('others.html')
 
-# @app.route('/')
-# def home():
-#     return render_template('base.html')
+@app.route('/overload_sem')
+def overload_sem():
+    return render_template('overload_sem.html')

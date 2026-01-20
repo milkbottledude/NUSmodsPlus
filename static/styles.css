@@ -155,6 +155,7 @@ body {
     margin: 5px;
     font-size: 21px;
     align-items: center;
+    flex-direction: row;
 }
 
 .details_nusmods {
@@ -573,6 +574,12 @@ body {
     font-size: 24px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+
+/* IDCD_mods.html */
+#ID_dropdown {
+    width: 70%;
+}
+
 
 
 .green_bg {
