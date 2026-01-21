@@ -5,31 +5,34 @@ const notice_window = document.querySelector('.not_done_notice')
 let cur_ID = JSON.parse(localStorage.getItem('ID_mods3'))
 let cur_CD = JSON.parse(localStorage.getItem('CD_mods3'))
 
-if (cur_CD.length) {
-    CD_tile.classList.add('greyed')
-    CD_tile.classList.remove('button')
-} else {
-    CD_tile.addEventListener('click', () => {
-    if (CD_dropdown.style.display === '') {
-        CD_dropdown.style.display = 'flex'
+if (cur_CD) {
+    if (cur_CD.length) {
+        CD_tile.classList.add('greyed')
+        CD_tile.classList.remove('button')
     } else {
-        CD_dropdown.style.display = ''
+        CD_tile.addEventListener('click', () => {
+        if (CD_dropdown.style.display === '') {
+            CD_dropdown.style.display = 'flex'
+        } else {
+            CD_dropdown.style.display = ''
+        }
+        })
     }
-    })
+
+    if ((cur_ID.length < 3 && cur_CD.length === 0) || (cur_ID.length < 2)) {
+        ID_tile.addEventListener('click', () => {
+            if (ID_dropdown.style.display === '') {
+                ID_dropdown.style.display = 'flex'
+            } else {
+                ID_dropdown.style.display = ''
+            }
+        })
+    } else {
+        ID_tile.classList.add('greyed')
+        ID_tile.classList.remove('button')    
+    }    
 }
 
-if ((cur_ID.length < 3 && cur_CD.length === 0) || (cur_ID.length < 2)) {
-    ID_tile.addEventListener('click', () => {
-        if (ID_dropdown.style.display === '') {
-            ID_dropdown.style.display = 'flex'
-        } else {
-            ID_dropdown.style.display = ''
-        }
-    })
-} else {
-    ID_tile.classList.add('greyed')
-    ID_tile.classList.remove('button')    
-}
 
 // adding mods
 const ID_dropdown = document.querySelector('#ID_dropdown')

@@ -287,7 +287,7 @@ IDCD_tile.addEventListener('click', () => {
 
 // to timetable generator
 const timetable_tile = document.querySelector('#timetable_tile')
-if (progress_bar.style.background = 'linear-gradient(to right, rgb(23, 196, 23) 100%, white 100%);') {
+if (progress_bar.style.background.includes('100%')) {
     timetable_tile.classList.remove('greyed')
     timetable_tile.classList.add('button')
     timetable_tile.addEventListener('click', () => window.location.href = '/overload_sem')

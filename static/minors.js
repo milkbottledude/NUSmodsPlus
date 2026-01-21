@@ -19,7 +19,7 @@ const undone_prs = {}
 
 mod_req_buttons.forEach(mod_req_button => {
     let minor_key = mod_req_button.id.split('_')[0]
-    let mrs_left_string = '<div style="margin-bottom: 60px; width: 80%; display: flex; flex-direction: column; align-items: center; max-height: 90%; overflow-y: auto;">'
+    let mrs_left_string = '<div class="mrs_left_string">'
     let alr_done = '' // temp, to see completed mod_reqs
     let x = 0
     let container_no = 1

@@ -342,6 +342,35 @@ body {
     padding: 20px;
 }
 
+/* minors.html */
+
+.legend_alr {
+    background-color: green;
+    border: 3px solid grey;
+    display: inline-block;
+}
+
+.legend_ID {
+    background-color: orangered;
+    border: 3px solid black;
+    display: inline-block;
+}
+
+.legend_CD {
+    background-color: rgb(123, 150, 70);
+    display: inline-block;
+}
+
+.mrs_left_string {
+    margin-bottom: 60px;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-height: 90%;
+    overflow-y: auto;
+}
+
 /* languages */
 .language_tile {
     display: flex;
@@ -456,7 +485,7 @@ body {
     font-size: 31px;
     padding: 2px 5px;
     border-radius: 5px;
-    margin-top: 69px;
+    margin-top: 115px;
 }
 
 .otherModTile {
@@ -539,6 +568,10 @@ body {
 }
 
 .sem_title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     background-color: aqua;
     padding: 1px 4px;
     border-radius: 3px;
@@ -578,11 +611,36 @@ body {
     width: 70%;
 }
 
+/* mod_to_sem.html */
+
+.mod_container {
+    background-color: bisque;
+}
+
+.mod_no {
+    /* font-size: 80%; */
+    margin: 3px 2px;
+    margin-left: 15px;
+    border: 2px solid black;
+    border-radius: 8px;
+    padding: 0px 7px;
+    background-color: chartreuse;
+}
+
+.mod_in_sem {
+    text-align: center;
+    margin: 2px 9px;
+}
 
 
 
+.orangered_bg {
+    background-color: orangered;
+}
 
-
+.yellow_bg {
+    background-color: yellow;
+}
 
 .green_fn {
     color: green;
