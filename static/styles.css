@@ -286,9 +286,7 @@ body {
     bottom: auto;
 }
 
-.green_fn {
-    color: green;
-}
+
 
 /* ue_mods */
 .greyed {
@@ -582,6 +580,15 @@ body {
 
 
 
+
+
+
+
+.green_fn {
+    color: green;
+}
+
 .green_bg {
-    background-color: rgb(21, 176, 21);
+    background-color: rgb(22, 169, 22);
+    color: aliceblue;
 }

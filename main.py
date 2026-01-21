@@ -45,3 +45,7 @@ def others():
 @app.route('/overload_sem')
 def overload_sem():
     return render_template('overload_sem.html')
+
+@app.route('/mod_to_sem')
+def mod_to_sem():
+    return render_template('mod_to_sem.html')
