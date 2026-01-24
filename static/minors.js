@@ -38,6 +38,7 @@ mod_req_buttons.forEach(mod_req_button => {
                 let prs_arr = all_mods_dict[str_piece]['pre_reqs']
                 let mod_x = 0;
                 prs_arr.forEach(pr_str => {
+                    console.log(pr_str)
                     let prs = pr_str.split(' ')
                     let symb = prs.shift()
                     if (symb === '!') {
@@ -55,23 +56,24 @@ mod_req_buttons.forEach(mod_req_button => {
                         })
                     } else if (symb === '<' || symb === '%') {
                         let amt = Number(prs.pop())
-                        let add_to_undone = []
-                        prs.forEach(pr => {
-                            if (!JSON.parse(localStorage.getItem('ID_mods')).includes(pr) &&
-                                !JSON.parse(localStorage.getItem('CD_mods')).includes(pr) &&
-                                !JSON.parse(localStorage.getItem('Others')).includes(pr) &&
-                                !JSON.parse(localStorage.getItem('pe_mods')).includes(pr) &&
-                                !JSON.parse(localStorage.getItem('core_mods')).includes(pr) &&
-                                !Object.values(JSON.parse(localStorage.getItem('pillar_mods'))).includes(pr)
+                        let add_to_undone = true
+                        prs.forEach(pr => {                         
+                            if (JSON.parse(localStorage.getItem('ID_mods')).includes(pr) ||
+                                JSON.parse(localStorage.getItem('CD_mods')).includes(pr) ||
+                                JSON.parse(localStorage.getItem('Others')).includes(pr) ||
+                                JSON.parse(localStorage.getItem('pe_mods')).includes(pr) ||
+                                JSON.parse(localStorage.getItem('core_mods')).includes(pr) ||
+                                Object.values(JSON.parse(localStorage.getItem('pillar_mods'))).includes(pr)
                             ) {
-                                if (amt > 0) {
-                                    add_to_undone.push(pr)
-                                    amt--
-                                    mod_x++
+                                amt--
+                                if (amt === 0) {
+                                    add_to_undone = false
                                 }
                             }                            
                         })
-                        undone_prs_mod.push(...add_to_undone)
+                        if (add_to_undone) {
+                            undone_prs_mod.push(...prs)
+                        }
                     }
                 })
                 undone_prs[str_piece] = undone_prs_mod
@@ -140,23 +142,24 @@ mod_req_buttons.forEach(mod_req_button => {
                         })
                     } else if (symb === '<' || symb === '%') {
                         let amt = Number(prs.pop())
-                        let add_to_undone = []
-                        prs.forEach(pr => {
-                            if (!JSON.parse(localStorage.getItem('ID_mods')).includes(pr) &&
-                                !JSON.parse(localStorage.getItem('CD_mods')).includes(pr) &&
-                                !JSON.parse(localStorage.getItem('Others')).includes(pr) &&
-                                !JSON.parse(localStorage.getItem('pe_mods')).includes(pr) &&
-                                !JSON.parse(localStorage.getItem('core_mods')).includes(pr) &&
-                                !Object.values(JSON.parse(localStorage.getItem('pillar_mods'))).includes(pr)
+                        let add_to_undone = true
+                        prs.forEach(pr => {                         
+                            if (JSON.parse(localStorage.getItem('ID_mods')).includes(pr) ||
+                                JSON.parse(localStorage.getItem('CD_mods')).includes(pr) ||
+                                JSON.parse(localStorage.getItem('Others')).includes(pr) ||
+                                JSON.parse(localStorage.getItem('pe_mods')).includes(pr) ||
+                                JSON.parse(localStorage.getItem('core_mods')).includes(pr) ||
+                                Object.values(JSON.parse(localStorage.getItem('pillar_mods'))).includes(pr)
                             ) {
-                                if (amt > 0) {
-                                    add_to_undone.push(pr)
-                                    amt--
-                                    mod_x++
+                                amt--
+                                if (amt === 0) {
+                                    add_to_undone = false
                                 }
                             }                            
                         })
-                        undone_prs_mod.push(...add_to_undone)
+                        if (add_to_undone) {
+                            undone_prs_mod.push(...prs)
+                        }
                     }
                 })
                 undone_prs[str_piece] = undone_prs_mod                        
@@ -375,44 +378,54 @@ fuouttahere.addEventListener('click', () => {
                 if (sym === '!') {
                     arr.forEach(mod => {
                         if (undone_prs[mod].length != 0) {
-                            let carry_on = true
-                            // Object.values(to_base).forEach(ffs => {
-                            //     Object.values(ffs).forEach(arr => {
-                            //         if (arr.includes(mod)) {
-                            //             carry_on = false
-                            //         }
-                            //     })
-                            // })
-                            if (carry_on) {
-                                notif_string += `<div class"i_got_this">${mod}:`
-                                undone_prs[mod].forEach(pr => {
+                            notif_string += `<div class"i_got_this">${mod}:`
+                            let remove_top = true
+                            undone_prs[mod].forEach(pr => {
+                                let carry_on = true
+                                Object.values(to_base).forEach(ffs => {
+                                    Object.values(ffs).forEach(arr => {
+                                        if (arr.includes(pr)) {
+                                            carry_on = false
+                                        }
+                                    })
+                                })
+                                if (carry_on) {
                                     notif_string += `<span class="red"> ${pr}</span>`
                                     to_others.push(pr)
                                     let_go = false
-                                })                                 
-                            }    
-                        }
+                                    remove_top = false
+                                }
+                            })   
+                            if (remove_top) {
+                                notif_string = notif_string.slice(0, -`<div class"i_got_this">${mod}:`.length)
+                            }                              
+                        }                            
                     })
                 } else {
                     let cut_arr = arr.slice(1)
                     cut_arr.forEach(mod => {
                         if (undone_prs[mod].length != 0) {
-                            let carry_on = true
-                            // Object.values(to_base).forEach(ffs => {
-                            //     Object.values(ffs).forEach(arr => {
-                            //         if (arr.includes(mod)) {
-                            //             carry_on = false
-                            //         }
-                            //     })
-                            // })
-                            if (carry_on) {
-                                notif_string += `<div class"i_got_this">${mod}:`
-                                undone_prs[mod].forEach(pr => {
+                            notif_string += `<div class"i_got_this">${mod}:`
+                            let remove_top = true
+                            undone_prs[mod].forEach(pr => {
+                                let carry_on = true
+                                Object.values(to_base).forEach(ffs => {
+                                    Object.values(ffs).forEach(arr => {
+                                        if (arr.includes(mod)) {
+                                            carry_on = false
+                                        }
+                                    })
+                                })
+                                if (carry_on) {
+                                    remove_top = false
                                     let_go = false
                                     notif_string += `<span class="red"> ${pr}</span>`
                                     to_others.push(pr)
-                                })
-                            }
+                                }
+                            })   
+                            if (remove_top) {
+                                notif_string = notif_string.slice(0, -`<div class"i_got_this">${mod}:`.length)
+                            }   
                         }
                     })
 
@@ -435,6 +448,8 @@ fuouttahere.addEventListener('click', () => {
 
     }
 })
-
+setTimeout(() => {
+    console.log(undone_prs)
+}, 1000)
 })();
 

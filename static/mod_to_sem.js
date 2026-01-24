@@ -7,8 +7,8 @@ const sems_x = {
     'sem_4': 5 + to_add_x['4'],
     'sem_5': 5 + to_add_x['5'],
     'sem_6': 5 + to_add_x['6'],
-    'sem_7': 1,
-    'sem_8': 2
+    'sem_7': 2,
+    'sem_8': 3
 }
 
 // const misc_x = {
@@ -69,7 +69,6 @@ const Others1 = JSON.parse(localStorage.getItem('Others'))
 const ID_mods2 = JSON.parse(localStorage.getItem('ID_mods2'))
 const CD_mods2 = JSON.parse(localStorage.getItem('CD_mods2'))
 const PE_mods = Object.keys(JSON.parse(localStorage.getItem('PE_mods')))
-const Others2 = JSON.parse(localStorage.getItem('Others2')).filter(mod => !Others1.includes(mod))
 const minors = Object.values(JSON.parse(localStorage.getItem('minors')))
 let minor_mods = []
 minors.forEach(dict => {
@@ -81,12 +80,12 @@ minors.forEach(dict => {
         })
     })
 })
-console.log(minor_mods)
+const Others2 = JSON.parse(localStorage.getItem('Others2')).filter(mod => !Others1.includes(mod) && !minor_mods.includes(mod))
 const ID_mods3 = JSON.parse(localStorage.getItem('ID_mods3')).filter(mod => !ID_mods2.includes(mod))
 const CD_mods3 = JSON.parse(localStorage.getItem('CD_mods3')).filter(mod => !CD_mods2.includes(mod))
 
-const MISCs = [...Others1, ...ID_mods2, ...CD_mods2, ...PE_mods, ...Others2, ...minor_mods, ...ID_mods3, ...CD_mods3]
-console.log(MISCs)
+let MISCs = [...Others1, ...ID_mods2, ...CD_mods2, ...PE_mods, ...Others2, ...minor_mods, ...ID_mods3, ...CD_mods3]
+
 for (const mod_name of MISCs) {
     pre_reqs[mod_name] = null
     req_fors[mod_name] = null
@@ -165,13 +164,20 @@ const eachSem = (sem_key) => {
 }
 
 setTimeout(() => {
+    mod_to_sem['sem_7'].push('IER/CP4101')
+    mod_to_sem['sem_8'].push('IS4108 CAP')    
     Object.keys(mod_to_sem).forEach(sem_key => {
         console.log(sem_key)
         eachSem(sem_key)
+        const sem_container = document.querySelector(`#${sem_key}_container`)
+        let mod_html = ''
+        mod_to_sem[sem_key].forEach(mod => mod_html += `<div class="mod_in_sem">${mod}</div>`)
+        sem_container.innerHTML = mod_html
     })
-    console.log(mod_to_sem)
-    console.log(pre_reqs)    
 }, 1000)
+
+
+
 
 
 
