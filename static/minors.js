@@ -375,24 +375,44 @@ fuouttahere.addEventListener('click', () => {
                 if (sym === '!') {
                     arr.forEach(mod => {
                         if (undone_prs[mod].length != 0) {
-                            notif_string += `<div class"i_got_this">${mod}:`
-                            undone_prs[mod].forEach(pr => {
-                                notif_string += `<span class="red"> ${pr}</span>`
-                                to_others.push(pr)
-                                let_go = false
-                            })                            
+                            let carry_on = true
+                            // Object.values(to_base).forEach(ffs => {
+                            //     Object.values(ffs).forEach(arr => {
+                            //         if (arr.includes(mod)) {
+                            //             carry_on = false
+                            //         }
+                            //     })
+                            // })
+                            if (carry_on) {
+                                notif_string += `<div class"i_got_this">${mod}:`
+                                undone_prs[mod].forEach(pr => {
+                                    notif_string += `<span class="red"> ${pr}</span>`
+                                    to_others.push(pr)
+                                    let_go = false
+                                })                                 
+                            }    
                         }
                     })
                 } else {
                     let cut_arr = arr.slice(1)
                     cut_arr.forEach(mod => {
                         if (undone_prs[mod].length != 0) {
-                            notif_string += `<div class"i_got_this">${mod}:`
-                            undone_prs[mod].forEach(pr => {
-                                let_go = false
-                                notif_string += `<span class="red"> ${pr}</span>`
-                                to_others.push(pr)
-                            })
+                            let carry_on = true
+                            // Object.values(to_base).forEach(ffs => {
+                            //     Object.values(ffs).forEach(arr => {
+                            //         if (arr.includes(mod)) {
+                            //             carry_on = false
+                            //         }
+                            //     })
+                            // })
+                            if (carry_on) {
+                                notif_string += `<div class"i_got_this">${mod}:`
+                                undone_prs[mod].forEach(pr => {
+                                    let_go = false
+                                    notif_string += `<span class="red"> ${pr}</span>`
+                                    to_others.push(pr)
+                                })
+                            }
                         }
                     })
 

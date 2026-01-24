@@ -30,9 +30,16 @@ const to_window = (type, pt2=false) => {
         })
     } else if (type === 'Others') {
         string = `<span class="mod_title">${type}</span>`
-        Object.values(JSON.parse(localStorage.getItem(`${type}`))).forEach(mod => {
-            string += `<span>${mod}</span>`
-        })
+        if (pt2) {
+            Object.values(JSON.parse(localStorage.getItem(`${type}2`))).forEach(mod => {
+                string += `<span>${mod}</span>`
+            })
+        } else {
+            Object.values(JSON.parse(localStorage.getItem(`${type}`))).forEach(mod => {
+                string += `<span>${mod}</span>`
+            })            
+        }
+
     } else if (type === 'PE') {
         string = `<span class="mod_title">${type} Mods</span>`
         Object.keys(JSON.parse(localStorage.getItem(`${type}_mods`))).forEach(mod => {
@@ -93,6 +100,7 @@ const CD_mods2 = JSON.parse(localStorage.getItem('CD_mods2'))
 const ID_mods = JSON.parse(localStorage.getItem('ID_mods'))
 const CD_mods = JSON.parse(localStorage.getItem('CD_mods'))
 const Others = JSON.parse(localStorage.getItem('Others'))
+const Others2 = JSON.parse(localStorage.getItem('Others2'))
 let IDCD_total = 0
 
 if (ID_mods) {
@@ -153,6 +161,12 @@ if (Others) {
 if (Others !== null) {
     if (Others.length) {
         to_window('Others')
+    }
+}
+
+if (Others2 !== null) {
+    if (Others2.length) {
+        to_window('Others', pt2=true)
     }
 }
 
@@ -262,27 +276,27 @@ ue_tile.addEventListener('click', () => {
 })
 
 IDCD_tile.addEventListener('click', () => {
-    if (IDCD_tile.style.background = 'rgb(23, 196, 23)') {
-        let reset_mods = '<span class="purple">IDCD '
-        if (pe_tile.style.backgroundColor === 'rgb(23, 196, 23)') {
-            reset_mods += 'and PE '
-        }
-        if (minor_dict) {
-            reset_mods += 'and UE'
-        }
-        reset_mods += ' mods</span>'
-        reset_text.innerHTML = `Entering this tile will reset all your ${reset_mods} Continue?`
-        reset_notice.appendChild(go_in)
-        if (currentHandler) {
-            go_in.removeEventListener('click', currentHandler)
-        }
-        go_in.addEventListener('click', goInIDCD)
-        currentHandler = goInIDCD
-        reset_notice.appendChild(nuh_uh)
-        reset_notice.style.display = 'flex'
-    } else {
+    // if (IDCD_tile.style.background = 'rgb(23, 196, 23)') {
+    //     let reset_mods = '<span class="purple">IDCD '
+    //     if (pe_tile.style.backgroundColor === 'rgb(23, 196, 23)') {
+    //         reset_mods += 'and PE '
+    //     }
+    //     if (minor_dict) {
+    //         reset_mods += 'and UE'
+    //     }
+    //     reset_mods += ' mods</span>'
+    //     reset_text.innerHTML = `Entering this tile will reset all your ${reset_mods} Continue?`
+    //     reset_notice.appendChild(go_in)
+    //     if (currentHandler) {
+    //         go_in.removeEventListener('click', currentHandler)
+    //     }
+    //     go_in.addEventListener('click', goInIDCD)
+    //     currentHandler = goInIDCD
+    //     reset_notice.appendChild(nuh_uh)
+    //     reset_notice.style.display = 'flex'
+    // } else {
         window.location.href = '/idcd_mods'
-    }
+    // }
 })
 
 // to timetable generator

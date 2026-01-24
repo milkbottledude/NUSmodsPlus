@@ -854,7 +854,7 @@ Now lets establish some rules that BAISmods will abide by when allocating module
 
 4) Industry Experience Requirement cannot be taken with any other modules. This is in case the student is using ATAP (Advanced Technology Attachment Programme) to fulfill IER, which **does not** allow any other modules to be taken in that semester.
 
-5) When choosing semesters to overload, Y1S1 is off limits.
+5) When choosing semesters to overload, Y1S1 and Y4 are off limits.
 
 #### 'req_for's
 

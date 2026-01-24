@@ -81,14 +81,14 @@ atStart().then(() => {
                     }
                 } else if (IDCD_mods_dict['CD_mods'].includes(mod_code)) {
                     if (cur_ID.length === 3 || cur_CD.length === 1) {
-                        dot_status.style.display = 'flex'
-                        cur_CD.push(mod_code)
-                    } else {
                         notice_window.style.display = 'flex'
                         notice_window.textContent = 'Max CD mods reached'
                         setTimeout(() => {
                             notice_window.style.display = ''
-                        }, 1900);                        
+                        }, 1900);   
+                    } else {
+                        dot_status.style.display = 'flex'
+                        cur_CD.push(mod_code)                     
                     }
                 }
             } else {

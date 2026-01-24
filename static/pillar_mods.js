@@ -98,11 +98,6 @@ back_button.addEventListener('click', () => {
         }, 1900)
     } else {
         localStorage.setItem('pillar_mods', JSON.stringify(mods_chosen))
-        localStorage.setItem('IDCD_mods', JSON.stringify({
-            'ID': false,
-            'CD': false
-        }))
-        localStorage.setItem('Others', JSON.stringify([]))
         window.location.href = "/"
     }
 })
