@@ -49,11 +49,11 @@ const CD_mods = JSON.parse(localStorage.getItem('CD_mods'))
 const ID_mods2 = JSON.parse(localStorage.getItem('ID_mods2'))
 const CD_mods2 = JSON.parse(localStorage.getItem('CD_mods2'))
 
-const counted_ID = []
-const counted_CD = []
+let counted_ID = []
+let counted_CD = []
 
 let crs2 = 0
-if (counted_ID && ID_mods2) {
+if (counted_ID && ID_mods2.length > ID_mods.length) {
     while (counted_ID.length < 3 && ID_mods2.length != 0) {
         counted_ID.push(ID_mods2.pop())
         if (!ID_mods.includes(counted_ID.at(-1))) {
@@ -67,6 +67,9 @@ if (counted_ID && ID_mods2) {
             crs2 += 4
         }
     }    
+} else {
+    counted_ID = ID_mods
+    counted_CD = CD_mods
 }
 
 
@@ -99,3 +102,8 @@ if (Number((remaining_crs_span.textContent)) < 0) {
 localStorage.setItem('ID_mods3', JSON.stringify(counted_ID))
 localStorage.setItem('CD_mods3', JSON.stringify(counted_CD))
 localStorage.setItem('UE_crs_left', JSON.stringify(remaining_crs_span.textContent))
+
+if (!localStorage.getItem('ID_mods2')) {
+    localStorage.setItem('ID_mods2', JSON.stringify([]))
+    localStorage.setItem('CD_mods2', JSON.stringify([]))
+}

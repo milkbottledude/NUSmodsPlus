@@ -71,8 +71,13 @@ if (LAN_dict) {
     (async () => {
         const target_mods = await fetch('/jsons/target_mods.json').then(r => r.json())
         for (let [lan, lvl] of Object.entries(LAN_dict)) {
-            for (let i = 0; i < lvl; i++) {
-                mod_to_sem[`sem_${i+1}`].unshift(target_mods['language_mods'][lan][i])
+            for (let sem_key of Object.keys(mod_to_sem)) {
+                if (sems_x[sem_key] - mod_to_sem[sem_key].length > 0) {
+                    if (lvl > 0) {
+                        lvl--
+                        mod_to_sem[sem_key].unshift(target_mods['language_mods'][lan].shift())
+                    }
+                }
             }
         }
     })()
@@ -87,7 +92,12 @@ const Others1 = JSON.parse(localStorage.getItem('Others'))
 const ID_mods2 = JSON.parse(localStorage.getItem('ID_mods2'))
 const CD_mods2 = JSON.parse(localStorage.getItem('CD_mods2'))
 const PE_mods = Object.keys(JSON.parse(localStorage.getItem('PE_mods')))
-const minors = Object.values(JSON.parse(localStorage.getItem('minors')))
+let minors = JSON.parse(localStorage.getItem('minors'))
+if (minors) {
+    minors = Object.values(minors)
+} else {
+    minors = []
+}
 let minor_mods = []
 minors.forEach(dict => {
     Object.values(dict).forEach(arr => {
@@ -182,6 +192,7 @@ const eachSem = (sem_key) => {
 }
 
 setTimeout(() => {
+    Object.keys(req_fors).forEach(nigger => console.log(nigger))
     mod_to_sem['sem_7'].push('IER/CP4101')
     mod_to_sem['sem_8'].push('IS4108 CAP')    
     Object.keys(mod_to_sem).forEach(sem_key => {
@@ -192,6 +203,7 @@ setTimeout(() => {
         mod_to_sem[sem_key].forEach(mod => mod_html += `<div class="mod_in_sem">${mod}</div>`)
         sem_container.innerHTML = mod_html
     })
+    Object.keys(req_fors).forEach(nigger => console.log(nigger))
 }, 1000)
 
 
