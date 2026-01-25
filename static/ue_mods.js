@@ -78,7 +78,7 @@ if (ID_mods2) {
 
 crs2 += Number(remaining_crs_span.textContent)
 if (crs2 < 0) {
-    remaining_crs_span.classList.add('red')
+    remaining_crs_span.style.color = 'rgb(168, 5, 5)'
 }
 remaining_crs_span.textContent = crs2
 
@@ -99,7 +99,6 @@ ril_others.forEach(_ => {
 
 if (Number((remaining_crs_span.textContent)) < 0) {
     remaining_crs_span.style.color = 'rgb(168, 5, 5)'
-    console.log('REDDDDDDDD NIGGGASSSSSSSSS')
 }
 
 localStorage.setItem('ID_mods3', JSON.stringify(counted_ID))
