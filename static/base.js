@@ -185,7 +185,7 @@ let minor_dict = localStorage.getItem('minors')
 if (minor_dict != null) {
     minor_dict = JSON.parse(minor_dict)
 }
-if (ID_mods2) {
+if (ID_mods2) { // if (JSON.parse(localStorage.getItem('UE_crs_left')) {
     let UE_crs_left = Number(JSON.parse(localStorage.getItem('UE_crs_left')))
     let percentage = 100 - Math.floor(UE_crs_left/40*100)
     UE_tile.style.background = `linear-gradient(to right, rgb(23, 196, 23) ${percentage}%, aqua ${percentage}%)`
