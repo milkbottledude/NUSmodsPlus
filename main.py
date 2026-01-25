@@ -24,7 +24,7 @@ def ue():
 
 @app.route('/idcd_mods')
 def idcd():
-    return render_template('idcd_mods.html')
+    return render_template('IDCD_mods.html')
 
 @app.route('/timetable')
 def timetable():

@@ -435,6 +435,7 @@ fuouttahere.addEventListener('click', () => {
         notif_string += `<div class="dont_worry">We will add them to your selected modules as <span class="purple">'Others'</span> mods</div>`
         if (let_go) {
             window.location.href = '/ue_mods'
+            localStorage.setItem('Others2', JSON.stringify(to_others))
         } else {
             localStorage.setItem('Others2', JSON.stringify(to_others))
             pr_window.style.display = 'flex'
