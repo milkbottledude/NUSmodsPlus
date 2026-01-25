@@ -53,24 +53,27 @@ let counted_ID = []
 let counted_CD = []
 
 let crs2 = 0
-if (counted_ID && ID_mods2.length > ID_mods.length) {
-    while (counted_ID.length < 3 && ID_mods2.length != 0) {
-        counted_ID.push(ID_mods2.pop())
-        if (!ID_mods.includes(counted_ID.at(-1))) {
-            crs2 += 4
+if (ID_mods2) {
+    if (counted_ID && ID_mods2.length > ID_mods.length) {
+        while (counted_ID.length < 3 && ID_mods2.length != 0) {
+            counted_ID.push(ID_mods2.pop())
+            if (!ID_mods.includes(counted_ID.at(-1))) {
+                crs2 += 4
+            }
         }
-    }
 
-    if (counted_ID.length < 3 && counted_CD.length === 0 && CD_mods2.length != 0) {
-        counted_CD.push(CD_mods2.pop())
-        if (!ID_mods.includes(counted_ID.at(-1))) {
-            crs2 += 4
-        }
+        if (counted_ID.length < 3 && counted_CD.length === 0 && CD_mods2.length != 0) {
+            counted_CD.push(CD_mods2.pop())
+            if (!ID_mods.includes(counted_ID.at(-1))) {
+                crs2 += 4
+            }
+        }    
+    } else {
+        counted_ID = ID_mods
+        counted_CD = CD_mods
     }    
-} else {
-    counted_ID = ID_mods
-    counted_CD = CD_mods
 }
+
 
 
 crs2 += Number(remaining_crs_span.textContent)
@@ -79,10 +82,10 @@ if (crs2 < 0) {
 }
 remaining_crs_span.textContent = crs2
 
-let ril_others;
+let ril_others = []
 if (JSON.parse(localStorage.getItem('Others2'))) {
     ril_others = JSON.parse(localStorage.getItem('Others2'))
-} else {
+} else if (JSON.parse(localStorage.getItem('Others'))){
     ril_others = JSON.parse(localStorage.getItem('Others'))
     console.log('hello')
 }
