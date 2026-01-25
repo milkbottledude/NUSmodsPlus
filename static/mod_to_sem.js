@@ -1,4 +1,22 @@
 const to_add_x = JSON.parse(localStorage.getItem('sems_add_x'))
+if (!to_add_x) {
+    console.log('nigga')
+    const loadings = document.querySelectorAll('.green_bg')
+    loadings.forEach(load => {
+        if (load.textContent === 'loading..') {
+            load.textContent = 'ERROR'
+            load.classList.remove('green_bg')
+            load.classList.add('orangered_bg')
+            
+        }
+    })
+}
+
+const reset_button = document.querySelector('.back_button')
+reset_button.addEventListener('click', () => {
+    localStorage.clear()
+    window.location.href = '/'
+})
 
 const sems_x = {
     'sem_1': 5,
@@ -175,6 +193,7 @@ setTimeout(() => {
         sem_container.innerHTML = mod_html
     })
 }, 1000)
+
 
 
 
