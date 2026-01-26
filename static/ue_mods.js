@@ -27,6 +27,19 @@ if (minors) {
     let minor_mods = 0
     for (let deets of Object.values(minors)) {
         for (let [symbol, arr] of Object.entries(deets)) {
+            arr.forEach(pot => {
+                if (JSON.parse(localStorage.getItem('ID_mods')).includes(pot) ||
+                    JSON.parse(localStorage.getItem('CD_mods')).includes(pot) ||
+                    JSON.parse(localStorage.getItem('Others')).includes(pot) ||
+                    JSON.parse(localStorage.getItem('pe_mods')).includes(pot) ||
+                    JSON.parse(localStorage.getItem('core_mods')).includes(pot) ||
+                    Object.values(JSON.parse(localStorage.getItem('pillar_mods'))).includes(pot)
+                ) {
+                    if (pot.length > 1) {
+                        minor_mods--
+                    }
+                }
+            })
             if (symbol === '!') {
                 minor_mods += arr.length
             } else {
@@ -40,6 +53,9 @@ if (minors) {
         remaining_crs_span.textContent = crs3
         console.log(crs3)
     }      
+    console.log('fuck nigegrs')
+    console.log(minor_mods)
+    console.log('fuck')
 }
 
 

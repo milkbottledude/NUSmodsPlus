@@ -395,6 +395,7 @@ fuouttahere.addEventListener('click', () => {
                             }) 
                             let temp = ''
                             let carry_on = true
+                            let to_others_add = []
                             undone_prs[mod][1].forEach(pr => {
                                 Object.values(to_base).forEach(ffs => {
                                     Object.values(ffs).forEach(arr => {
@@ -405,7 +406,7 @@ fuouttahere.addEventListener('click', () => {
                                 })
                                 if (carry_on) {
                                     temp += `<span class="red"> ${pr}</span>`
-                                    to_others.push(pr)
+                                    to_others_add.push(pr)
                                     remove_top = false
                                 }
                             })                             
@@ -420,6 +421,7 @@ fuouttahere.addEventListener('click', () => {
                                 notif_string = notif_string.slice(0, -`<div class"i_got_this">${mod}:`.length)
                             } else {
                                 let_go = false
+                                to_others.push(to_others_add[0])
                             }                              
                         }                            
                     })
@@ -448,6 +450,7 @@ fuouttahere.addEventListener('click', () => {
                             }) 
                             let temp = ''
                             let carry_on = true
+                            let to_others_add = []
                             undone_prs[mod][1].forEach(pr => {
                                 Object.values(to_base).forEach(ffs => {
                                     Object.values(ffs).forEach(arr => {
@@ -458,7 +461,7 @@ fuouttahere.addEventListener('click', () => {
                                 })
                                 if (carry_on) {
                                     temp = `<span class="red"> ${pr}</span>`
-                                    to_others.push(pr)
+                                    to_others_add.push(pr)
                                     remove_top = false
                                 }
                             })                             
@@ -473,6 +476,7 @@ fuouttahere.addEventListener('click', () => {
                                 notif_string = notif_string.slice(0, -`<div class"i_got_this">${mod}:`.length)
                             } else {
                                 let_go = false
+                                to_others.push(to_others_add[0])
                             }                              
                         }                            
                     })

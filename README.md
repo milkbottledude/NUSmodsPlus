@@ -108,26 +108,74 @@ The BAISmods webapp has 5 stages:
 
 **Part 2: Minors**
 
-![Fig-n]
+![Fig-n](progress_pics/Fig-n-IMD_minor_3_pr.gif)
 
-- In the Minors page, the number of mods required for each minor is displayed on the right of each minor tile, some with smaller mod requirements than others which could be due to double counting. 
+- In the Minors page, the number of mods required for each minor is displayed on the right of each minor tile, some with smaller mod requirements than others which could be due to double counting. This is another helpful feature of BAISmods, it helps you account for minor mods you have already done.
 
 - For example, since Interactive Media Development (IMD) requires a CS1010 variant, and BAIS curriculum already has CS1010A as a core module, it can be double counted, reducing what was initially 4 modules to complete for the IMD minor, to now 3.
 
 ![Fig-o]
 
+- For this demonstration, I will be choosing the 'Economics' minor.
+
 - Inside each tile, the requirements for each minor is shown in greater detail. Pressing the 'All of' tiles will drop down an array of mods, all of which you are required to take to fulfill the minor. As for the '*x* of' tiles, where *x* is a number, you need only select *x* number of mods from the dropdown window.
 
 - Similar to the PE mods page, the number of pre-requisites for each mod is also shown below it. The undone pre-requisites will also be flashed to you prior to exiting the page, and will be auto added to your module selection as either 'IDCD' mods or 'Others' mods.
 
-- For this demonstration, I will be choosing the 'Psychology' minor.
+**Part 3: Others**
+
+Lets say you want to take a UE mod by itself instead of with a minor. You can enter the 'Others' tile and key in the mod of your choice there.
+
+![Fig-p](progress_pics/Fig-p-an1_others.jpg)
+
+- For example, I could want to know more about humans and our species background. Then AN1101E is a good choice, level 1k and with no pre-requisites.
+
+- (*In the works*) I also have plans to integrate a small neural network model into BAISmods (in-house, no LLM API here) so that you can just describe a mod and it will return mods that fit your description.
 
 
 #### 4) IDCD modules (if IDCD requirement has not been fulfilled)
 
+If you recall from earlier when we were choosing PE mods, one of the pre-requisite mods (IS1128) happened to be an ID mod, so we have 1/3 IDCD mods. 
+
+![Fig-q](progress_pics/Fig-q-after_others.jpg)
+
+- Since the requirement is not fulfilled, we must enter the IDCD tile and choose another 2 IDCD mods, with no more than 1 CD mod.
+
+![Fig-r](progress_pics/Fig-r-choosing_IDCD.gif)
+
+As you can see, the webapp will signal if you already have 3 total IDCD mods selected, or if you try to choose > 1 CD mod. In this case, I chose 2 extra ID mods to complete the trio.
 
 
 #### 5) Mod to Sem Timetable Generator
 
+![Fig-s](progress_pics/Fig-s-one_last_check.gif)
 
+Now that we have chosen all our mods and the 'selected mods' progress bar is fully green, the 'Timetable Generator' tile is unlocked. Before clicking into it, its a good idea to take a look at what mods we have chosen.
 
+**Part 1: Overloading Sems**
+
+By default, each semester will have 5 mods per sem. However, we did select quite a number of unrestricted electives.
+
+Furthermore, since IS4108 Capstone Project and Industry Exp Requirement are large mods that only allow 1 and 2 mods to be taken in the same sem respectively, we have no choice but to choose some semesters to overload.
+
+The webapp calculates how many module spaces extra you have, but the distribution of them across the semesters is up to you, excluding Sem 1, Sem 7, and Sem 8 (Y1S1, Y4S1, Y4S2).
+
+![Fig-t](progress_pics/Fig-t-choosing_sems.gif)
+
+- In this case, we need to distribute 5 extra mods. Pressing the '+' increases the number of extra mods the semester will contain **on top** of the default number of mods it already holds. 
+
+- As I like my workload even, I added 1 extra mod across all the available sems, bringing the excess mod number to 0 and allowing us to now generate our 8 semester BAIS timetable.
+
+**Part 2: Timetable Generation**
+
+![Fig-u](progress_pics/Fig-u-timtams_generated.jpg)
+
+- After pressing the green 'Generate' button and waiting 1-2 seconds, the webapp will give you a full 8 semester timetable, combining the BAIS core modules, IS4108 Capstone Project and IER with your personal blend of pillar, IDCD, programme elective, and unrestricted elective modules with all pre-requisites accounted for.
+
+- The green/yellow (and possibly red) squares with numbers inside, next to the semester labels, indicate the number of modules within that sem. 
+
+- So originally, the numbers were as follows: 5, 5, 5, 5, 5, 5, 2, 3. So after taking into account the overloaded sems, of which I distributed evenly across sems 2-6, that arrangement has now become: 5, 6, 6, 6, 6, 6, 2, 3.
+
+After you are done marvelling at how amazing my webapp is (im joking a kid could prob vibecode this in 1 day), you can press the red 'reset' button in the top left corner should you decide to change your module selection.
+
+And thats it for the BAISmods tutorial. Feel free to [telegram me](https://t.me/milkbottledude) if you have any issues/feedback on the webapp, or just want to chat :)

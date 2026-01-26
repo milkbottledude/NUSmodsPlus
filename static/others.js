@@ -1,3 +1,8 @@
+let Others3 = JSON.parse(localStorage.getItem('Others3'))
+if (!Others3) {
+    Others3 = []
+}
+
 const searchMod = document.querySelector('#search_mod')
 let target_mods;
 let all_mods_dict;
@@ -24,7 +29,8 @@ searchMod.addEventListener('keydown', function(e) {
                     !JSON.parse(localStorage.getItem('CD_mods2')).includes(key) &&
                     !JSON.parse(localStorage.getItem('pe_mods')).includes(key) &&
                     !JSON.parse(localStorage.getItem('core_mods')).includes(key) &&
-                    !Object.values(JSON.parse(localStorage.getItem('pillar_mods'))).includes(key)
+                    !Object.values(JSON.parse(localStorage.getItem('pillar_mods'))).includes(key) &&
+                    key.slice(0, 2) != 'LA' // new
                 ) {
                     to_show[key] = all_mods_dict[key]["title"]
                 }
@@ -67,11 +73,12 @@ const back_to_ue = document.querySelector('.back_button')
 back_to_ue.addEventListener('click', () => {
     let current_others;
     if (JSON.parse(localStorage.getItem('Others2'))) {
-        current_others = JSON.parse(localStorage.getItem('Others2'))
+        current_others = JSON.parse(localStorage.getItem('Others2')).filter(mod => !Others3.includes(mod))
     } else {
-        current_others = JSON.parse(localStorage.getItem('Others'))
+        current_others = JSON.parse(localStorage.getItem('Others')).filter(mod => !Others3.includes(mod))
     }
     current_others.push(...chosen_others)
     localStorage.setItem('Others2', JSON.stringify(current_others))
+    localStorage.setItem('Others3', JSON.stringify(chosen_others))
     window.location.href = '/ue_mods'
 })
