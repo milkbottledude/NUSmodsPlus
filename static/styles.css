@@ -1,12 +1,12 @@
 body {
     margin: 0;
-    background-color: rgb(86, 81, 81);
+    background-color: rgb(20, 20, 30);
 }
 /* Base */
 .top_banner {
     display: flex;
     position: fixed;
-    background-color: rgb(101, 101, 163);
+    background-color: rgb(47, 47, 70);
     margin-top: auto;
     height: 8%;
     width: 100%;
